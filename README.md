@@ -180,6 +180,7 @@ GET http://localhost:8080/user/{{id}}
 DELETE http://localhost:8080/user/{{id}}
 
 
+
 ## Autores
 
 [<img src="https://avatars.githubusercontent.com/u/67704047?s=400&u=50e40cfa5c84ecc20dbb0eb0b8b9a3587cb36fcc&v=4" width=115><br><sub>Andreza Emiliano</sub>]
