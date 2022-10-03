@@ -136,6 +136,49 @@ Para dar merge  do Pull Request:
 * [ATENCÃO] Ao fazer o merge de develop para master não excluir a branch develop.
 * Ao mergear o PR escolha a opção Squash e exclua a branch utilizada, caso não seja a develop.
 
+Endpoint Mapeados
+-----------
+GET http://localhost:8080/
+POST http://localhost:8080/auth/logout
+GET http://localhost:8080/auth/token/refresh
+GET http://localhost:8080/permission
+PUT http://localhost:8080/permission
+POST http://localhost:8080/permission
+GET http://localhost:8080/permission/{{id}}
+DELETE http://localhost:8080/permission/{{id}}
+PUT http://localhost:8080/register/brand
+POST http://localhost:8080/register/brand
+DELETE http://localhost:8080/register/brand/{{id}}
+PUT http://localhost:8080/register/category
+POST http://localhost:8080/register/category
+DELETE http://localhost:8080/register/category/{{id}}
+PUT http://localhost:8080/register/market
+POST http://localhost:8080/register/market
+DELETE http://localhost:8080/register/market/{{id}} 
+PUT http://localhost:8080/register/product
+POST http://localhost:8080/register/product
+DELETE http://localhost:8080/register/product/{{id}}
+GET http://localhost:8080/search/brand
+GET http://localhost:8080/search/brand/{{id}}
+GET http://localhost:8080/search/category
+GET http://localhost:8080/search/category/{{id}}
+GET http://localhost:8080/search/market
+GET http://localhost:8080/search/market/{{id}}
+GET http://localhost:8080/search/product
+GET http://localhost:8080/search/product/market
+GET http://localhost:8080/search/product/name
+GET http://localhost:8080/search/product/{{id}}
+PUT http://localhost:8080/shopping
+POST http://localhost:8080/shopping
+DELETE http://localhost:8080/shopping
+GET http://localhost:8080/shopping/user/{{userId}}
+GET http://localhost:8080/shopping/{{id}}
+GET http://localhost:8080/user
+PUT http://localhost:8080/user
+POST http://localhost:8080/user
+GET http://localhost:8080/user/{{id}}
+DELETE http://localhost:8080/user/{{id}}
+
 
 ## Autores
 
