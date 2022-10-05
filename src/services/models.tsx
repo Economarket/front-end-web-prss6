@@ -3,6 +3,10 @@ export interface Login {
   password: String;
 }
 
+export interface Token {
+  token: string;
+}
+
 export interface User {
   name: String;
   password: String;
