@@ -136,6 +136,50 @@ Para dar merge  do Pull Request:
 * [ATENCÃO] Ao fazer o merge de develop para master não excluir a branch develop.
 * Ao mergear o PR escolha a opção Squash e exclua a branch utilizada, caso não seja a develop.
 
+Endpoint Mapeados
+-----------
+GET http://api-economarket.herokuapp.com/<br/>
+POST http://api-economarket.herokuapp.com/auth/logout<br/>
+GET http://api-economarket.herokuapp.com/auth/token/refresh<br/>
+GET http://api-economarket.herokuapp.com/permission<br/>
+PUT http://api-economarket.herokuapp.com/permission<br/>
+POST http://api-economarket.herokuapp.com/permission<br/>
+GET http://api-economarket.herokuapp.com/permission/{{id}}<br/>
+DELETE http://api-economarket.herokuapp.com/permission/{{id}}<br/>
+PUT http://api-economarket.herokuapp.com/register/brand<br/>
+POST http://api-economarket.herokuapp.com/register/brand<br/>
+DELETE http://api-economarket.herokuapp.com/register/brand/{{id}}<br/>
+PUT http://api-economarket.herokuapp.com/register/category<br/>
+POST http://api-economarket.herokuapp.com/register/category<br/>
+DELETE http://api-economarket.herokuapp.com/register/category/{{id}}<br/>
+PUT http://api-economarket.herokuapp.com/register/market<br/>
+POST http://api-economarket.herokuapp.com/register/market<br/>
+DELETE http://api-economarket.herokuapp.com/register/market/{{id}} <br/>
+PUT http://api-economarket.herokuapp.com/register/product<br/>
+POST http://api-economarket.herokuapp.com/register/product<br/>
+DELETE http://api-economarket.herokuapp.com/register/product/{{id}}<br/>
+GET http://api-economarket.herokuapp.com/search/brand<br/>
+GET http://api-economarket.herokuapp.com/search/brand/{{id}}<br/>
+GET http://api-economarket.herokuapp.com/search/category<br/>
+GET http://api-economarket.herokuapp.com/search/category/{{id}}<br/>
+GET http://api-economarket.herokuapp.com/search/market<br/>
+GET http://api-economarket.herokuapp.com/search/market/{{id}}<br/>
+GET http://api-economarket.herokuapp.com/search/product<br/>
+GET http://api-economarket.herokuapp.com/search/product/market<br/>
+GET http://api-economarket.herokuapp.com/search/product/name<br/>
+GET http://api-economarket.herokuapp.com/search/product/{{id}}<br/>
+PUT http://api-economarket.herokuapp.com/shopping<br/>
+POST http://api-economarket.herokuapp.com/shopping<br/>
+DELETE http://api-economarket.herokuapp.com/shopping<br/>
+GET http://api-economarket.herokuapp.com/shopping/user/{{userId}}<br/>
+GET http://api-economarket.herokuapp.com/shopping/{{id}}<br/>
+GET http://api-economarket.herokuapp.com/user<br/>
+PUT http://api-economarket.herokuapp.com/user<br/>
+POST http://api-economarket.herokuapp.com/user<br/>
+GET http://api-economarket.herokuapp.com/user/{{id}}<br/>
+DELETE http://api-economarket.herokuapp.com/user/{{id}}<br/>
+
+
 
 ## Autores
 
