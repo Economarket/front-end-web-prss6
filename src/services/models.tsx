@@ -1,4 +1,4 @@
-import { DateLocale } from "yup/lib/locale";
+import { DateLocale } from 'yup/lib/locale';
 
 export interface Address {
   cep: String;
@@ -33,7 +33,6 @@ export interface Market {
   address?: Address;
   schedules?: Schedule[];
   products?: Product[];
-
 }
 
 export interface Product {
@@ -44,7 +43,6 @@ export interface Product {
   category: Category;
   unity: Number;
   markets: Market[];
- 
 }
 
 export interface ProductList {
@@ -59,7 +57,6 @@ export interface Schedule {
   closingHour: DateLocale;
   dayOfWeek: Number;
   market: Market;
-
 }
 
 export interface ShoppingList {
@@ -84,10 +81,11 @@ export interface User {
   tokens: RefreshToken[];
 }
 
-export interface Permission {
-
+export interface UserLogin {
+  email: String;
+  senha: String;
 }
 
-export interface RefreshToken {
+export interface Permission {}
 
-}
+export interface RefreshToken {}
