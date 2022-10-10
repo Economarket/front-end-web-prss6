@@ -1,22 +1,22 @@
 import { api } from "./api";
 import { BRAND, MARKET, REGISTER } from "../constants";
 
-export async function putMarket(market: string) {
+export async function putMarket(marketId: string) {
     const { data } = await api.put(`${REGISTER}${MARKET}`, {
-        market
+        marketId
     });
     return data;
 }
 
-export async function postMarket(market: string) {
+export async function postMarket(marketId: string) {
     const { data } = await api.post(`${REGISTER}${BRAND}`, {
-        market
+        marketId
     });
     return data;
 }
 
-export async function deleteMarketById(market: string) {
-    const { data } = await api.delete(`${REGISTER}${BRAND}/${market}`, {});
+export async function deleteMarketById(marketId: string) {
+    const { data } = await api.delete(`${REGISTER}${BRAND}/${marketId}`, {});
     return data;
 }
 
@@ -25,7 +25,7 @@ export async function searchMarket() {
     return data;
 }
 
-export async function searchMarketById(market: string) {
-    const { data } = await api.get(`${REGISTER}${MARKET}/${market}`, {});
+export async function searchMarketById(marketId: string) {
+    const { data } = await api.get(`${REGISTER}${MARKET}/${marketId}`, {});
     return data;
 } 

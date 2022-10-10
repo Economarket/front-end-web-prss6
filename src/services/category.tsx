@@ -1,22 +1,22 @@
 import { api } from "./api";
-import { BRAND, BY_ID, CATEGORY, REGISTER } from "../constants";
+import { BRAND, CATEGORY, REGISTER } from "../constants";
 
-export async function putCategory(category: string) {
-    const { data } = await api.put(`${REGISTER}${BRAND}`, {
-      category
+export async function putCategory(categoryId: string) {
+    const { data } = await api.put(`${REGISTER}${CATEGORY}`, {
+      categoryId
     });
     return data;
   } 
   
-export async function postCategory(category: string) {
-  const { data } = await api.post(`${REGISTER}${BRAND}`, {
-    category
+export async function postCategory(categoryId: string) {
+  const { data } = await api.post(`${REGISTER}${CATEGORY}`, {
+    categoryId
   });
   return data;
 } 
 
-export async function deleteCategoryById(category: string) {
-  const { data } = await api.delete(`${REGISTER}${BRAND}/${category}`, {});
+export async function deleteCategoryById(categoryId: string) {
+  const { data } = await api.delete(`${REGISTER}${CATEGORY}/${categoryId}`, {});
   return data;
 } 
 
@@ -25,7 +25,7 @@ export async function searchCategory() {
   return data;
 } 
 
-export async function searchCategoryById(category: string) {
-  const { data } = await api.get(`${REGISTER}${BRAND}/${category}`, {});
+export async function searchCategoryById(categoryId: string) {
+  const { data } = await api.get(`${REGISTER}${CATEGORY}/${categoryId}`, {});
   return data;
 } 

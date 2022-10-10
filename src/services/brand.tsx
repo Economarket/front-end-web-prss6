@@ -1,22 +1,22 @@
 import { api } from "./api";
-import { BRAND, BY_ID, REGISTER } from "../constants";
+import { BRAND, REGISTER } from "../constants";
 
-export async function putBrand(id: string) {
+export async function putBrand(brandId: string) {
     const { data } = await api.put(`${REGISTER}${BRAND}`, {
-      id
+      brandId
     });
     return data;
   } 
   
-  export async function postBrand(brand: string) {
+  export async function postBrand(brandId: string) {
     const { data } = await api.post(`${REGISTER}${BRAND}`, {
-      brand
+      brandId
     });
     return data;
   } 
   
-  export async function deleteBrandById(brand: string) {
-    const { data } = await api.delete(`${REGISTER}${BRAND}/${brand}`, {});
+  export async function deleteBrandById(brandId: string) {
+    const { data } = await api.delete(`${REGISTER}${BRAND}/${brandId}`, {});
     return data;
   } 
 
@@ -25,7 +25,7 @@ export async function putBrand(id: string) {
     return data;
   } 
   
-  export async function searchBrandById(brand: string) {
-    const { data } = await api.get(`${REGISTER}${BRAND}/${brand}`, {});
+  export async function searchBrandById(brandId: string) {
+    const { data } = await api.get(`${REGISTER}${BRAND}/${brandId}`, {});
     return data;
   } 
