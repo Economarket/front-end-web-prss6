@@ -7,26 +7,26 @@ export async function getPermission() {
   return data;
 }  
 
-export async function getPermissionById(id: string) {
-  const { data } = await api.get(`${PEPRMISSION}/${id}`, {});
+export async function getPermissionById(permissionId: string) {
+  const { data } = await api.get(`${PEPRMISSION}/${permissionId}`, {});
   return data;
 }  
 
-export async function putPermission(permission: string) {
+export async function putPermission(permissionId: string) {
   const { data } = await api.put(`${PEPRMISSION}`, {
-    permission
+    permissionId
   });
   return data;
 }  
 
-export async function postPermission(permission: string) {
+export async function postPermission(permissionId: string) {
   const { data } = await api.post(`${PEPRMISSION}`, {
-    permission
+    permissionId
   });
   return data;
 }  
 
-export async function deletePermissionById(id: string) {
-  const { data } = await api.delete(`${PEPRMISSION}/${id}`, {});
+export async function deletePermissionById(permissionId: string) {
+  const { data } = await api.delete(`${PEPRMISSION}/${permissionId}`, {});
   return data;
 } 

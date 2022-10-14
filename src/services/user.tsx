@@ -3,26 +3,26 @@ import { api } from "./api";
 import { SHOPPING, USER } from "../constants";
 
 export async function getUser() {
-    const { data } = await api.get(`${SHOPPING}`, {});
+    const { data } = await api.get(`${USER}`, {});
     return data;
 }
 
-export async function getUserById(id: string) {
-    const { data } = await api.get(`${USER}/${id}`, {});
+export async function getUserById(userId: string) {
+    const { data } = await api.get(`${USER}/${userId}`, {});
     return data;
 }
 
-export async function putUserById(id: string) {
-    const { data } = await api.put(`${USER}`, { id });
+export async function putUserById(userId: string) {
+    const { data } = await api.put(`${USER}`, { userId });
     return data;
 }
 
-export async function postUserById(id: string) {
-    const { data } = await api.post(`${USER}`, { id });
+export async function postUserById(userId: string) {
+    const { data } = await api.post(`${USER}`, { userId });
     return data;
 }
 
-export async function deleteUserById(id: string) {
-    const { data } = await api.delete(`${USER}/${id}`, {});
+export async function deleteUserById(userId: string) {
+    const { data } = await api.delete(`${USER}/${userId}`, {});
     return data;
 } 
