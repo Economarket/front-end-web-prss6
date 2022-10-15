@@ -95,9 +95,8 @@ const InputText = (
             )}
           </S.InputWrapper>
         </S.Container>
+        {!!errorMessage && <S.Error>{errorMessage}</S.Error>}
       </S.Wrapper>
-
-      <>{!!errorMessage && <S.Error>{errorMessage}</S.Error>}</>
     </>
   );
 };

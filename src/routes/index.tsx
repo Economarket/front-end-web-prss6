@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router-dom";
 // import Unauthorized from '';
 
 import Login from "../pages/Login/index";
+import User from "../pages/User/index";
 // import ForgotPassword from '';
 // import ChangePassword from '';
 // import ExpiredToken from '';
@@ -28,6 +29,7 @@ export default function MyRoutes() {
         }
       /> */}
       <Route path="/login" element={<Login />} />
+      <Route path="/novo-usuario" element={<User />} />
       {/* <Route path="/recuperar-minha-senha" element={<ForgotPassword />} />
       <Route path="/alterar-senha" element={<ChangePassword />} />
       <Route path="/token-expirado" element={<ExpiredToken />} />

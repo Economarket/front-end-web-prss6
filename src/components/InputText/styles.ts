@@ -10,10 +10,10 @@ interface ContainerProps extends Pick<InputTextProps, "disabled"> {
 const modifiers = {
   appearance: {
     primary: (theme: DefaultTheme) => css`
-      border-color: ${theme.colors.borderGray};
+      border-color: ${theme.colors.gray10};
 
       ${Input} {
-        background-color: ${theme.colors.background500};
+        background-color: ${theme.colors.backgroundWhite};
       }
     `,
 
@@ -84,15 +84,15 @@ const modifiers = {
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.3rem;
   width: 100%;
 `;
 
 export const Label = styled.label`
   ${({ theme }) => css`
-    font-family: ${theme.font.font.family};
-    font-size: ${theme.font.font.sizes.small};
-    color: ${theme.colors.secondary};
+    color: ${theme.colors.gray6000};
+    font-family: ${theme.font.family.primary};
+    font-size: ${theme.font.sizes.xsmall};
   `}
 `;
 
@@ -100,28 +100,28 @@ export const Container = styled.div<ContainerProps>`
   ${({ theme, disabled, error }) => css`
     position: relative;
 
-    ${error && modifiers.error(theme)};
     ${disabled && modifiers.disabled(theme)};
+    ${error && modifiers.error(theme)};
   `}
 `;
 
 export const InputWrapper = styled.div<InputTextProps>`
   ${({ theme, sizes, appearance }) => css`
-    border: 0.1rem solid ${theme.colors.gray300};
+    align-items: center;
+    border: 0.1rem solid ${theme.colors.backgrouGray};
     border-radius: ${theme.border.radius.large};
     display: flex;
-    align-items: center;
 
     &:focus,
     &:focus-within,
     &:active {
-      border: ${`0.1rem solid ${theme.colors.borderBlue}`};
-      box-shadow: ${"0px 0px 0px 4px rgba(99, 131, 123, 0.2)"};
+      border: ${`0.1rem solid ${theme.colors.blue100}`};
       border-radius: ${theme.border.radius.large};
+      box-shadow: ${"0px 0px 0px 4px rgba(99, 131, 123, 0.2)"};
     }
 
-    ${!!sizes && modifiers.sizes[sizes](theme)};
     ${!!appearance && modifiers.appearance[appearance](theme)};
+    ${!!sizes && modifiers.sizes[sizes](theme)};
   `}
 `;
 
@@ -129,33 +129,33 @@ export const Input = styled.input<InputTextProps>`
   ${({ theme, iconPosition, icon }) => css`
     border: 0;
     border-radius: ${theme.border.radius.large};
-    color: ${theme.colors.secondary};
-    font-family: ${theme.font.font.family};
-    font-size: ${theme.font.font.sizes.medium};
-    padding-right: ${icon && iconPosition === "right"
-      ? theme.spacings.xxlarge
-      : theme.spacings.xsmall};
+    color: ${theme.colors.gray6000};
+    font-family: ${theme.font.family.primary};
+    font-size: ${theme.font.sizes.small};
+    height: 100%;
+    outline: none;
     padding-left: ${iconPosition === "left"
       ? theme.spacings.xxlarge
       : theme.spacings.xsmall};
-    outline: none;
+    padding-right: ${icon && iconPosition === "right"
+      ? theme.spacings.xxlarge
+      : theme.spacings.xsmall};
     width: 100%;
-    height: 100%;
 
     &::placeholder {
-      color: ${theme.colors.secondary};
+      color: ${theme.colors.gray6000};
     }
   `}
 `;
 
 export const IconWrapper = styled.div<IconProps>`
   ${({ theme, iconPosition }) => css`
-    position: absolute;
     color: ${theme.colors.gray500};
     height: 2.2rem;
-    width: 2.2rem;
-    right: ${iconPosition === "right" && theme.spacings.xsmall};
     left: ${iconPosition === "left" && theme.spacings.xsmall};
+    position: absolute;
+    right: ${iconPosition === "right" && theme.spacings.xsmall};
+    width: 2.2rem;
     cursor: pointer;
   `}
 `;
@@ -163,13 +163,10 @@ export const IconWrapper = styled.div<IconProps>`
 export const Error = styled.p`
   ${({ theme }) => css`
     color: ${theme.colors.error500};
-    font-size: ${theme.font.font.sizes.small};
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100%;
-    position: absolute;
-    margin-top: 0.4rem;
+    font-family: ${theme.font.family.primary};
+    font-size: ${theme.font.sizes.small};
     text-align: justify;
+    width: 100%;
 
     #link {
       padding-left: 0.5rem;
