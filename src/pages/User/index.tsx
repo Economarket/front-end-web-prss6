@@ -2,44 +2,6 @@ import ExternalAccessContainer from "../../templates/ExternalLayout";
 
 import * as S from "../styles";
 import InputText from "../../components/InputText";
-<<<<<<< HEAD
-import register from "../../assets/register.png";
-import Button from "../../components/Button";
-
-export default function User() {
-  return (
-    <S.Wrapper>
-      <ExternalAccessContainer
-        title="Novo cadastro"
-        subtitle="Preencha os campos abaixo para criar um novo cadastro"
-        image={register}
-      >
-        <S.Form>
-          <InputText
-            name="nome"
-            label="Nome"
-            placeholder="Digite seu nome"
-          ></InputText>
-          <InputText
-            name="email"
-            label="E-mail"
-            placeholder="Digite seu e-mail"
-          ></InputText>
-          <InputText
-            name="password"
-            label="Senha"
-            placeholder="Digite uma senha"
-          ></InputText>
-          <InputText
-            name="confirm"
-            label="Confirme a senha"
-            placeholder="Confirme a senha"
-          ></InputText>
-
-          <S.TextPassword>No mínimo 8 caracteres</S.TextPassword>
-
-          <Button text="Cadastrar" />
-=======
 import registerUser from "../../assets/registerUser.png";
 import Button from "../../components/Button";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -109,7 +71,6 @@ export default function User() {
           <PasswordRules password={watch("password")} />
 
           <Button text="Cadastrar" onClick={handleSubmit(onSubmit)} />
->>>>>>> 292c0ed452006add0c7595c69fdfcfb3faed171f
         </S.Form>
       </ExternalAccessContainer>
     </S.Wrapper>
