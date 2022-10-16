@@ -1,31 +1,51 @@
 import styled, { css } from "styled-components";
+import {
+  mediaQueryLg,
+  mediaQuerySm,
+  mediaQueryXl,
+} from "../../mixins/media-queries";
 
 export const Wrapper = styled.div`
+  ${({ theme }) => css`
+    background: ${theme.colors.backgroundBlue};
+  `}
+
   display: grid;
-  grid-template-columns: 42% 1fr;
-  height: 100vh;
+  grid-template-rows: 15% 1fr;
   justify-items: center;
+  min-height: 100vh;
   width: 100%;
+
+  ${mediaQuerySm(css`
+    display: grid;
+    grid-template-columns: 58% 1fr;
+    grid-template-rows: 1fr;
+  `)}
 `;
 
 export const WrapperLeft = styled.div`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.whiteFull};
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-    width: 100%;
-  `}
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+
+  ${mediaQuerySm(css`
+    padding-top: 6rem;
+  `)};
 `;
 
 export const Content = styled.div`
-  min-width: 30rem;
+  justify-content: center;
   width: 70%;
 `;
 
 export const Logo = styled.div`
-  text-align: center;
   margin: 1rem 0;
+  position: absolute;
+  top: 0;
 `;
 
 export const Title = styled.h1`
@@ -49,14 +69,28 @@ export const Subtitle = styled.p`
 export const WrapperRight = styled.div`
   ${({ theme }) => css`
     align-items: center;
-    background: ${theme.colors.backgroundBlue};
+    background-color: ${theme.colors.whiteFull};
+    border-radius: 10px;
     display: flex;
-    height: 100%;
+    height: 94%;
     justify-content: center;
-    width: 100%;
+    margin: auto;
+    width: 92%;
   `}
 `;
 
 export const Image = styled.img`
-  width: 80%;
+  width: 0;
+
+  ${mediaQuerySm(css`
+    width: 80%;
+  `)};
+
+  ${mediaQueryLg(css`
+    width: 70%;
+  `)};
+
+  ${mediaQueryXl(css`
+    width: 60%;
+  `)};
 `;

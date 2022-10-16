@@ -1,4 +1,3 @@
-import { ChangeEvent, useState } from "react";
 import ExternalAccessContainer from "../../templates/ExternalLayout";
 
 import * as S from "../styles";
@@ -8,7 +7,8 @@ import Button from "../../components/Button";
 import { signIn } from "../../services/auth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schema } from "../../utils/schema";
+import { schemaLogin } from "../../utils/schema";
+import InputPassword from "../../components/InputPassword";
 
 export default function Login() {
   const {
@@ -20,17 +20,16 @@ export default function Login() {
       email: "",
       password: "",
     },
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schemaLogin),
   });
 
   const onSubmit = async (data: any) => {
-    console.log(data);
     await signIn(data.email, data.password);
   };
   return (
     <S.Wrapper>
-      <ExternalAccessContainer title="Oi! Vamos começar?" image={login}>
-        <S.Form onSubmit={onSubmit}>
+      <ExternalAccessContainer title="Que bom te ver novamente!" image={login}>
+        <S.Form onSubmit={handleSubmit(onSubmit)}>
           <InputText
             {...register("email")}
             name="email"
@@ -39,7 +38,7 @@ export default function Login() {
             errorMessage={errors.email?.message}
           />
 
-          <InputText
+          <InputPassword
             {...register("password")}
             name="password"
             label="Senha"
@@ -49,9 +48,10 @@ export default function Login() {
 
           <Button text="Entrar" onClick={handleSubmit(onSubmit)} />
         </S.Form>
+
         <S.Text>
           Ainda não possui cadastro?
-          <S.Link>Cadastre-se</S.Link>
+          <S.Link href="/novo-usuario">Cadastre-se</S.Link>
         </S.Text>
       </ExternalAccessContainer>
     </S.Wrapper>

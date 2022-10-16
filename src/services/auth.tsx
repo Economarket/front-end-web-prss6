@@ -1,9 +1,13 @@
 import { api } from "./api";
-import { CONTEXT_AUTH, LOGOUT_ENDPOINT, SINGIN_ENDPOINT, TOKEN_REFRESH } from "../constants";
+import {
+  CONTEXT_AUTH,
+  LOGOUT_ENDPOINT,
+  LOGIN_ENDPOINT,
+  TOKEN_REFRESH,
+} from "../constants";
 
 export async function signIn(email: string, password: string) {
-  console.log("chegou");
-  const { data } = await api.post(`auth/login `, {
+  const { data } = await api.post(`${CONTEXT_AUTH}${LOGIN_ENDPOINT}`, {
     email,
     password,
   });
@@ -11,22 +15,15 @@ export async function signIn(email: string, password: string) {
   return data;
 }
 
-<<<<<<< HEAD
 //verificar parametros
 export async function signOut(token: string) {
   const { data } = await api.post(`${CONTEXT_AUTH}${LOGOUT_ENDPOINT}`, {
-    token
+    token,
   });
   return data;
-}   
+}
 
 export async function refreshToken() {
   const { data } = await api.get(`${CONTEXT_AUTH}${TOKEN_REFRESH}`, {});
   return data;
 }  
-
-=======
-// api-economarket.herokuapp.com/auth/login
-// email: manager@manager.com
-// password: @manage
->>>>>>> EMW-tela-de-login
