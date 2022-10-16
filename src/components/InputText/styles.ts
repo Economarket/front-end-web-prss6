@@ -164,7 +164,7 @@ export const Error = styled.p`
   ${({ theme }) => css`
     color: ${theme.colors.error500};
     font-family: ${theme.font.family.primary};
-    font-size: ${theme.font.sizes.small};
+    font-size: ${theme.font.sizes.xsmall};
     text-align: justify;
     width: 100%;
 

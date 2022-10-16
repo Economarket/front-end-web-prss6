@@ -2,42 +2,75 @@ import ExternalAccessContainer from "../../templates/ExternalLayout";
 
 import * as S from "../styles";
 import InputText from "../../components/InputText";
-import register from "../../assets/register.png";
+import registerUser from "../../assets/registerUser.png";
 import Button from "../../components/Button";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { signIn } from "../../services/auth";
+import { schemaRegisterUser } from "../../utils/schema";
+import { useForm } from "react-hook-form";
+import InputPassword from "../../components/InputPassword";
+import PasswordRules from "../../components/PasswordRules";
 
 export default function User() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    resolver: yupResolver(schemaRegisterUser),
+  });
+
+  const onSubmit = async (data: any) => {
+    console.log(data);
+    await signIn(data.email, data.password);
+  };
   return (
     <S.Wrapper>
       <ExternalAccessContainer
-        title="Novo cadastro"
-        subtitle="Preencha os campos abaixo para criar um novo cadastro"
-        image={register}
+        title="Vamos começar o cadastro?"
+        subtitle="Preencha os campos abaixo para criar um novo cadastro."
+        image={registerUser}
       >
-        <S.Form>
+        <S.Form onSubmit={handleSubmit(onSubmit)}>
           <InputText
-            name="nome"
+            {...register("name")}
+            name="name"
             label="Nome"
             placeholder="Digite seu nome"
-          ></InputText>
+            errorMessage={errors.name?.message}
+          />
           <InputText
+            {...register("email")}
             name="email"
             label="E-mail"
             placeholder="Digite seu e-mail"
-          ></InputText>
-          <InputText
+            errorMessage={errors.email?.message}
+          />
+          <InputPassword
+            {...register("password")}
             name="password"
             label="Senha"
             placeholder="Digite uma senha"
-          ></InputText>
-          <InputText
-            name="confirm"
+            errorMessage={errors.password?.message}
+          />
+          <InputPassword
+            {...register("confirmPassword")}
+            name="confirmPassword"
             label="Confirme a senha"
             placeholder="Confirme a senha"
-          ></InputText>
+            errorMessage={errors.confirmPassword?.message}
+          />
 
-          <S.TextPassword>No mínimo 8 caracteres</S.TextPassword>
+          <PasswordRules password={watch("password")} />
 
-          <Button text="Cadastrar" />
+          <Button text="Cadastrar" onClick={handleSubmit(onSubmit)} />
         </S.Form>
       </ExternalAccessContainer>
     </S.Wrapper>
