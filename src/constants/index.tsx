@@ -1,16 +1,35 @@
-export const CONTEXT_AUTH = '/economakert-auth-server';
+export const CONTEXT_AUTH = "/auth";
 
-export const SINGIN_ENDPOINT = '/sign-in';
+export const LOGIN_ENDPOINT = "/login";
 
-export const LOGGED_IN_ENDPOINT = '/logged-in';
+export const LOGOUT_ENDPOINT = "/logout";
 
-export const PASSWORD_ENDPOINT = '/password';
+export const TOKEN_REFRESH = "/token/refresh";
 
-export const CONTEXT_PRODUCT = '/economarket-product';
+export const PRODUCT_ENDPOINT = "/product";
 
-export const PRODUCT_ENDPOINT = '/product';
+export const BRAND = "/brand";
 
-export const ROLE_ADMIN = 'ROLE_ADMIN';
+export const CATEGORY = "/category";
 
-export const ROLE_USER = 'ROLE_USER';
+export const MARKET = "/market";
 
+export const PEPRMISSION = "/permission";
+
+export const BY_ID = "/";
+
+export const PRODUCT = "/product";
+
+export const REGISTER = "/register";
+
+export const SEARCH = "/search";
+
+export const NAME = "/name";
+
+export const SHOPPING = "/shopping";
+
+export const USER = "/user";
+
+export const ROLE_ADMIN = "ROLE_ADMIN";
+
+export const ROLE_USER = "ROLE_USER";
