@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL,
+  baseURL: "https://api-economarket.herokuapp.com"
   // headers: {
   //   "Accept": "*/*",
   //   "Accept-Encoding": "gzip, deflate, br",
