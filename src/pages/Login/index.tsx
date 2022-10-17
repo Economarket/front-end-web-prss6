@@ -9,8 +9,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaLogin } from "../../utils/schema";
 import InputPassword from "../../components/InputPassword";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -24,7 +27,13 @@ export default function Login() {
   });
 
   const onSubmit = async (data: any) => {
-    await signIn(data.email, data.password);
+    await signIn(data.email, data.password).then((response) => {
+      localStorage.setItem("token", response.access_token);
+
+      if (localStorage.getItem("token")) {
+        navigate("/");
+      }
+    });
   };
   return (
     <S.Wrapper>
