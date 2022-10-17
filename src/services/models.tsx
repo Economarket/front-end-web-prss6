@@ -1,4 +1,4 @@
-import { DateLocale } from 'yup/lib/locale';
+import { DateLocale } from "yup/lib/locale";
 
 export interface Address {
   cep: String;
@@ -66,7 +66,7 @@ export interface ShoppingList {
 }
 
 export interface Token {
-  token: string;
+  access_token: string;
 }
 
 export interface User {
