@@ -17,10 +17,11 @@ export interface Brand {
 }
 
 export interface Category {
-  uuid?: String;
-  name: String;
-  searchName?: String;
-  product?: Product[];
+  id: number;
+  uuid: string;
+  name: string;
+  searchName: string;
+  // product?: Product[];
 }
 
 export interface Market {
