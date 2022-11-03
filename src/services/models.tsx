@@ -1,13 +1,14 @@
 import { DateLocale } from "yup/lib/locale";
 
 export interface Address {
-  cep: String;
-  street: String;
-  number: String;
-  complement?: String;
-  district: String;
-  city: String;
-  state: String;
+  id: number;
+  cep: string;
+  street: string;
+  number: string;
+  complement?: string;
+  district: string;
+  city: string;
+  state: string;
 }
 
 export interface Brand {
@@ -25,12 +26,13 @@ export interface Category {
 }
 
 export interface Market {
-  uuid?: String;
-  locateX: String;
-  locateY: String;
-  name: String;
-  description?: String;
-  logo?: String;
+  id: number;
+  uuid: string;
+  locateX?: string;
+  locateY?: string;
+  name: string;
+  description?: string;
+  logo?: string;
   address?: Address;
   schedules?: Schedule[];
   products?: Product[];

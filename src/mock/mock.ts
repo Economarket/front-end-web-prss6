@@ -1,4 +1,21 @@
-import { Category } from "../services/models";
+import { Category, Market } from "../services/models";
+
+export const markets_mock: Market[] = [
+    {
+        id: 1,
+        uuid: "f696ee14-56d2-4697-9f18-db4d461e7ba8",
+        name: "Savegnago",
+        address: {
+            id: 1,
+            cep: "14802-000",
+            street: "Av. Padre Francisco Salles Culturato",
+            number: "1600",
+            district: "Centro",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    }
+];
 
 export const categories_mock: Category[] = [
     {
