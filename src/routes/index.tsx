@@ -6,8 +6,11 @@ import { Route, Routes } from "react-router-dom";
 // import Layout from '';
 // import Unauthorized from '';
 
+import Home from "../pages/Home/index";
 import Login from "../pages/Login/index";
+import Tests from "../pages/Tests";
 import User from "../pages/User/index";
+import PrivateRoute from "./privateRoute";
 // import ForgotPassword from '';
 // import ChangePassword from '';
 // import ExpiredToken from '';
@@ -20,16 +23,17 @@ import User from "../pages/User/index";
 export default function MyRoutes() {
   return (
     <Routes>
-      {/* <Route
+      <Route
         path="/"
         element={
           <PrivateRoute>
-            <Layout />
+            <Home />
           </PrivateRoute>
         }
-      /> */}
+      />
       <Route path="/login" element={<Login />} />
       <Route path="/novo-usuario" element={<User />} />
+      <Route path="/testes" element={<Tests />} />
       {/* <Route path="/recuperar-minha-senha" element={<ForgotPassword />} />
       <Route path="/alterar-senha" element={<ChangePassword />} />
       <Route path="/token-expirado" element={<ExpiredToken />} />

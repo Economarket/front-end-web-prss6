@@ -5,13 +5,16 @@ import InputText from "../../components/InputText";
 import registerUser from "../../assets/registerUser.png";
 import Button from "../../components/Button";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signIn } from "../../services/auth";
 import { schemaRegisterUser } from "../../utils/schema";
 import { useForm } from "react-hook-form";
 import InputPassword from "../../components/InputPassword";
 import PasswordRules from "../../components/PasswordRules";
+import { postUser } from "../../services/user";
+import { useNavigate } from "react-router-dom";
 
 export default function User() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -28,8 +31,9 @@ export default function User() {
   });
 
   const onSubmit = async (data: any) => {
-    console.log(data);
-    await signIn(data.email, data.password);
+    await postUser(data.name, data.password, data.email).then(() => {
+      navigate("/login");
+    });
   };
   return (
     <S.Wrapper>

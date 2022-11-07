@@ -5,9 +5,10 @@ import {
   LOGIN_ENDPOINT,
   TOKEN_REFRESH,
 } from "../constants";
+import { Token } from "./models";
 
-export async function signIn(email: string, password: string) {
-  const { data } = await api.post(`${CONTEXT_AUTH}${LOGIN_ENDPOINT}`, {
+export async function signIn(email: string, password: string): Promise<Token> {
+  const { data } = await api.post<Token>(`${CONTEXT_AUTH}${LOGIN_ENDPOINT}`, {
     email,
     password,
   });
@@ -26,4 +27,4 @@ export async function signOut(token: string) {
 export async function refreshToken() {
   const { data } = await api.get(`${CONTEXT_AUTH}${TOKEN_REFRESH}`, {});
   return data;
-}  
+}

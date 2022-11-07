@@ -2,7 +2,8 @@ import styled, { css } from "styled-components";
 
 export const Wrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const Form = styled.form`

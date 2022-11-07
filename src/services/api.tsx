@@ -1,7 +1,8 @@
 import axios from "axios";
+import { BASE_URL } from "../constants";
 
 export const api = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL,
+  baseURL: BASE_URL
   // headers: {
   //   "Accept": "*/*",
   //   "Accept-Encoding": "gzip, deflate, br",
