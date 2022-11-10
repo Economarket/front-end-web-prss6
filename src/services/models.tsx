@@ -45,7 +45,7 @@ export interface Product {
   brand: Brand;
   category: Category;
   unity: string;
-  markets?: Market[];
+  market?: Market;
 }
 
 export interface ProductList {

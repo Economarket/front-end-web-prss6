@@ -121,27 +121,18 @@ export const products_mock: Product[] = [
         "id": 1,
         "name": "Nuggets Empanados Sadia",
         "price": 13.58,
-        "category": {
-            "id": 3,
-            "uuid": "c72926d4-2f12-4d3a-b43d-341867a6ff21",
-            "name": "Congelados",
-            "searchName": "congelados"
-        },
+        "category": categories_mock[2],
         "brand": {
             "brandName": "Sadia"
         },
-        "unity": "Kg"
+        "unity": "Kg",
+        "market": markets_mock[0]
     },
     {
         "id": 6,
         "name": "Salgadinho Doritos",
         "price": 6.59,
-        "category": {
-            "id": 4,
-            "uuid": "460c364c-21b9-40ca-83db-b82efe2f7c0e",
-            "name": "Mercearia",
-            "searchName": "mercearia"
-        },
+        "category": categories_mock[3],
         "brand": {
             "brandName": "Elma Chips"
         },
@@ -151,12 +142,7 @@ export const products_mock: Product[] = [
         "id": 10,
         "name": "Chocolate em barra Lacta Oreo",
         "price": 6.09,
-        "category": {
-            "id": 6,
-            "uuid": "197e1773-3132-4520-b5cf-a6a92680ff1a",
-            "name": "Doces",
-            "searchName": "doces"
-        },
+        "category": categories_mock[5],
         "brand": {
             "brandName": "Laka"
         },
@@ -166,12 +152,7 @@ export const products_mock: Product[] = [
         "id": 15,
         "name": "Lombo Suíno",
         "price": 69.0,
-        "category": {
-            "id": 2,
-            "uuid": "533a1b7a-0cf6-41bb-b500-4e73dae3a7a5",
-            "name": "Carnes",
-            "searchName": "carnes"
-        },
+        "category": categories_mock[1],
         "brand": {
             "brandName": "Friboi"
         },
@@ -181,12 +162,7 @@ export const products_mock: Product[] = [
         "id": 16,
         "name": "Coca-cola 600ml",
         "price": 3.0,
-        "category": {
-            "id": 1,
-            "uuid": "37ef972b-f772-475b-9545-02f9da7a4459",
-            "name": "Bebidas",
-            "searchName": "bebidas"
-        },
+        "category": categories_mock[0],
         "brand": {
             "brandName": "Coca-cola"
         },
