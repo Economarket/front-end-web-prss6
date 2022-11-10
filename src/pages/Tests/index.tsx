@@ -6,6 +6,7 @@ import CategoryCard from "../../components/CategoryCard";
 import MarketCard from "../../components/MarketCard";
 import Carousel from '../../components/Carousel';
 import ProductCard from '../../components/ProductCard';
+import ShoppingListItem from '../../components/ShoppingListItem';
 
 const Tests: React.FC = () => {
     const [categories, setCategories] = useState<Category[]>(categories_mock);
@@ -48,6 +49,11 @@ const Tests: React.FC = () => {
         <div style={{display: "flex", justifyContent: "space-around", width: "90%", height: "100vh",flexWrap: "wrap", margin: "10rem"}}>
             {InstaProducts().map(p =>
                 <ProductCard product={p} onClick={() => console.log(p.name)} />
+            )}
+        </div>
+        <div style={{display: "flex", flexDirection:"column", width: "50%", margin: "10rem"}}>
+            {products_mock.map(p =>
+                <ShoppingListItem product={p} />
             )}
         </div>
     </S.Wrapper>
