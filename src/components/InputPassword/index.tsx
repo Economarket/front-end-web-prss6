@@ -16,7 +16,7 @@ const InputPassword = (
   return (
     <InputText
       type={showPassword}
-      icon={showPassword === "password" ? <IconEye /> : <IconEyeOff />}
+      icon={showPassword === "password" ? <IconEyeOff /> : <IconEye />}
       ref={ref}
       iconClick={() => {
         showPassword === "password"

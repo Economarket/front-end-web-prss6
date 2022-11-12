@@ -3,6 +3,8 @@ import { ThemeProvider } from "styled-components";
 
 import GlobalStyle from "./styles/global";
 import theme from "./styles/theme";
+import { toast, ToastContainer } from 'react-toastify';
+
 
 import Routes from "./routes/";
 // import { LayoutProvider } from "./contexts/layout";
@@ -11,6 +13,7 @@ import Routes from "./routes/";
 const App = () => (
   <Router>
     <GlobalStyle />
+    <ToastContainer style={{ width: "250px", fontSize: "15px" }}/>
     <ThemeProvider theme={theme}>
       {/* <LayoutProvider>
         <SessionProvider> */}
