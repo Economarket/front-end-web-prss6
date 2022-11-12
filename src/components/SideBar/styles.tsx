@@ -1,7 +1,8 @@
-import styled from "styled-components";
-import { Link } from 'react-router-dom';
+import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
+import { mediaQuerySm } from "../../mixins/media-queries";
 
-const SidebarLink = styled(Link)`
+export const SidebarLink = styled(Link)`
   display: flex;
   align-items: center;
   height: 0.1rem;
@@ -11,30 +12,42 @@ const SidebarLink = styled(Link)`
 
   &:hover {
     background-color: #197aa6;
-    border-radius: 4%;
+    border-radius: 5px;
   }
 `;
-const SidebarLabel = styled.span`
-  margin-left: 1rem;
+export const SidebarLabel = styled.span`
+  ${({ theme }) => css`
+    color: ${theme.colors.blue200};
+    font-family: ${theme.font.family.primary};
+    font-size: ${theme.font.sizes.medium};
+    margin-left: 1rem;
+  `}
 `;
 
-const SidebarNav = styled.div<{ sidebar: boolean }>`
-  width: 270px;
-  height: 100vh;
-  background-color: #f5f5f5;
+export const SidebarNav = styled.div<{ sidebar: boolean }>`
   position: fixed;
-  top: 0;
-  left: ${({ sidebar }) => (sidebar ? '0' : '-100%')};
+  top: 17rem;
+  left: ${({ sidebar }) => (sidebar ? "0" : "-100%")};
   transition: 350ms;
+  ${mediaQuerySm(
+    css`
+      position: static;
+    `
+  )};
 `;
 
-const NavIcon = styled(Link)`
+export const NavIcon = styled(Link)`
   display: flex;
   justify-content: flex-start;
   align-items: center;
   height: 3rem;
   font-size: 1.3rem;
   margin-left: 2rem;
+  ${mediaQuerySm(
+    css`
+      display: none;
+    `
+  )};
 `;
 
-const SidebarWrap = styled.div``;
+export const SidebarWrap = styled.div``;

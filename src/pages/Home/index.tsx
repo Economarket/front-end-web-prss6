@@ -1,11 +1,12 @@
-import * as S from '../styles';
-import SideBar from '../../components/SideBar/sidebar';
+import InternalAccessContainer from "../../templates/InternalLayout";
+import * as S from "../styles";
 
 export default function Home() {
   return (
     <S.Wrapper>
-      <S.Text>Bem vindo a home!</S.Text>
-      <SideBar />
+      <InternalAccessContainer>
+        <h1>teste</h1>
+      </InternalAccessContainer>
     </S.Wrapper>
   );
 }
