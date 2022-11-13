@@ -1,9 +1,9 @@
 import * as S from "../styles";
 
-export default function Home() {
+export default function ShoppingList() {
   return (
     <S.Wrapper>
-      <h1>Home</h1>
+      <h1>Lista de Compras</h1>
     </S.Wrapper>
   );
 }

@@ -1,9 +1,9 @@
 import * as S from "../styles";
 
-export default function Home() {
+export default function Category() {
   return (
     <S.Wrapper>
-      <h1>Home</h1>
+      <h1>Categorias</h1>
     </S.Wrapper>
   );
 }

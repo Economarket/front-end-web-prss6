@@ -4,6 +4,7 @@ import { ReactComponent as Logo } from "../../assets/Logo.svg";
 import Button from "../../components/Button";
 import Sidebar from "../../components/SideBar/sidebar";
 import * as S from "./styles";
+import { Outlet } from "react-router-dom";
 
 export interface InternalTemplate {
   children?: React.ReactNode;
@@ -61,7 +62,10 @@ const InternalAccessContainer = ({
         <Sidebar />
       </S.WrapperMenu>
 
-      <S.WrapperContent>{children}</S.WrapperContent>
+      <S.WrapperContent>
+        {children}
+        <Outlet />
+      </S.WrapperContent>
 
       <S.WrapperFoot>
         <S.Subtitle>
