@@ -1,6 +1,8 @@
 import styled, { css, DefaultTheme } from "styled-components";
 import { ButtonProps } from ".";
 
+type IconProps = Pick<ButtonProps, "sizes">;
+
 const modifiers = {
   appearance: {
     primary: (theme: DefaultTheme) => css`
@@ -19,23 +21,53 @@ const modifiers = {
       border-color: ${theme.colors.blue300};
       color: ${theme.colors.blue300};
     `,
+
+    ghost: (theme: DefaultTheme) => css`
+      background-color: transparent;
+      border-color: transparent;
+      color: ${theme.colors.primary500};
+
+      &:hover,
+      &:focus {
+        background-color: transparent;
+        border-color: transparent;
+        box-shadow: ${theme.shadows.xsmall};
+        color: ${theme.colors.primary500};
+      }
+
+      &:active {
+        border-color: ${theme.colors.primary500};
+      }
+    `,
   },
 
   sizes: {
     small: (theme: DefaultTheme) => css`
-      padding: ${theme.spacings.xxsmall} ${theme.spacings.large};
+      padding: ${theme.spacings.xxsmall} ${theme.spacings.small};
       font-size: ${theme.font.sizes.xsmall};
-      border-radius: ${theme.border.radius.full};
+      border-radius: ${theme.border.radius.medium};
+
+      ${Icon} {
+        width: 2rem;
+      }
     `,
     medium: (theme: DefaultTheme) => css`
       padding: ${theme.spacings.small} ${theme.spacings.large};
       font-size: ${theme.font.sizes.small};
       border-radius: ${theme.border.radius.large};
+
+      ${Icon} {
+        width: 4rem;
+      }
     `,
     large: (theme: DefaultTheme) => css`
       padding: ${theme.spacings.large} ${theme.spacings.xxxlarge};
       font-size: ${theme.font.sizes.small};
       border-radius: ${theme.border.radius.xlarge};
+
+      ${Icon} {
+        width: 6rem;
+      }
     `,
   },
 
@@ -70,5 +102,11 @@ export const Button = styled.button<ButtonProps>`
     ${disabled && modifiers.disabled(theme)};
     ${!!appearance && modifiers.appearance[appearance](theme)};
     ${!!sizes && modifiers.sizes[sizes](theme)};
+  `}
+`;
+
+export const Icon = styled.svg<IconProps>`
+  ${({ theme }) => css`
+    color: ${theme.colors.primary500};
   `}
 `;

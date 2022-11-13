@@ -18,7 +18,7 @@ const ExternalAccessContainer = ({
     <S.Wrapper>
       <S.WrapperLeft>
         <S.Logo>
-          <Logo />
+          <Logo fill="#FFFFF" />
         </S.Logo>
 
         <S.Image src={image} />
