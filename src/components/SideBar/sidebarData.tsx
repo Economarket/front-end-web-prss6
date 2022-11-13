@@ -10,7 +10,7 @@ import { SidebarItem } from "./Menu";
 export const SidebarData: SidebarItem[] = [
   {
     title: "Home",
-    path: "/home",
+    path: "/",
     icon: <IconHome />,
     iconClosed: <AiFillCaretDown />,
     iconOpened: <AiFillCaretUp />,

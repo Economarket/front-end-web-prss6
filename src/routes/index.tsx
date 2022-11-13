@@ -65,7 +65,7 @@ export default function MyRoutes() {
           </PrivateRoute>
         }
       >
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/cadastroprodutos" element={<Product />} />
         <Route path="/listacompras" element={<ShoppingList />} />
         <Route path="/categorias" element={<Category />} />
