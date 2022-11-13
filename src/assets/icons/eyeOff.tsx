@@ -1,6 +1,8 @@
 import React from 'react';
 
-export default function IconEyeOff(props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>) {
+export default function IconEyeOff(
+  props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>,
+) {
   return (
     <svg
       {...props}
