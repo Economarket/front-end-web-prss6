@@ -1,20 +1,27 @@
 import React from 'react';
 
-export default function IconWarning(
+export default function IconOutLineClose(
   props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>,
 ) {
   return (
     <svg
       {...props}
-      width="22"
-      height="22"
-      viewBox="0 0 22 22"
+      width="32"
+      height="32"
+      viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M11 7V11M11 15H11.01M21 11C21 16.5228 16.5228 21 11 21C5.47715 21 1 16.5228 1 11C1 5.47715 5.47715 1 11 1C16.5228 1 21 5.47715 21 11Z"
-        stroke="currentColor"
+        d="M25 7L7 25"
+        stroke="#004068"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M25 25L7 7"
+        stroke="#004068"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

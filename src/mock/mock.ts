@@ -168,4 +168,4 @@ export const products_mock: Product[] = [
         },
         "unity": "Un"
     },
-]
+];

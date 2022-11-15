@@ -163,6 +163,7 @@ const theme = {
     error500: "#F1392B",
     green500: "#3B5249",
     green700: "#2D3934",
+    primary500: "#3B5249",
     // background600: "#CBCFD2",
     // background700: "#ABB0B4",
     // background800: "#90959B",

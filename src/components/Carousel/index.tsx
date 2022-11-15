@@ -1,5 +1,7 @@
 import useEmblaCarousel from "embla-carousel-react";
 import { useCallback } from "react";
+import IconChevronLeft from "../../assets/icons/chevronLeft";
+import IconChevronRigth from "../../assets/icons/chevronRight";
 import { Button, ButtonContainer, CaroselContainer, CarouselItem, CarouselList, CarouselViewport } from "./index.styled";
 
 
@@ -29,8 +31,8 @@ const Carousel: React.FC<{ children: JSX.Element[]}> = ({ children }) => {
     return (
         <CaroselContainer>
             <ButtonContainer>
-                <Button onClick={() => scrollPrev()}>{"<"}</Button>
-                <Button onClick={() => scrollNext()}>{">"}</Button>
+                <Button onClick={() => scrollPrev()}>{<IconChevronLeft/>}</Button>
+                <Button onClick={() => scrollNext()}>{<IconChevronRigth/>}</Button>
             </ButtonContainer>
             <CarouselViewport ref={emblaRef}>
                 <CarouselList>
