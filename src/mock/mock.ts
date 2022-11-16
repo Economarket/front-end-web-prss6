@@ -3,7 +3,7 @@ import { Category, Market } from "../services/models";
 export const markets_mock: Market[] = [
     {
         id: 1,
-        uuid: "f696ee14-56d2-4697-9f18-db4d461e7ba8",
+        uuid: "savegnago",
         name: "Savegnago",
         address: {
             id: 1,
@@ -14,7 +14,219 @@ export const markets_mock: Market[] = [
             city: "Araraquara",
             state: "São Paulo"
         }
+    },
+    {
+        id: 2,
+        uuid: "assai",
+        name: "Assaí",
+        address: {
+            id: 2,
+            cep: "14802-000",
+            street: "Av. José Bonifácio",
+            number: "483",
+            district: "Centro",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 3,
+        uuid: "14_supermercados",
+        name: "Supermercados 14",
+        address: {
+            id: 3,
+            cep: "14802-000",
+            street: "Av. Padre Francisco Salles Culturato",
+            number: "483",
+            district: "Centro",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 4,
+        uuid: "atacadao",
+        name: "Atacadão",
+        address: {
+            id: 4,
+            cep: "14802-000",
+            street: "Av. Aroeiras",
+            number: "285",
+            district: "Aroeiras",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 5,
+        uuid: "casa_deliza",
+        name: "Casa Deliza",
+        address: {
+            id: 5,
+            cep: "14802-000",
+            street: "Av. Armando Corrêa de Siqueira",
+            number: "1419",
+            district: "Vila Harmonia",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 6,
+        uuid: "dia",
+        name: "Supermercado Dia",
+        address: {
+            id: 6,
+            cep: "14802-000",
+            street: "Av. Armando Corrêa de Siqueira",
+            number: "1419",
+            district: "Vila Harmonia",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 7,
+        uuid: "emporio_camargo",
+        name: "Empório Camargo",
+        address: {
+            id: 7,
+            cep: "14802-000",
+            street: "R. Miguel Cortez",
+            number: "315",
+            district: "Vila Suconasa",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 8,
+        uuid: "jau_serve",
+        name: "Jaú Serve",
+        address: {
+            id: 8,
+            cep: "14802-000",
+            street: "R. Miguel Cortez",
+            number: "315",
+            district: "Vila Suconasa",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 9,
+        uuid: "max_facil",
+        name: "Max Fácil",
+        address: {
+            id: 9,
+            cep: "14802-000",
+            street: "R. Dom Carlos Carmelo",
+            number: "716",
+            district: "Botânico",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 10,
+        uuid: "palomax",
+        name: "Palomax",
+        address: {
+            id: 10,
+            cep: "14802-000",
+            street: "Av. Vaz Filho",
+            number: "2874",
+            district: "Vila Xavier",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 11,
+        uuid: "passarinho",
+        name: "Passarinho Horti Fruti",
+        address: {
+            id: 11,
+            cep: "14802-000",
+            street: "Rua Voluntários da Pátria",
+            number: "2821",
+            district: "Centro",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 12,
+        uuid: "paulistao",
+        name: "Paulistão",
+        address: {
+            id: 12,
+            cep: "14802-000",
+            street: " Al. Paulista",
+            number: "1960",
+            district: "Vila Xavier",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 13,
+        uuid: "sempre_vale",
+        name: "Sempre Vale",
+        address: {
+            id: 13,
+            cep: "14802-000",
+            street: "Av. Antônio de Padua Corrêa",
+            number: "938",
+            district: "Centro",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 14,
+        uuid: "tiba",
+        name: "Tiba",
+        address: {
+            id: 14,
+            cep: "14802-000",
+            street: " Av. José Nogueira Neves",
+            number: "490",
+            district: "Vila Melhado",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 15,
+        uuid: "tonin",
+        name: "Tonin",
+        address: {
+            id: 15,
+            cep: "14802-000",
+            street: "R. Castro Alves",
+            number: "3445",
+            district: "Centro",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 16,
+        uuid: "vencedor",
+        name: "Vencedor",
+        address: {
+            id: 16,
+            cep: "14802-000",
+            street: " Av. Maria Antonia Camargo de Oliveira",
+            number: "2787",
+            district: "Centro",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
     }
+    
+   
 ];
 
 export const categories_mock: Category[] = [

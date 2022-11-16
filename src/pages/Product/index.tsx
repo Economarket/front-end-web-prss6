@@ -1,9 +1,11 @@
-import * as S from "../styles";
+import { Title } from '../../templates/InternalLayout/styles';
+import * as S from '../styles';
+import './styles';
 
 export default function Product() {
   return (
     <S.Wrapper>
-      <h1>Produtos</h1>
+      <Title> Cadastro de Produtos</Title>
     </S.Wrapper>
   );
 }
