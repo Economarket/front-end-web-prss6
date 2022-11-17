@@ -10,6 +10,7 @@ import Category from "../pages/Category";
 import Home from "../pages/Home/index";
 import Login from "../pages/Login/index";
 import Product from "../pages/Product";
+import Profile from "../pages/Profile";
 import ShoppingList from "../pages/ShoppingList";
 import Tests from "../pages/Tests";
 import User from "../pages/User/index";
@@ -69,6 +70,7 @@ export default function MyRoutes() {
         <Route path="/cadastroprodutos" element={<Product />} />
         <Route path="/listacompras" element={<ShoppingList />} />
         <Route path="/categorias" element={<Category />} />
+        <Route path="/profile" element={<Profile />} />
       </Route>
     </Routes>
   );

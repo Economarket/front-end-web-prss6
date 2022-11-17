@@ -4,14 +4,14 @@ import { ReactComponent as Logo } from "../../assets/Logo.svg";
 import Button from "../../components/Button";
 import Sidebar from "../../components/SideBar/sidebar";
 import * as S from "./styles";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useSession } from "../../contexts/session";
 
 export interface InternalTemplate {
   children?: React.ReactNode;
   image?: string;
   title?: string;
   subtitle?: string;
-  user?: string;
   address?: string;
 }
 
@@ -19,9 +19,10 @@ const InternalAccessContainer = ({
   title = "Economize nas suas compras de mercado: Pesquise!",
   subtitle = "O que você precisa para economizar está aqui. Faça buscas e encontre o melhor preço.",
   children,
-  user,
   address,
 }: InternalTemplate) => {
+  const { user, logout } = useSession();
+  const navigate = useNavigate();
   return (
     <S.Wrapper>
       <S.Logo>
@@ -37,7 +38,7 @@ const InternalAccessContainer = ({
 
         <S.WrapperUser>
           <S.WrapperData>
-            <S.Subtitle>Olá, fulano{user}</S.Subtitle>
+            <S.Subtitle>Olá, {user?.name}</S.Subtitle>
             <S.Subtitle>Endereco{address}</S.Subtitle>
           </S.WrapperData>
 
@@ -45,13 +46,14 @@ const InternalAccessContainer = ({
             <Button
               appearance="ghost"
               sizes="small"
-              text="Alterar Senha"
+              text="Usuario"
               icon={IconUser}
+              onClick={() => navigate("/profile")}
             />
             <Button
               appearance="ghost"
               sizes="small"
-              text="Sair | Desconectar"
+              text="Localização"
               icon={AddressUser}
             />
           </S.WrapperIcons>
