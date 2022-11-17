@@ -92,3 +92,8 @@ export interface UserLogin {
 export interface Permission {}
 
 export interface RefreshToken {}
+
+export interface Location {
+  lat: number;
+  long: number;
+}
