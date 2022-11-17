@@ -184,3 +184,5 @@ DELETE http://api-economarket.herokuapp.com/user/{{id}}<br/>
 ## Autores
 
 [<img src="https://avatars.githubusercontent.com/u/67704047?s=400&u=50e40cfa5c84ecc20dbb0eb0b8b9a3587cb36fcc&v=4" width=115><br><sub>Andreza Emiliano</sub>]
+
+Deploys por README: .

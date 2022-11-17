@@ -8,6 +8,7 @@ export const Container = styled.div`
     width: 30rem;
     height: 13rem;
     border-radius: ${theme.border.radius.large};
+    margin-left: 4px;
 `;
 
 export const LogoContainer = styled.div`

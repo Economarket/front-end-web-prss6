@@ -15,6 +15,21 @@ export const SidebarLink = styled(Link)`
     border-radius: 5px;
   }
 `;
+
+export const SidebarLinkOut = styled(Link)`
+  display: flex;
+  align-items: center;
+  height: 0.1rem;
+  font-size: 1rem;
+  padding: 2rem;
+  text-decoration: none;
+  margin-top: 250px;
+
+  &:hover {
+    background-color: #197aa6;
+    border-radius: 5px;
+  }
+`;
 export const SidebarLabel = styled.span`
   ${({ theme }) => css`
     color: ${theme.colors.blue200};
