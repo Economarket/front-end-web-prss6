@@ -6,8 +6,6 @@ import CategoryCard from '../../components/CategoryCard';
 import MarketCard from '../../components/MarketCard';
 import Carousel from '../../components/Carousel';
 
-
-
 const Tests: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>(categories_mock);
 
