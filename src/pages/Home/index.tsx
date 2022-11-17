@@ -1,39 +1,35 @@
-import Button from "../../components/Button";
-import * as S from "../styles";
+import { useState } from 'react';
+import Carousel from '../../components/Carousel';
+import CategoryCard from '../../components/CategoryCard';
+import MarketCard from '../../components/MarketCard';
+import { categories_mock, markets_mock } from '../../mock/mock';
+import { Category } from '../../services/models';
+import * as S from '../styles';
+import { CardsMarketContainer } from './styles';
 
 export default function Home() {
-  //   import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
-
-  // const getLocation = () =>{
-  //    const pos = {};
-  //    const geolocation = navigator.geolocation;
-  //    if (geolocation) {
-  //       geolocation.getCurrentPosition(findLocal, showEror);
-  //    }
-  //    function findLocal(position){
-  //       pos.lat = position.coords.latitude;
-  //       pos.lng = position.coords.longitude;
-  //    }
-  //    function showEror(){console.log(Error)}
-  //    return pos;
-  // };
-  // const myLocation = getLocation();
-
-  // const getPosition = () => {
-  //   if (!("geolocation" in navigator)) {
-  //     console.log("Not Available");
-
-  //   } else {
-  //     navigator.geolocation.getCurrentPosition(function (position) {
-  //       console.log("Latitude is :", position.coords.latitude);
-  //       console.log("Longitude is :", position.coords.longitude);
-  //     });
-  //   }
-  // };
-
+  const [categories, setCategories] = useState<Category[]>(categories_mock);
   return (
     <S.Wrapper>
-      <h1>Home</h1>
+      <Carousel>
+        {categories.map((c) => (
+          <CategoryCard
+            category={c}
+            onClick={() => console.log(`Redirect to ${c.name} page...`)}
+          />
+        ))}
+      </Carousel>
+      <CardsMarketContainer>
+        {markets_mock?.map((m) => {
+          return (
+            <MarketCard
+              key={m.id}
+              market={m}
+              onClick={() => console.log(`Redirect to ${m.name} page...`)}
+            />
+          );
+        })}
+      </CardsMarketContainer>
     </S.Wrapper>
   );
 }

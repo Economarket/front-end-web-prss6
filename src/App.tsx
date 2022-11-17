@@ -3,7 +3,8 @@ import { ThemeProvider } from "styled-components";
 
 import GlobalStyle from "./styles/global";
 import theme from "./styles/theme";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from 'react-toastify';
+
 
 import Routes from "./routes/";
 import { SessionProvider } from "./contexts/session";

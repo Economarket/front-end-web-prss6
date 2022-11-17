@@ -5,6 +5,7 @@ import IconListCheck from "./../../assets/icons/listCheck";
 import IconHome from "./../../assets/icons/home";
 import IconPlusCicle from "./../../assets/icons/plusCicle";
 import { SidebarItem } from "./Menu";
+import IconSearch from "../../assets/icons/search";
 
 export const SidebarData: SidebarItem[] = [
   {
@@ -13,6 +14,11 @@ export const SidebarData: SidebarItem[] = [
     icon: <IconHome />,
     iconClosed: <AiFillCaretDown />,
     iconOpened: <AiFillCaretUp />,
+  },
+  {
+    title: 'Pesquisa',
+    path: '/pesquisa',
+    icon: <IconSearch />,
   },
   {
     title: "Cadastro de produto",
@@ -24,11 +30,6 @@ export const SidebarData: SidebarItem[] = [
     path: "/listacompras",
     icon: <IconListCheck />,
   },
-  // {
-  //   title: 'Lista de favoritos',
-  //   path: '/listafavoritos',
-  //   icon: <IconListHeart />,
-  // },
   {
     title: "Categorias",
     path: "/categorias",
