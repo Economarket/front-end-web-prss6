@@ -1,5 +1,5 @@
 import { api } from "./api";
-import { BRAND, CATEGORY, REGISTER } from "../constants";
+import { CATEGORY, REGISTER, SEARCH } from "../constants";
 
 export async function putCategory(categoryId: string) {
     const { data } = await api.put(`${REGISTER}${CATEGORY}`, {
@@ -21,11 +21,11 @@ export async function deleteCategoryById(categoryId: string) {
 } 
 
 export async function searchCategory() {
-  const { data } = await api.get(`${REGISTER}${CATEGORY}`, {});
+  const { data } = await api.get(`${SEARCH}${CATEGORY}`, {});
   return data;
 } 
 
 export async function searchCategoryById(categoryId: string) {
-  const { data } = await api.get(`${REGISTER}${CATEGORY}/${categoryId}`, {});
+  const { data } = await api.get(`${SEARCH}${CATEGORY}/${categoryId}`, {});
   return data;
 } 

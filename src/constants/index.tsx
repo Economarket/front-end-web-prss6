@@ -1,3 +1,5 @@
+export const BASE_URL = "https://api-economarket.herokuapp.com/";
+
 export const CONTEXT_AUTH = "/auth";
 
 export const LOGIN_ENDPOINT = "/login";
