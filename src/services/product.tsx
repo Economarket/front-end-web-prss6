@@ -7,7 +7,7 @@ export async function putProduct(productId: string) {
 }
 
 export async function postProduct(name: string, marca: string, unidade: string, valor: string, categoria: string, mercado: string) {
-    const { data } = await api.post(`${PRODUCT}`, { name, marca, unidade, valor, categoria,mercado });
+    const { data } = await api.post(`${PRODUCT}`, { name, marca, unidade, valor, categoria, mercado });
     return data;
 }
 

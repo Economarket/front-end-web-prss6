@@ -1,5 +1,5 @@
-import { Route, Routes } from "react-router-dom";
-import Category from "../pages/Category";
+import { Route, Routes } from 'react-router-dom';
+import Category from '../pages/Category';
 
 // import PrivateRoute from "./privateRoute";
 // import RequireAuth from './requireAuth';
@@ -7,16 +7,17 @@ import Category from "../pages/Category";
 // import Layout from '';
 // import Unauthorized from '';
 
-import Home from "../pages/Home/index";
-import Pesquisa from "../pages/Pesquisa"
-import Login from "../pages/Login/index";
-import Product from "../pages/Product";
-import Profile from "../pages/Profile";
-import ShoppingList from "../pages/ShoppingList";
-import Tests from "../pages/Tests";
-import User from "../pages/User/index";
-import InternalAccessContainer from "../templates/InternalLayout";
-import PrivateRoute from "./privateRoute";
+import Home from '../pages/Home/index';
+import Login from '../pages/Login/index';
+import Product from '../pages/Product';
+import Profile from '../pages/Profile';
+import ShoppingList from '../pages/ShoppingList';
+import Tests from '../pages/Tests';
+import User from '../pages/User/index';
+import InternalAccessContainer from '../templates/InternalLayout';
+import PrivateRoute from './privateRoute';
+import RegisterProducts from '../pages/RegisterProducts';
+import NearbyMarkets from '../pages/NearbyMarkets';
 // import ForgotPassword from '';
 // import ChangePassword from '';
 // import ExpiredToken from '';
@@ -67,10 +68,11 @@ export default function MyRoutes() {
         }
       >
         <Route path="/" element={<Home />} />
-        <Route path="/pesquisa" element={<Pesquisa />} />
-        <Route path="/cadastroprodutos" element={<Product />} />
-        <Route path="/listacompras" element={<ShoppingList />} />
+        <Route path="/produtos" element={<Product />} />
         <Route path="/categorias" element={<Category />} />
+        <Route path="/cadastroprodutos" element={<RegisterProducts />} />
+        <Route path="/listacompras" element={<ShoppingList />} />
+        <Route path="/mercadosProximos" element={<NearbyMarkets />} />
         <Route path="/profile" element={<Profile />} />
       </Route>
     </Routes>
