@@ -1,10 +1,16 @@
 import { Title } from '../../templates/InternalLayout/styles';
-import * as S from "../styles";
+import { NewListContainer, NewListButton, MainContainer } from './index.styled';
 
-export default function ShoppingList() {
+const ShoppingList: React.FC = () => {
   return (
-    <S.Wrapper>
+  <MainContainer>
     <Title> Lista de Compras</Title>
-  </S.Wrapper>
+    <NewListContainer>
+      <Title>Minhas Listas</Title>
+      <NewListButton>Criar nova lista</NewListButton>
+    </NewListContainer>
+  </MainContainer>
   );
-}
+};
+
+export default ShoppingList;
