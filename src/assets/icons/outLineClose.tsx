@@ -14,14 +14,14 @@ export default function IconOutLineClose(
     >
       <path
         d="M25 7L7 25"
-        stroke="#004068"
+        stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M25 25L7 7"
-        stroke="#004068"
+        stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
