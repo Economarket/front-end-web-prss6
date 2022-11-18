@@ -45,6 +45,8 @@ const Label = styled.p`
 export const Title = styled(Label)`
     font-weight: 700;
     font-size: 1.5rem;
+    text-align: start;
+    padding: 10px
 `;
 
 export const AddressContainer = styled.div`

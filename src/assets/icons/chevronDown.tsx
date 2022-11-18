@@ -14,7 +14,7 @@ export default function IconChevronDown(
     >
       <path
         d="M26 12L16 22L6 12"
-        stroke="#004068"
+        stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

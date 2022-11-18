@@ -25,3 +25,20 @@ export const schemaRegisterUser = yup.object().shape({
   password: yup.string().required("Preencha a senha").trim(),
   confirmPassword: yup.string().required("Preencha a senha").trim(),
 });
+
+export const schemaRegisterProduct = yup.object().shape({
+  name: yup
+    .string()
+    .required("Preencha o nome")
+    .trim()
+    .min(3, "Preencha no mínimo com 3 caracteres"),
+  marca: yup
+    .string()
+    .required("Preencha a marca")
+    .trim()
+    .min(3, "Preencha no mínimo com 3 caracteres"),
+  unidade: yup.string().required("Preencha a unidade").trim(),
+  valor: yup.string().required("Preencha o valor").trim(),
+  categoria: yup.string().required("Escolha a categoria").trim(),
+  mercado: yup.string().required("Escolha o mercado").trim(),
+});
