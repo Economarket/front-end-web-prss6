@@ -22,8 +22,17 @@ export const schemaRegisterUser = yup.object().shape({
     .trim()
     .min(3, "Preencha no mínimo com 3 caracteres")
     .email("Preencha com um e-mail válido"),
-  password: yup.string().required("Preencha a senha").trim(),
-  confirmPassword: yup.string().required("Preencha a senha").trim(),
+  password: yup
+    .string()
+    .required("Preencha a senha")
+    .trim()
+    .min(8, "Sua senha não está de acordo as regras."),
+  confirmPassword: yup
+    .string()
+    .required("Preencha a senha")
+    .trim()
+    .min(8, "As senhas não correspondem.")
+    .oneOf([yup.ref("password")], "As senhas não correspondem."),
 });
 
 export const schemaRegisterProduct = yup.object().shape({
