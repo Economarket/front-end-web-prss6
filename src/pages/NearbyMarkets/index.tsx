@@ -11,88 +11,9 @@ import { schemaRegisterProduct } from '../../utils/schema';
 import * as S from '../styles';
 
 export default function NearbyMarkets() {
-  const navigate = useNavigate();
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      name: '',
-      marca: '',
-      unidade: '',
-      valor: '',
-      categoria: '',
-      mercado: '',
-    },
-    resolver: yupResolver(schemaRegisterProduct),
-  });
-
-  const onSubmit = async (data: any) => {
-    await postProduct(
-      data.name,
-      data.marca,
-      data.unidade,
-      data.valor,
-      data.categoria,
-      data.mercado,
-    ).then(() => {
-      navigate('/cadastroprodutos');
-    });
-  };
   return (
     <S.Wrapper>
-      <Title>Vamos cadastrar um produto?</Title>
-      <S.ProductContainer>
-        <S.Form>
-          <InputText
-            {...register('name')}
-            name="name"
-            label="Nome"
-            placeholder="Digite o nome do produto"
-            errorMessage={errors.name?.message}
-          />
-          <InputText
-            {...register('marca')}
-            name="marca"
-            label="Marca"
-            placeholder="Digite a marca"
-            errorMessage={errors.marca?.message}
-          />
-          <InputText
-            {...register('unidade')}
-            name="unidade"
-            label="Unidade"
-            placeholder="Digite a unidade"
-            errorMessage={errors.unidade?.message}
-          />
-          <InputText
-            {...register('valor')}
-            name="valor"
-            label="Valor"
-            placeholder="Digite o valor"
-            errorMessage={errors.valor?.message}
-          />
-          <InputText
-            {...register('categoria')}
-            name="categoria"
-            label="Categoria"
-            placeholder="Aqui precisamos chamar as categorias"
-            errorMessage={errors.categoria?.message}
-          />
-          <InputText
-            {...register('mercado')}
-            name="mercado"
-            label="Mercado"
-            placeholder="Digite o mercado"
-            errorMessage={errors.mercado?.message}
-          />
-
-          <Button text="Cadastrar" onClick={handleSubmit(onSubmit)} />
-        </S.Form>
-      </S.ProductContainer>
+      <Title> Mercados proximos</Title>
     </S.Wrapper>
   );
 }
