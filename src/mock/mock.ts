@@ -1,9 +1,9 @@
-import { Category, Market } from "../services/models";
+import { Category, Market, Product } from "../services/models";
 
 export const markets_mock: Market[] = [
     {
         id: 1,
-        uuid: "f696ee14-56d2-4697-9f18-db4d461e7ba8",
+        uuid: "savegnago",
         name: "Savegnago",
         address: {
             id: 1,
@@ -14,7 +14,219 @@ export const markets_mock: Market[] = [
             city: "Araraquara",
             state: "São Paulo"
         }
+    },
+    {
+        id: 2,
+        uuid: "assai",
+        name: "Assaí",
+        address: {
+            id: 2,
+            cep: "14802-000",
+            street: "Av. José Bonifácio",
+            number: "483",
+            district: "Centro",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 3,
+        uuid: "14_supermercados",
+        name: "Supermercados 14",
+        address: {
+            id: 3,
+            cep: "14802-000",
+            street: "Av. Padre Francisco Salles Culturato",
+            number: "483",
+            district: "Centro",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 4,
+        uuid: "atacadao",
+        name: "Atacadão",
+        address: {
+            id: 4,
+            cep: "14802-000",
+            street: "Av. Aroeiras",
+            number: "285",
+            district: "Aroeiras",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 5,
+        uuid: "casa_deliza",
+        name: "Casa Deliza",
+        address: {
+            id: 5,
+            cep: "14802-000",
+            street: "Av. Armando Corrêa de Siqueira",
+            number: "1419",
+            district: "Vila Harmonia",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 6,
+        uuid: "dia",
+        name: "Supermercado Dia",
+        address: {
+            id: 6,
+            cep: "14802-000",
+            street: "Av. Armando Corrêa de Siqueira",
+            number: "1419",
+            district: "Vila Harmonia",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 7,
+        uuid: "emporio_camargo",
+        name: "Empório Camargo",
+        address: {
+            id: 7,
+            cep: "14802-000",
+            street: "R. Miguel Cortez",
+            number: "315",
+            district: "Vila Suconasa",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 8,
+        uuid: "jau_serve",
+        name: "Jaú Serve",
+        address: {
+            id: 8,
+            cep: "14802-000",
+            street: "R. Miguel Cortez",
+            number: "315",
+            district: "Vila Suconasa",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 9,
+        uuid: "max_facil",
+        name: "Max Fácil",
+        address: {
+            id: 9,
+            cep: "14802-000",
+            street: "R. Dom Carlos Carmelo",
+            number: "716",
+            district: "Botânico",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 10,
+        uuid: "palomax",
+        name: "Palomax",
+        address: {
+            id: 10,
+            cep: "14802-000",
+            street: "Av. Vaz Filho",
+            number: "2874",
+            district: "Vila Xavier",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 11,
+        uuid: "passarinho",
+        name: "Passarinho Horti Fruti",
+        address: {
+            id: 11,
+            cep: "14802-000",
+            street: "Rua Voluntários da Pátria",
+            number: "2821",
+            district: "Centro",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 12,
+        uuid: "paulistao",
+        name: "Paulistão",
+        address: {
+            id: 12,
+            cep: "14802-000",
+            street: " Al. Paulista",
+            number: "1960",
+            district: "Vila Xavier",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 13,
+        uuid: "sempre_vale",
+        name: "Sempre Vale",
+        address: {
+            id: 13,
+            cep: "14802-000",
+            street: "Av. Antônio de Padua Corrêa",
+            number: "938",
+            district: "Centro",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 14,
+        uuid: "tiba",
+        name: "Tiba",
+        address: {
+            id: 14,
+            cep: "14802-000",
+            street: " Av. José Nogueira Neves",
+            number: "490",
+            district: "Vila Melhado",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 15,
+        uuid: "tonin",
+        name: "Tonin",
+        address: {
+            id: 15,
+            cep: "14802-000",
+            street: "R. Castro Alves",
+            number: "3445",
+            district: "Centro",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
+    },
+    {
+        id: 16,
+        uuid: "vencedor",
+        name: "Vencedor",
+        address: {
+            id: 16,
+            cep: "14802-000",
+            street: " Av. Maria Antonia Camargo de Oliveira",
+            number: "2787",
+            district: "Centro",
+            city: "Araraquara",
+            state: "São Paulo"
+        }
     }
+    
+   
 ];
 
 export const categories_mock: Category[] = [
@@ -30,11 +242,12 @@ export const categories_mock: Category[] = [
         name: "Carnes",
         searchName: "carnes",
     },
-    // {
-    //     id: 3,
-    //     uuid: "c72926d4-2f12-4d3a-b43d-341867a6ff21",
-    //     name: "Congelados"
-    // },
+    {
+        id: 3,
+        uuid: "c72926d4-2f12-4d3a-b43d-341867a6ff21",
+        name: "Congelados",
+        searchName: "congelados"
+    },
     {
         id: 4,
         uuid: "460c364c-21b9-40ca-83db-b82efe2f7c0e",
@@ -77,12 +290,12 @@ export const categories_mock: Category[] = [
         name: "Jardinagem",
         searchName: "jardinagem",
     },
-    // {
-    //     id: 11,
-    //     uuid: "2deb746e-d9a8-45c2-aee6-cf28f01f7654",
-    //     name: "Bazar",
-    //     searchName: "bazar",
-    // },
+    {
+        id: 11,
+        uuid: "2deb746e-d9a8-45c2-aee6-cf28f01f7654",
+        name: "Bazar",
+        searchName: "bazar",
+    },
     {
         id: 12,
         uuid: "c4d31ee7-4d76-4ac9-a29b-763017a7e296",
@@ -113,4 +326,58 @@ export const categories_mock: Category[] = [
         name: "Padaria",
         searchName: "padaria",
     }
+];
+
+export const products_mock: Product[] = [
+    {
+        "id": 1,
+        "name": "Nuggets Empanados Sadia",
+        "price": 13.58,
+        "category": categories_mock[2],
+        "brand": {
+            "brandName": "Sadia"
+        },
+        "unity": "Kg",
+        "market": markets_mock[0]
+    },
+    {
+        "id": 6,
+        "name": "Salgadinho Doritos",
+        "price": 6.59,
+        "category": categories_mock[3],
+        "brand": {
+            "brandName": "Elma Chips"
+        },
+        "unity": "Un"
+    },
+    {
+        "id": 10,
+        "name": "Chocolate em barra Lacta Oreo",
+        "price": 6.09,
+        "category": categories_mock[5],
+        "brand": {
+            "brandName": "Laka"
+        },
+        "unity": "Un"
+    },
+    {
+        "id": 15,
+        "name": "Lombo Suíno",
+        "price": 69.0,
+        "category": categories_mock[1],
+        "brand": {
+            "brandName": "Friboi"
+        },
+        "unity": "Kg"
+    },
+    {
+        "id": 16,
+        "name": "Coca-cola 600ml",
+        "price": 3.0,
+        "category": categories_mock[0],
+        "brand": {
+            "brandName": "Coca-cola"
+        },
+        "unity": "Un"
+    },
 ];

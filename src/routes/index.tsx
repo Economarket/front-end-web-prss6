@@ -8,8 +8,10 @@ import Category from "../pages/Category";
 // import Unauthorized from '';
 
 import Home from "../pages/Home/index";
+import Pesquisa from "../pages/Pesquisa"
 import Login from "../pages/Login/index";
 import Product from "../pages/Product";
+import Profile from "../pages/Profile";
 import ShoppingList from "../pages/ShoppingList";
 import Tests from "../pages/Tests";
 import User from "../pages/User/index";
@@ -34,7 +36,6 @@ export default function MyRoutes() {
       {/* <Route path="/listafavoritos" element={<ListaFavoritos />} /> */}
 
       {/* <Route path="/promocoes" element={<Promocoes />} />
-      <Route path="/sair" element={<Sair />} /> */}
       {/* <Route path="/recuperar-minha-senha" element={<ForgotPassword />} />
       <Route path="/alterar-senha" element={<ChangePassword />} />
       <Route path="/token-expirado" element={<ExpiredToken />} />
@@ -66,9 +67,11 @@ export default function MyRoutes() {
         }
       >
         <Route path="/" element={<Home />} />
+        <Route path="/pesquisa" element={<Pesquisa />} />
         <Route path="/cadastroprodutos" element={<Product />} />
         <Route path="/listacompras" element={<ShoppingList />} />
         <Route path="/categorias" element={<Category />} />
+        <Route path="/profile" element={<Profile />} />
       </Route>
     </Routes>
   );

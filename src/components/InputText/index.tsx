@@ -11,7 +11,7 @@ export interface IconProps {
 export interface InputTextProps extends IconProps {
   appearance?: "primary" | "secondary";
   sizes?: "small" | "medium" | "large";
-  type?: "text" | "password";
+  type?: "text" | "password" | "number";
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   autoFocus?: boolean;
   disabled?: boolean;
