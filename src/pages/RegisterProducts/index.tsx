@@ -12,7 +12,7 @@ import * as S from '../styles';
 import './styles';
 import { ProductContainer } from './styles';
 
-export default function Product() {
+export default function RegisterProducts() {
   const navigate = useNavigate();
 
   const {
