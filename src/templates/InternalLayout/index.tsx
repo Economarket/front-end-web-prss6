@@ -6,79 +6,84 @@ import Sidebar from "../../components/SideBar/sidebar";
 import * as S from "./styles";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useSession } from "../../contexts/session";
+import IconLogOut from "../../assets/icons/logOut";
 
 export interface InternalTemplate {
   children?: React.ReactNode;
   image?: string;
   title?: string;
   subtitle?: string;
-  address?: string;
 }
 
 const InternalAccessContainer = ({
-  title = "Economize nas suas compras de mercado: Pesquise!",
-  subtitle = "O que você precisa para economizar está aqui. Faça buscas e encontre o melhor preço.",
+  title = "Economize nas suas compras de mercado!",
+  subtitle = "Pesquise e encontre o melhor para você.",
   children,
-  address,
 }: InternalTemplate) => {
   const { user, logout } = useSession();
   const navigate = useNavigate();
+
   return (
     <S.Wrapper>
-      <S.Logo>
-        <Logo fill="#197AA6" />
-      </S.Logo>
-
       <S.WrapperHeader>
-        <S.WrapperText>
-          <S.Title>{title}</S.Title>
+        <S.Logo>
+          <Logo fill="#197AA6" />
+        </S.Logo>
 
-          <S.Subtitle>{subtitle}</S.Subtitle>
-        </S.WrapperText>
+        <S.Header>
+          <S.WrapperText>
+            <S.Title>{title}</S.Title>
 
-        <S.WrapperUser>
-          <S.WrapperData>
-            <S.Subtitle>Olá, {user?.name}</S.Subtitle>
-            <S.Subtitle>Endereco{address}</S.Subtitle>
-          </S.WrapperData>
+            <S.Subtitle>{subtitle}</S.Subtitle>
+          </S.WrapperText>
 
-          <S.WrapperIcons>
-            <Button
-              appearance="ghost"
-              sizes="small"
-              text="Usuario"
-              icon={IconUser}
-              onClick={() => navigate("/profile")}
-            />
-            <Button
-              appearance="ghost"
-              sizes="small"
-              text="Localização"
-              icon={AddressUser}
-            />
-          </S.WrapperIcons>
-        </S.WrapperUser>
+          <S.WrapperUser>
+            <S.WrapperData>
+              <S.Subtitle>Olá, {user?.name}</S.Subtitle>
+              {/* <S.Subtitle>Endereco{address}</S.Subtitle> */}
+            </S.WrapperData>
+
+            <S.WrapperIcons>
+              <Button
+                appearance="ghost"
+                sizes="small"
+                text="Usuario"
+                icon={IconUser}
+                onClick={() => navigate("/profile")}
+              />
+              <Button
+                appearance="ghost"
+                sizes="small"
+                text="Sair"
+                icon={IconLogOut}
+                onClick={() => logout()}
+              />
+            </S.WrapperIcons>
+          </S.WrapperUser>
+        </S.Header>
       </S.WrapperHeader>
 
-      <S.WrapperMenu>
-        <Sidebar />
-      </S.WrapperMenu>
-
-      <S.WrapperContent>
-        {children}
-        <Outlet />
-      </S.WrapperContent>
-
-      <S.WrapperFoot>
-        <S.Subtitle>
-          © Copyright 2022 - EconoMarket - Todos os direitos reservados
-          EconoMarket
-        </S.Subtitle>
-        <S.Subtitle>
-          CNPJ 12.345.678/9123-45 / Enderço, nº 123, Bairro, Araraquara/SP - CEP
-          12.345-678
-        </S.Subtitle>
-      </S.WrapperFoot>
+      <S.WrapperMiddle>
+        <S.WrapperMenu>
+          <Sidebar />
+        </S.WrapperMenu>
+        <S.WrapperContentFooter>
+          <S.WrapperContent>
+            {children}
+            <Outlet />
+          </S.WrapperContent>
+          <S.WrapperFoot>
+            <S.Subtitle>
+              © Copyright 2022 - EconoMarket - Todos os direitos reservados
+              EconoMarket
+            </S.Subtitle>
+            <S.Subtitle>
+              CNPJ 12.345.678/9123-45 / Enderço, nº 123, Bairro, Araraquara/SP -
+              CEP 12.345-678
+            </S.Subtitle>
+          </S.WrapperFoot>
+        </S.WrapperContentFooter>
+      </S.WrapperMiddle>
     </S.Wrapper>
   );
 };

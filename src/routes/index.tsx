@@ -36,7 +36,6 @@ export default function MyRoutes() {
       {/* <Route path="/listafavoritos" element={<ListaFavoritos />} /> */}
 
       {/* <Route path="/promocoes" element={<Promocoes />} />
-      <Route path="/sair" element={<Sair />} /> */}
       {/* <Route path="/recuperar-minha-senha" element={<ForgotPassword />} />
       <Route path="/alterar-senha" element={<ChangePassword />} />
       <Route path="/token-expirado" element={<ExpiredToken />} />

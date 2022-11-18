@@ -16,23 +16,28 @@ export const SidebarData: SidebarItem[] = [
     iconOpened: <AiFillCaretUp />,
   },
   {
-    title: 'Pesquisa',
-    path: '/pesquisa',
-    icon: <IconSearch />,
-  },
-  {
     title: "Cadastro de produto",
     path: "/cadastroprodutos",
     icon: <IconPlusCicle />,
   },
   {
-    title: "Lista de compra",
+    title: "Categorias",
+    path: "/categorias",
+    icon: <IconCategoryPieChart />,
+  },
+  {
+    title: "Listas de compra",
     path: "/listacompras",
     icon: <IconListCheck />,
   },
   {
-    title: "Categorias",
-    path: "/categorias",
-    icon: <IconCategoryPieChart />,
+    title: "Mercados Próximos",
+    path: "/pesquisa",
+    icon: <IconSearch />,
+  },
+  {
+    title: "Produtos",
+    path: "/pesquisa",
+    icon: <IconSearch />,
   },
 ];
