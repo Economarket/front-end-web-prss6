@@ -22,7 +22,3 @@ import { FC } from "react";
 // export const Promocoes: FC = () => {
 //   return <div>Promoções</div>;
 // };
-
-// export const Sair: FC = () => {
-//   return <div>Sair</div>;
-// };

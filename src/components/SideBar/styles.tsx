@@ -15,6 +15,7 @@ export const SidebarLink = styled(Link)`
     border-radius: 5px;
   }
 `;
+
 export const SidebarLabel = styled.span`
   ${({ theme }) => css`
     color: ${theme.colors.blue200};

@@ -1,31 +1,28 @@
 import styled, { css } from "styled-components";
-import {
-  mediaQuerySm,
-} from "../../mixins/media-queries";
+import { mediaQuerySm } from "../../mixins/media-queries";
 
 export const Wrapper = styled.div`
-  display: grid;
-  grid-template-rows: 1fr 3fr 0.5fr;
-  grid-template-columns: 2fr 8fr;
-  justify-items: center;
-  min-height: 100vh;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
 
   ${mediaQuerySm(css``)}
 `;
 
 export const WrapperHeader = styled.div`
-  grid-column: 2/2;
-  grid-row: 1/1;
+  display: flex;
+`;
+
+export const Header = styled.div`
   align-items: center;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   height: 100%;
   gap: 8rem;
   width: 100%;
   padding: 2rem 4rem;
   border-bottom: 2px solid;
   border-color: #d9d9d9;
+  min-height: 20vh;
 
   ${mediaQuerySm(css``)};
 `;
@@ -46,21 +43,20 @@ export const WrapperIcons = styled.div`
 `;
 
 export const Logo = styled.div`
-  grid-column: 1/1;
-  grid-row: 1/1;
   border-bottom: 2px solid;
   border-right: 2px solid;
   border-color: #d9d9d9;
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   padding: 2rem;
+  min-height: 20vh;
+  min-width: 40vh;
 `;
 
 export const WrapperText = styled.div`
   flex-direction: column;
   align-items: center;
+  margin-left: 20rem;
 `;
 export const Title = styled.h1`
   ${({ theme }) => css`
@@ -81,19 +77,25 @@ export const Subtitle = styled.p`
   `}
 `;
 
+export const WrapperMiddle = styled.div`
+  display: flex;
+  overflow-x: hidden;
+`;
+
 export const WrapperMenu = styled.div`
-  grid-column: 1/1;
-  grid-row: 2/4;
   border-right: 2px solid;
   border-color: #d9d9d9;
-  height: 100%;
-  width: 100%;
   padding: 1rem;
+  min-width: 40vh;
+`;
+
+export const WrapperContentFooter = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const WrapperContent = styled.div`
-  grid-column: 2/2;
-  grid-row: 2/2;
   border-bottom: 2px solid;
   border-color: #d9d9d9;
   height: 100%;
@@ -101,9 +103,7 @@ export const WrapperContent = styled.div`
 `;
 
 export const WrapperFoot = styled.div`
-  grid-column: 2/2;
-  grid-row: 3/3;
-  height: 100%;
-  width: 100%;
+  width: 79%;
   padding: 2rem;
+  min-height: 20vh;
 `;

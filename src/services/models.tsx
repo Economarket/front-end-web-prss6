@@ -14,7 +14,6 @@ export interface Address {
 export interface Brand {
   searchName?: String;
   brandName: String;
-  product?: Product[];
 }
 
 export interface Category {
@@ -39,13 +38,14 @@ export interface Market {
 }
 
 export interface Product {
-  name: String;
-  searchName?: String;
-  price: Number;
+  id: number;
+  name: string;
+  searchName?: string;
+  price: number;
   brand: Brand;
   category: Category;
-  unity: Number;
-  markets: Market[];
+  unity: string;
+  market?: Market;
 }
 
 export interface ProductList {
@@ -92,3 +92,8 @@ export interface UserLogin {
 export interface Permission {}
 
 export interface RefreshToken {}
+
+export interface Location {
+  lat: number;
+  long: number;
+}

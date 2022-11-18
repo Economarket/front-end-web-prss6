@@ -7,19 +7,16 @@ import { ToastContainer } from 'react-toastify';
 
 
 import Routes from "./routes/";
-// import { LayoutProvider } from "./contexts/layout";
-// import { SessionProvider } from "./contexts/session";
+import { SessionProvider } from "./contexts/session";
 
 const App = () => (
   <Router>
     <GlobalStyle />
-    <ToastContainer style={{ width: "250px", fontSize: "15px" }}/>
+    <ToastContainer style={{ width: "250px", fontSize: "15px" }} />
     <ThemeProvider theme={theme}>
-      {/* <LayoutProvider>
-        <SessionProvider> */}
-      <Routes />
-      {/* </SessionProvider>
-      </LayoutProvider> */}
+      <SessionProvider>
+        <Routes />
+      </SessionProvider>
     </ThemeProvider>
   </Router>
 );

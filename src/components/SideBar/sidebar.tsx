@@ -4,6 +4,8 @@ import IconMenu from "./../../assets/icons/menu";
 import IconOutLineClose from "./../../assets/icons/outLineClose";
 import { SidebarData } from "./sidebarData";
 import * as S from "./styles";
+import { useSession } from "../../contexts/session";
+import IconLogOut from "./../../assets/icons/logOut";
 
 const Sidebar: FC = () => {
   const [sidebar, setSidebar] = useState(false);
