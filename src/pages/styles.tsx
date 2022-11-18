@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -61,4 +61,18 @@ export const CardCategoryContainer = styled.div`
   gap: 2rem;
   flex-wrap: wrap;
   justify-content: center;
+`;
+
+export const ProductContainer = styled.div`
+  ${({ theme }) => css`
+    align-items: center;
+    background-color: ${theme.colors.whiteFull};
+    border-radius: 10px;
+    display: grid;
+    height: 90%;
+    justify-content: center;
+    margin: auto;
+    padding: 2%;
+    width: 60%;
+  `};
 `;
