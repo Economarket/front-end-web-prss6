@@ -4,6 +4,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: left;
+  width: 100%;
 `;
 
 export const Form = styled.form`
@@ -37,4 +38,27 @@ export const TextPassword = styled.p`
     font-family: ${theme.font.family.secondary};
     font-size: ${theme.font.sizes.xsmall};
   `}
+`;
+
+export const CardsMarketContainer = styled.div`
+  display: flex;
+  gap: 3rem;
+  padding: 2rem;
+  flex-flow: wrap;
+  width: 100%;
+`;
+
+export const CaroselContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 90%;
+`;
+
+export const CardCategoryContainer = styled.div`
+  padding: 10px;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
 `;

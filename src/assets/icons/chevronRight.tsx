@@ -14,7 +14,7 @@ export default function IconChevronRigth(
     >
       <path
         d="M9 18L15 12L9 6"
-        stroke="#004068"
+        stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

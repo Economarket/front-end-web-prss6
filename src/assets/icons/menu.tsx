@@ -14,21 +14,21 @@ export default function IconMenu(
     >
       <path
         d="M5 16H27"
-        stroke="#004068"
+        stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M5 8H27"
-        stroke="#004068"
+        stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M5 24H27"
-        stroke="#004068"
+        stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
