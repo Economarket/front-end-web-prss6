@@ -3,7 +3,7 @@ import theme from "../../styles/theme";
 import { Wrapper } from "../styles";
 
 export const MainContainer = styled(Wrapper)`
-    padding: 2rem;
+    padding: 3rem 5rem;
 `;
 
 export const NewListContainer = styled.div`
@@ -21,4 +21,9 @@ export const NewListButton = styled.button`
     border: none;
     border-radius: 5px;
     color: ${theme.colors.whiteFull};
+    cursor: pointer;
+
+    &:hover {
+        background-color: ${theme.colors.blue200}; 
+    }
 `;

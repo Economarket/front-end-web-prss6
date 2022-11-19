@@ -12,8 +12,9 @@ export interface Address {
 }
 
 export interface Brand {
-  searchName?: String;
+  id?: number;
   brandName: String;
+  searchName?: String;
 }
 
 export interface Category {
@@ -21,7 +22,6 @@ export interface Category {
   uuid: string;
   name: string;
   searchName: string;
-  // product?: Product[];
 }
 
 export interface Market {
@@ -45,14 +45,8 @@ export interface Product {
   brand: Brand;
   category: Category;
   unity: string;
-  market?: Market;
-}
-
-export interface ProductList {
-  uuid?: String;
-  shoppingList: ShoppingList;
-  product: Product;
-  quantity: Number;
+  market?: Market | null;
+  greaterThanLastPrice?: boolean | null;
 }
 
 export interface Schedule {
@@ -60,12 +54,6 @@ export interface Schedule {
   closingHour: DateLocale;
   dayOfWeek: Number;
   market: Market;
-}
-
-export interface ShoppingList {
-  uuid?: String;
-  user: User;
-  productList?: ProductList[];
 }
 
 export interface Token {
@@ -78,7 +66,6 @@ export interface User {
   password: String;
   email: String;
   experience?: Number;
-  shoppingLists?: ShoppingList[];
   permissions?: Permission[];
   address?: Address;
   tokens: RefreshToken[];
@@ -96,4 +83,16 @@ export interface RefreshToken {}
 export interface Location {
   lat: number;
   long: number;
+}
+
+export interface ProductList {
+  id: number;
+  product: Product;
+  quantity: number;
+}
+
+export interface ShoppingList {
+  id: number;
+  name: string;
+  productList?: ProductList[];
 }
