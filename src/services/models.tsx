@@ -61,14 +61,12 @@ export interface Token {
 }
 
 export interface User {
-  uuid?: String;
-  name: String;
-  password: String;
-  email: String;
-  experience?: Number;
+  id: number;
+  uuid?: string;
+  name: string;
+  email: string;
   permissions?: Permission[];
   address?: Address;
-  tokens: RefreshToken[];
 }
 
 export interface UserLogin {

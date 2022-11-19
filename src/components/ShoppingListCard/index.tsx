@@ -50,7 +50,7 @@ const ShoppingListCard: React.FC<ShoppingListCardProps> = ({ shoppingList, onDel
                 <IconChevronUp />
             </ActionButton>}
             <AddButton href="/pesquisa">
-                <span style={{marginRight: "1rem", marginTop: ".5rem", filter: "invert(100%) saturate(0%) brightness(200%)"}}><IconPlusCicle /></span>
+                <span style={{marginRight: "1rem", marginTop: ".5rem"}}><IconPlusCicle /></span>
                 Adicionar produtos
             </AddButton>
         </InfoContainer>

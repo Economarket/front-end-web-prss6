@@ -1,17 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import ShoppingListCard from '../../components/ShoppingListCard';
-import { shopping_list_mock } from '../../mock/shopping';
 import { ShoppingList as ShoppingModel } from '../../services/models';
+import { getShoppingList } from '../../services/shopping';
 import { Title } from '../../templates/InternalLayout/styles';
 import { NewListContainer, NewListButton, MainContainer } from './index.styled';
+import { useSession } from "../../contexts/session";
 
 const ShoppingList: React.FC = () => {
-  
+  const { user } = useSession();
   const [shoppingList, setShoppingList] = useState<ShoppingModel[]>();
 
+  const updateShoppingList = useCallback(async () => {
+    if(user)
+      setShoppingList(await getShoppingList(user.id));
+  }, [user]);
+
   useEffect(() => {
-    setShoppingList(shopping_list_mock);
-  }, []);
+    updateShoppingList();
+  }, [updateShoppingList]);
 
   const handleDeleteList = () => {
     
