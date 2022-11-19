@@ -36,7 +36,6 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
 
   async function signin(email: string, password: string) {
-    console.log(email, password);
     try {
       await signIn(email, password)
         .then((response) => {

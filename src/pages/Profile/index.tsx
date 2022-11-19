@@ -40,7 +40,6 @@ export default function Profile() {
   const handle = async () => {
     await getCategories()
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => console.error(error));

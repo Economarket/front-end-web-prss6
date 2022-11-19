@@ -32,6 +32,10 @@ export const SHOPPING = "/shopping";
 
 export const USER = "/user";
 
+export const FIELDUTILS = "/fieldutils";
+
+export const UNITY = "/unity";
+
 export const ROLE_ADMIN = "ROLE_ADMIN";
 
 export const ROLE_USER = "ROLE_USER";

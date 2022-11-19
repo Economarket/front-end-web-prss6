@@ -27,14 +27,14 @@ export interface Category {
 export interface Market {
   id: number;
   uuid: string;
-  locateX?: string;
-  locateY?: string;
+  // locateX?: string;
+  // locateY?: string;
   name: string;
   description?: string;
   logo?: string;
   address?: Address;
   schedules?: Schedule[];
-  products?: Product[];
+  // products?: Product[];
 }
 
 export interface Product {
@@ -88,6 +88,10 @@ export interface Location {
   long: number;
 }
 
+export interface Unity {
+  abreviation: string;
+  description: string;
+}
 export interface ProductList {
   id: number;
   product: Product;

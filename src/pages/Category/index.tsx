@@ -16,13 +16,16 @@ export default function Categories() {
   }, [updateCategories]);
   return (
     <S.Wrapper>
+      <S.Title>Categorias</S.Title>
+
       <S.CardCategoryContainer>
-        {categories && categories.map((c) => (
-          <CategoryCard
-            category={c}
-            onClick={() => console.log(`Redirect to ${c.name} page...`)}
-          />
-        ))}
+        {categories &&
+          categories.map((c) => (
+            <CategoryCard
+              category={c}
+              onClick={() => console.log(`Redirect to ${c.name} page...`)}
+            />
+          ))}
       </S.CardCategoryContainer>
     </S.Wrapper>
   );

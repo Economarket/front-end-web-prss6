@@ -77,3 +77,13 @@ export const ProductContainer = styled.div`
     width: 60%;
   `};
 `;
+
+
+export const Title = styled.h1`
+  ${({ theme }) => css`
+    color: ${theme.colors.blue200};
+    font-family: ${theme.font.family.primary};
+    font-size: ${theme.font.sizes.large};
+    padding-bottom: 0.6rem;
+  `}
+`;
