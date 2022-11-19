@@ -95,7 +95,10 @@ export interface ProductList {
 }
 
 export interface ShoppingList {
-  id: number;
+  id?: number;
   name: string;
   productList?: ProductList[];
+  user?: {
+    id: number;
+  }
 }

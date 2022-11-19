@@ -106,5 +106,4 @@ export const WrapperContent = styled.div`
 export const WrapperFoot = styled.div`
   width: 79%;
   padding: 2rem;
-  min-height: 20vh;
 `;

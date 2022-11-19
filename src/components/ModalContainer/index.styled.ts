@@ -7,7 +7,7 @@ export const Backdrop = styled.div`
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: d9d9d9cc;
+    background-color: #d9d9d9cc;
     z-index: 100;
 `;
 
@@ -21,5 +21,5 @@ export const Container = styled.div<ContainerProps>`
     left: 1rem;
     right: 1rem;
     max-width: ${({ max_width }) => max_width};
-    zindex: 110;
+    z-index: 200;
 `;

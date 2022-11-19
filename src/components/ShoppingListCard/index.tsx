@@ -45,7 +45,9 @@ const ShoppingListCard: React.FC<ShoppingListCardProps> = ({ shoppingList, onDel
             </Body>
         )}  
         <InfoContainer>
-            <Title style={{fontSize: "1.75rem"}}>{size ? `Possui ${size} produtos` : "Você ainda não adicionou produtos a esta lista"}</Title>
+            <Title style={{fontSize: "1.75rem"}}>
+                {size ? `Possui ${size} produtos` : "Você ainda não adicionou produtos a esta lista"}
+            </Title>
             {open && <ActionButton onClick={() => setOpen(o => !o)} style={{alignSelf: "center"}}>
                 <IconChevronUp />
             </ActionButton>}

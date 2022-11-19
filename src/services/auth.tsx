@@ -25,10 +25,12 @@ export async function signOut(token: string) {
 }
 
 export async function refreshToken(refresh_token: string): Promise<RefreshToken> {
-  const { data } = await api.get(`${CONTEXT_AUTH}${TOKEN_REFRESH}`, {
-    headers: {
-      "Authorization": refresh_token
-    }
-  });
-  return data;
+  try{
+    const { data } = await api.get(`${CONTEXT_AUTH}${TOKEN_REFRESH}`);
+    return data;
+  } catch {
+    localStorage.removeItem("token");
+    localStorage.removeItem("refresh_token");
+    return {access_token: ""};
+  }
 }
