@@ -7,6 +7,10 @@ export const Wrapper = styled.div`
   width: 100%;
 `;
 
+export const HomeContainer = styled(Wrapper)`
+  padding: 3rem;
+`;
+
 export const Form = styled.form`
   display: grid;
   gap: 1rem;
@@ -42,17 +46,14 @@ export const TextPassword = styled.p`
 
 export const CardsMarketContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 3rem;
-  padding: 2rem;
-  flex-flow: wrap;
-  width: 100%;
 `;
 
 export const CaroselContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width: 90%;
 `;
 
 export const CardCategoryContainer = styled.div`
@@ -75,4 +76,14 @@ export const ProductContainer = styled.div`
     padding: 2%;
     width: 60%;
   `};
+`;
+
+
+export const Title = styled.h1`
+  ${({ theme }) => css`
+    color: ${theme.colors.blue200};
+    font-family: ${theme.font.family.primary};
+    font-size: ${theme.font.sizes.large};
+    padding-bottom: 0.6rem;
+  `}
 `;
