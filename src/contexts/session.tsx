@@ -41,14 +41,9 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       await signIn(email, password)
         .then((response) => {
           localStorage.setItem("token", response.access_token);
-
-          api.defaults.headers.common["Authorization"] =
-            "Bearer " + response.access_token;
-
+          localStorage.setItem("refresh_token", response.refresh_token);
           getUser(response.access_token);
-
           navigate("/");
-
           const decode = jwt(response.access_token);
         })
         .catch((error) => console.error(error));
@@ -67,6 +62,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       console.log(error);
     } finally {
       localStorage.removeItem("token");
+      localStorage.removeItem("refresh_token");
 
       delete api.defaults.headers.common["Authorization"];
 
@@ -124,10 +120,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
 
   useLayoutEffect(() => {
     const token = localStorage.getItem("token");
-
     if (token) {
-      api.defaults.headers.common["Authorization"] = "Bearer " + token;
-
       getUser(token);
     }
   }, [getUser]);
