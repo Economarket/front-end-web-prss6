@@ -12,6 +12,7 @@ export interface Address {
 }
 
 export interface Brand {
+  id?: number;
   searchName?: String;
   brandName: String;
 }
@@ -27,14 +28,14 @@ export interface Category {
 export interface Market {
   id: number;
   uuid: string;
-  locateX?: string;
-  locateY?: string;
+  // locateX?: string;
+  // locateY?: string;
   name: string;
   description?: string;
   logo?: string;
   address?: Address;
   schedules?: Schedule[];
-  products?: Product[];
+  // products?: Product[];
 }
 
 export interface Product {
@@ -96,4 +97,9 @@ export interface RefreshToken {}
 export interface Location {
   lat: number;
   long: number;
+}
+
+export interface Unity {
+  abreviation: string;
+  description: string;
 }

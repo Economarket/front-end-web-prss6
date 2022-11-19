@@ -40,7 +40,6 @@ export default function Profile() {
   const handle = async () => {
     await searchCategory()
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => console.error(error));
