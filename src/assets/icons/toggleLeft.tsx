@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function IconMakerPin(
+export default function IconToggleLeft(
   props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>,
 ) {
   return (
@@ -13,14 +13,14 @@ export default function IconMakerPin(
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z"
+        d="M2 12C2 8.68629 4.68629 6 8 6H16C19.3137 6 22 8.68629 22 12C22 15.3137 19.3137 18 16 18H8C4.68629 18 2 15.3137 2 12Z"
         stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M12 22C16 18 20 14.4183 20 10C20 5.58172 16.4183 2 12 2C7.58172 2 4 5.58172 4 10C4 14.4183 8 18 12 22Z"
+        d="M8 14.5C9.38071 14.5 10.5 13.3807 10.5 12C10.5 10.6193 9.38071 9.5 8 9.5C6.61929 9.5 5.5 10.6193 5.5 12C5.5 13.3807 6.61929 14.5 8 14.5Z"
         stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"

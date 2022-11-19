@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import Carousel from '../../components/Carousel';
-import CategoryCard from '../../components/CategoryCard';
-import MarketCard from '../../components/MarketCard';
-import { categories_mock, markets_mock } from '../../mock/mock';
-import { Category } from '../../services/models';
-import * as S from '../styles';
-import { CardsMarketContainer } from './styles';
+import { useState } from "react";
+import Carousel from "../../components/Carousel";
+import CategoryCard from "../../components/CategoryCard";
+import MarketCard from "../../components/MarketCard";
+import { categories_mock, markets_mock } from "../../mock/mock";
+import { Category } from "../../services/models";
+import * as S from "../styles";
 
 export default function Home() {
   const [categories, setCategories] = useState<Category[]>(categories_mock);
+  
   return (
     <S.Wrapper>
       <Carousel>
@@ -19,7 +19,7 @@ export default function Home() {
           />
         ))}
       </Carousel>
-      <CardsMarketContainer>
+      <S.CardsMarketContainer>
         {markets_mock?.map((m) => {
           return (
             <MarketCard
@@ -29,7 +29,7 @@ export default function Home() {
             />
           );
         })}
-      </CardsMarketContainer>
+      </S.CardsMarketContainer>
     </S.Wrapper>
   );
 }

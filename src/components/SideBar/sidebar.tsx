@@ -10,7 +10,6 @@ import IconLogOut from "./../../assets/icons/logOut";
 const Sidebar: FC = () => {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
-  const { logout } = useSession();
 
   return (
     <>
@@ -25,10 +24,6 @@ const Sidebar: FC = () => {
           {SidebarData.map((item, index) => {
             return <Menu item={item} key={index} />;
           })}
-          <S.SidebarLinkOut to="/login" onClick={() => logout()}>
-            <IconLogOut />
-            <S.SidebarLabel>Sair</S.SidebarLabel>
-          </S.SidebarLinkOut>
         </S.SidebarWrap>
       </S.SidebarNav>
     </>

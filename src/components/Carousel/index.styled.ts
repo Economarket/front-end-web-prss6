@@ -2,10 +2,12 @@ import styled from "styled-components";
 import theme from "../../styles/theme";
 
 export const CaroselContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    width: 90%;
+  padding-top: 2rem;
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 79%;
 `;
 
 export const CarouselViewport = styled.div`
@@ -28,26 +30,26 @@ export const CarouselItem = styled.li`
 `;
 
 export const ButtonContainer = styled.div`
-    display: flex;
-    width: 9rem;
-    justify-content: space-between;
+  display: flex;
+  width: 9rem;
+  justify-content: space-between;
 `;
 
 export const Button = styled.button`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 4rem;
-    height: 4rem;
-    color: ${theme.colors.blue200};
-    font-size: 2.5rem;
-    font-weight: 800;
-    background-color: ${theme.colors.offwhite};
-    border: 1px solid #D9D9D9;
-    border-radius: ${theme.border.radius.xlarge};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  height: 4rem;
+  color: ${theme.colors.blue200};
+  font-size: 2.5rem;
+  font-weight: 800;
+  background-color: ${theme.colors.offwhite};
+  border: 1px solid #d9d9d9;
+  border-radius: ${theme.border.radius.xlarge};
 
-    &:hover {
-        cursor: pointer;
-        background-color: #EEE;
-    }
+  &:hover {
+    cursor: pointer;
+    background-color: #eee;
+  }
 `;

@@ -6,8 +6,8 @@ export async function putProduct(productId: string) {
     return data;
 }
 
-export async function postProduct(productId: string) {
-    const { data } = await api.post(`${REGISTER}${PRODUCT}`, { productId });
+export async function postProduct(name: string, marca: string, unidade: string, valor: string, categoria: string, mercado: string) {
+    const { data } = await api.post(`${PRODUCT}`, { name, marca, unidade, valor, categoria, mercado });
     return data;
 }
 
