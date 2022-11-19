@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import jwt from "jwt-decode";
 
 import { api } from "../services/api";
-import { signIn } from "../services/auth";
+import { signIn, signOut } from "../services/auth";
 import { Location, User } from "../services/models";
 import { getUserById } from "../services/user";
 
@@ -41,14 +41,9 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       await signIn(email, password)
         .then((response) => {
           localStorage.setItem("token", response.access_token);
-
-          api.defaults.headers.common["Authorization"] =
-            "Bearer " + response.access_token;
-
+          localStorage.setItem("refresh_token", response.refresh_token);
           getUser(response.access_token);
-
           navigate("/");
-
           const decode = jwt(response.access_token);
         })
         .catch((error) => console.error(error));
@@ -57,17 +52,27 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  function logout() {
-    localStorage.removeItem("token");
+  async function logout() {
+    try {
+      const token = localStorage.getItem("token");
+      if (token) {
+        await signOut(token);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      localStorage.removeItem("token");
+      localStorage.removeItem("refresh_token");
 
-    delete api.defaults.headers.common["Authorization"];
+      delete api.defaults.headers.common["Authorization"];
 
-    setUser(null);
-    setLocation(null);
+      setUser(null);
+      setLocation(null);
 
-    setTimeout(() => {
-      navigate("/login");
-    }, 50);
+      setTimeout(() => {
+        navigate("/login");
+      }, 50);
+    }
   }
 
   const getPosition = () => {
@@ -115,10 +120,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
 
   useLayoutEffect(() => {
     const token = localStorage.getItem("token");
-
     if (token) {
-      api.defaults.headers.common["Authorization"] = "Bearer " + token;
-
       getUser(token);
     }
   }, [getUser]);

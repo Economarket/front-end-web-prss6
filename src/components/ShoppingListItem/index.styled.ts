@@ -61,8 +61,5 @@ export const QtdInput = styled.input`
 `;
 
 export const TrashContainer = styled.div`
-    &:hover {
-        cursor: pointer;
-        transform: scale(1.1);
-    }
+    cursor: pointer;
 `;

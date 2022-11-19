@@ -1,4 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
+<<<<<<< HEAD
+=======
+import Category from '../pages/Category';
+>>>>>>> 2755795c002714e1480843a75b28b91f397adae6
 
 // import PrivateRoute from "./privateRoute";
 // import RequireAuth from './requireAuth';
