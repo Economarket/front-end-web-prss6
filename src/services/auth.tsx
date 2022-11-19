@@ -34,8 +34,8 @@ export async function refreshToken(refresh_token: string): Promise<RefreshToken>
     return data;
   } catch (err) {
     console.log(err);
-    // localStorage.removeItem("token");
-    // localStorage.removeItem("refresh_token");
+    localStorage.removeItem("token");
+    localStorage.removeItem("refresh_token");
     return {access_token: ""};
   }
 }
