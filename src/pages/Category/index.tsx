@@ -1,15 +1,23 @@
 import { Category } from "../../services/models";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CategoryCard from "../../components/CategoryCard";
-import { categories_mock } from "../../mock/mock";
 import * as S from "../styles";
+import { getCategories } from "../../services/category";
 
 export default function Categories() {
-  const [categories, setCategories] = useState<Category[]>(categories_mock);
+  const [categories, setCategories] = useState<Category[]>();
+
+  const updateCategories = useCallback(async () => {
+    setCategories(await getCategories());
+  }, []);
+
+  useEffect(() => {
+    updateCategories();
+  }, [updateCategories]);
   return (
     <S.Wrapper>
       <S.CardCategoryContainer>
-        {categories.map((c) => (
+        {categories && categories.map((c) => (
           <CategoryCard
             category={c}
             onClick={() => console.log(`Redirect to ${c.name} page...`)}
