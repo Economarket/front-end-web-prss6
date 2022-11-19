@@ -37,9 +37,9 @@ const ShoppingListCard: React.FC<ShoppingListCardProps> = ({ shoppingList, onDel
             <Body show={open}>
                 {shoppingList.productList.map((p, index) => (
                     <ShoppingListItem 
-                    key={index} 
-                    productList={p}
-                    onDelete={onDeleteProduct}
+                        key={index} 
+                        productList={p}
+                        onDelete={onDeleteProduct}
                     />
                     ))}
             </Body>

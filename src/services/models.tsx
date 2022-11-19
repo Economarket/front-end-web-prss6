@@ -58,6 +58,11 @@ export interface Schedule {
 
 export interface Token {
   access_token: string;
+  refresh_token: string;
+}
+
+export interface RefreshToken {
+  access_token: string;
 }
 
 export interface User {
