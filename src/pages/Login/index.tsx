@@ -13,6 +13,7 @@ import React from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSession } from "../../contexts/session";
+import { Toast } from "../../components/Toast/toast";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -31,32 +32,7 @@ export default function Login() {
   });
 
   const onSubmit = async (data: any) => {
-    try {
-      await signin(data.email, data.password);
-    } catch (error) {
-      console.error(error);
-      notify();
-    }
-  };
-
-  const toastId = React.useRef(null);
-  const customId = "custom-id-yes";
-
-  const notify = () => {
-    if (!toast.isActive(customId)) {
-      toast("Usuário ou senha inválidos.", {
-        toastId: customId,
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
-    handleSubmit(onSubmit);
+    await signin(data.email, data.password)
   };
 
   return (

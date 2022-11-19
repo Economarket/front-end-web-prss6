@@ -14,6 +14,7 @@ import { api } from "../services/api";
 import { signIn, signOut } from "../services/auth";
 import { Location, User } from "../services/models";
 import { getUserById } from "../services/user";
+import { Toast } from "../components/Toast/toast";
 
 type Token = {
   user_id: string;
@@ -51,7 +52,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
 
           const decode = jwt(response.access_token);
         })
-        .catch((error) => console.error(error));
+        .catch(_ => Toast("Usuário ou senha inválidos", "warning"));
     } catch (error) {
       console.error(error);
     }
