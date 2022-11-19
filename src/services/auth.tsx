@@ -26,11 +26,16 @@ export async function signOut(token: string) {
 
 export async function refreshToken(refresh_token: string): Promise<RefreshToken> {
   try{
-    const { data } = await api.get(`${CONTEXT_AUTH}${TOKEN_REFRESH}`);
+    const { data } = await api.get(`${CONTEXT_AUTH}${TOKEN_REFRESH}`, {
+      headers: {
+        "Authorization": `Bearer ${refresh_token}`
+      }
+    });
     return data;
-  } catch {
-    localStorage.removeItem("token");
-    localStorage.removeItem("refresh_token");
+  } catch (err) {
+    console.log(err);
+    // localStorage.removeItem("token");
+    // localStorage.removeItem("refresh_token");
     return {access_token: ""};
   }
 }
