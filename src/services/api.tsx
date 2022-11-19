@@ -32,6 +32,7 @@ const newAccessToken = async () => {
       if(refresh_token){
         refreshToken(refresh_token).then((res) => {
           localStorage.setItem("token", res.access_token);
+          window.location.reload();
         });
       }
     } catch (err) {

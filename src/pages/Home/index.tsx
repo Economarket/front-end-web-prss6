@@ -8,7 +8,9 @@ import { markets_mock } from "../../mock/mock";
 import { getCategories } from "../../services/category";
 import { Category } from "../../services/models";
 import { Title } from "../../templates/ExternalLayout/styles";
+import CookieConsent from "react-cookie-consent";
 import * as S from "../styles";
+import theme from "../../styles/theme";
 
 export default function Home() {
   const [categories, setCategories] = useState<Category[]>();
@@ -45,6 +47,26 @@ export default function Home() {
           );
         })}
       </S.CardsMarketContainer>
+      <CookieConsent
+        location="bottom"
+        buttonText="Aceitar"
+        cookieName="refresh_token"
+        style={{ background: theme.colors.blue200 }}
+        buttonStyle={{ 
+          color: theme.colors.whiteFull,
+          backgroundColor: theme.colors.blue300,
+          borderRadius: "5px", 
+          fontSize: "2rem",
+          fontFamily: "Lato"
+        }}
+        expires={150}
+      >
+        <span style={{fontFamily: "Lato", fontSize: "1.75rem"}}>
+          Os cookies nesse site são necessários para o uso da aplicação. 
+          Além de melhorar a sua experiência.
+          Você deseja aceitá-los ?
+        </span>
+      </CookieConsent>
     </S.HomeContainer>
   );
 }
