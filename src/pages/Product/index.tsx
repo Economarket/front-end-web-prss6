@@ -2,13 +2,13 @@ import IconSearch from '../../assets/icons/search';
 import InputText from '../../components/InputText';
 import ProductCard from '../../components/ProductCard';
 import { products_mock } from '../../mock/mock';
-import { Title } from '../../templates/InternalLayout/styles';
 import * as S from '../styles';
 
 export default function Product() {
   return (
     <S.Wrapper>
-      <Title> Produtos</Title>
+      <S.Title> Produtos</S.Title>
+      
       <S.Form>
         <InputText 
           name="buscaProduto" 

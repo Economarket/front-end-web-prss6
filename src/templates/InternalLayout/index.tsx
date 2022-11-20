@@ -1,4 +1,3 @@
-import AddressUser from "../../assets/icons/address";
 import IconUser from "../../assets/icons/user";
 import { ReactComponent as Logo } from "../../assets/Logo.svg";
 import Button from "../../components/Button";

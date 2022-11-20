@@ -129,7 +129,7 @@ export const Input = styled.input<InputTextProps>`
   ${({ theme, iconPosition, icon }) => css`
     border: 0;
     border-radius: ${theme.border.radius.large};
-    color: ${theme.colors.gray6000};
+    color: ${theme.colors.gray};
     font-family: ${theme.font.family.primary};
     font-size: ${theme.font.sizes.small};
     height: 100%;
@@ -143,7 +143,9 @@ export const Input = styled.input<InputTextProps>`
     width: 100%;
 
     &::placeholder {
-      color: ${theme.colors.gray6000};
+      font-size: ${theme.font.sizes.small};
+      color: ${theme.colors.gray};
+      font-family: ${theme.font.family.primary};
     }
   `}
 `;
