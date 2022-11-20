@@ -5,6 +5,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     width: 20rem;
+    margin: 2rem 3rem;
     filter: drop-shadow(0px 4px 4px #0005);
 `;
 

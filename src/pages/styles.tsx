@@ -68,6 +68,29 @@ export const CardCategoryContainer = styled.div`
   justify-content: center;
 `;
 
+interface CardGridListProps {
+  itens_row?: number;
+}
+export const CardGridList = styled.ul<CardGridListProps>`
+  display: grid;
+  flex-flow: row wrap;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: repeat(${({ itens_row}) => itens_row ?? 3}, 1fr);
+  
+  @media (min-width: 1440px) {
+    grid-template-columns: repeat(${({ itens_row}) => itens_row ? itens_row + 1 : 4}, 1fr);
+  }
+
+  @media (min-width: 1920px) {
+    grid-template-columns: repeat(${({ itens_row}) => itens_row ? itens_row + 2 : 5}, 1fr);
+  }
+`;
+
 export const ProductContainer = styled.div`
   ${({ theme }) => css`
     align-items: center;
