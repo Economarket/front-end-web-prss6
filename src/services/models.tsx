@@ -18,9 +18,9 @@ export interface Brand {
 }
 
 export interface Category {
-  id?: number;
+  id: number;
   uuid: string;
-  name?: string;
+  name: string;
   searchName: string;
 }
 
