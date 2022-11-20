@@ -75,6 +75,7 @@ export const Subtitle = styled.p`
     color: ${theme.colors.gray900};
     font-family: ${theme.font.family.secondary};
     font-size: ${theme.font.sizes.xsmall};
+    padding: 0.5rem;
   `}
 `;
 
@@ -104,6 +105,5 @@ export const WrapperContent = styled.div`
 `;
 
 export const WrapperFoot = styled.div`
-  width: 79%;
   padding: 2rem;
 `;

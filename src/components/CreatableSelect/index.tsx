@@ -42,7 +42,7 @@ const CreatableSelect = ({
   }
 
   return (
-    <div>
+    <S.Wrapper>
       {label && (
         <S.WrapperLabel>
           <S.Label>{label}</S.Label>
@@ -62,8 +62,9 @@ const CreatableSelect = ({
           DropdownIndicator,
         }}
       />
+      
       {!!errorMessage && <S.Error>{errorMessage}</S.Error>}
-    </div>
+    </S.Wrapper>
   );
 };
 

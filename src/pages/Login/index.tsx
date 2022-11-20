@@ -60,7 +60,7 @@ export default function Login() {
   };
 
   return (
-    <S.Wrapper>
+    <>
       <ExternalAccessContainer title="Que bom te ver novamente!" image={login}>
         <S.Form onSubmit={handleSubmit(onSubmit)}>
           <InputText
@@ -87,6 +87,6 @@ export default function Login() {
           <S.Link href="/novo-usuario">Cadastre-se</S.Link>
         </S.Text>
       </ExternalAccessContainer>
-    </S.Wrapper>
+    </>
   );
 }

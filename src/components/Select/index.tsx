@@ -1,7 +1,6 @@
 import React from "react";
 import * as S from "./styles";
 import Skeleton from "../Skeleton";
-import CreatableSelect from "react-select/creatable";
 
 type SelectOption = {
   label: string;
@@ -43,7 +42,7 @@ const Select = ({
   }
 
   return (
-    <div>
+    <S.Wrapper>
       {label && (
         <S.WrapperLabel>
           <S.Label>{label}</S.Label>
@@ -64,7 +63,7 @@ const Select = ({
         }}
       />
       {!!errorMessage && <S.Error>{errorMessage}</S.Error>}
-    </div>
+    </S.Wrapper>
   );
 };
 

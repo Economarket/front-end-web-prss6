@@ -1,10 +1,11 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: left;
   width: 100%;
+  padding: 3rem;
 `;
 
 export const HomeContainer = styled(Wrapper)`
@@ -12,8 +13,10 @@ export const HomeContainer = styled(Wrapper)`
 `;
 
 export const Form = styled.form`
-  display: grid;
-  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: center;
 `;
 
 export const Text = styled.p`
@@ -48,6 +51,7 @@ export const CardsMarketContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 3rem;
+  justify-content: center;
 `;
 
 export const CaroselContainer = styled.div`
@@ -69,21 +73,26 @@ export const ProductContainer = styled.div`
     align-items: center;
     background-color: ${theme.colors.whiteFull};
     border-radius: 10px;
-    display: grid;
-    height: 90%;
+    display: flex;
     justify-content: center;
-    margin: auto;
-    padding: 2%;
+    padding: 2rem;
     width: 60%;
   `};
 `;
-
 
 export const Title = styled.h1`
   ${({ theme }) => css`
     color: ${theme.colors.blue200};
     font-family: ${theme.font.family.primary};
-    font-size: ${theme.font.sizes.large};
-    padding-bottom: 0.6rem;
+    font-size: ${theme.font.sizes.medium};
+    margin-bottom: 2rem;
   `}
+`;
+
+export const WrapperRegisteProducts = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  padding: 2rem;
 `;

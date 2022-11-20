@@ -30,7 +30,7 @@ export const WrapperSelect = styled(Select).attrs({
         border: none;
         border-radius: ${theme.border.radius.large};
         box-shadow: none;
-        background-color: ${theme.colors.whiteFull};
+        background-color: ${theme.colors.backgroundWhite};
         border: 1px solid ${theme.colors.whiteFull};
         cursor: pointer;
         caret-color: transparent;
@@ -55,7 +55,7 @@ export const WrapperSelect = styled(Select).attrs({
       }
 
       &__value-container {
-        padding: 1rem 3rem 1rem 1.4rem;
+        padding: 1rem 3rem 1rem 0.8rem;
       }
 
       &__input-container {
@@ -63,7 +63,7 @@ export const WrapperSelect = styled(Select).attrs({
         padding: 0;
         font-size: ${theme.font.sizes.small};
         color: ${theme.colors.gray};
-        font: ${theme.font.family.primary};
+        font-family: ${theme.font.family.primary};
       }
 
       &__input {
@@ -74,14 +74,14 @@ export const WrapperSelect = styled(Select).attrs({
       &__placeholder {
         font-size: ${theme.font.sizes.small};
         color: ${theme.colors.gray};
-        font: ${theme.font.family.primary};
+        font-family: ${theme.font.family.primary};
       }
 
       &__single-value {
         margin: 0;
         font-size: ${theme.font.sizes.small};
         color: ${theme.colors.gray};
-        font: ${theme.font.family.primary};
+        font-family: ${theme.font.family.primary};
       }
 
       &__menu {
@@ -91,7 +91,7 @@ export const WrapperSelect = styled(Select).attrs({
       &__menu-list {
         font-size: ${theme.font.sizes.small};
         color: ${theme.colors.gray};
-        font: ${theme.font.family.primary};
+        font-family: ${theme.font.family.primary};
 
         ::-webkit-scrollbar {
           background-color: ${theme.colors.gray300};
@@ -152,17 +152,29 @@ export const WrapperLabel = styled.div`
 
 export const Label = styled("label")`
   ${({ theme }) => css`
-    color: ${theme.colors.primary500};
-    padding-bottom: ${theme.spacings.xxsmall};
+    color: ${theme.colors.gray6000};
+    font-family: ${theme.font.family.primary};
+    font-size: ${theme.font.sizes.xsmall};
   `}
 `;
 
 export const Error = styled.p`
   ${({ theme }) => css`
     color: ${theme.colors.error500};
-    font-size: ${theme.font.sizes.small};
-    margin-top: 0.4rem;
-    position: absolute;
+    font-family: ${theme.font.family.primary};
+    font-size: ${theme.font.sizes.xsmall};
+    text-align: justify;
     width: 100%;
+
+    #link {
+      padding-left: 0.5rem;
+    }
   `}
+`;
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 100%;
 `;

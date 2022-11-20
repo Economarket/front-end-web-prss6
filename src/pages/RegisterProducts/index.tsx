@@ -7,7 +7,6 @@ import InputText from "../../components/InputText";
 import Select from "../../components/Select";
 import { postProduct } from "../../services/product";
 import { getFieldsUnity } from "../../services/unity";
-import { Title } from "../../templates/InternalLayout/styles";
 import { schemaRegisterProduct } from "../../utils/schema";
 import * as S from "../styles";
 import { SelectOption } from "../../components/Select/index";
@@ -16,6 +15,7 @@ import CreatableSelect from "../../components/CreatableSelect";
 import { searchCategory } from "../../services/category";
 import { searchMarket100 } from "../../services/market";
 import { Brand } from "../../services/models";
+import { currencyMask } from "../../fomatters/currencyMask";
 
 export default function RegisterProducts() {
   // const navigate = useNavigate();
@@ -132,8 +132,9 @@ export default function RegisterProducts() {
   };
 
   return (
-    <S.Wrapper>
-      <Title>Vamos cadastrar um produto?</Title>
+    <S.WrapperRegisteProducts>
+      <S.Title>Vamos cadastrar um produto?</S.Title>
+
       <S.ProductContainer>
         <S.Form>
           <InputText
@@ -143,6 +144,7 @@ export default function RegisterProducts() {
             placeholder="Digite o nome do produto"
             errorMessage={errors.name?.message}
           />
+
           <CreatableSelect
             {...register("brandId")}
             isAutocomplete
@@ -151,12 +153,13 @@ export default function RegisterProducts() {
               label: item.brandName,
             }))}
             label="Marca"
-            placeholder="Selecione a marca"
+            placeholder="Selecione ou digite a marca"
             onChange={(option: { value: string }) =>
               setValue("brandId", option.value)
             }
             errorMessage={errors.brandId?.message}
           />
+
           <Select
             {...register("unity")}
             isAutocomplete
@@ -168,13 +171,18 @@ export default function RegisterProducts() {
             }
             errorMessage={errors.unity?.message}
           />
+
           <InputText
             {...register("price")}
             name="price"
             label="Valor"
             placeholder="Digite o valor"
+            onChange={(event) => {
+              setValue("price", currencyMask(event.target.value));
+            }}
             errorMessage={errors.price?.message}
           />
+
           <Select
             {...register("category")}
             isAutocomplete
@@ -186,6 +194,7 @@ export default function RegisterProducts() {
             }
             errorMessage={errors.category?.message}
           />
+
           <Select
             {...register("market")}
             isAutocomplete
@@ -201,6 +210,6 @@ export default function RegisterProducts() {
           <Button text="Cadastrar" onClick={handleSubmit(onSubmit)} />
         </S.Form>
       </S.ProductContainer>
-    </S.Wrapper>
+    </S.WrapperRegisteProducts>
   );
 }

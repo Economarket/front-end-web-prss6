@@ -1,4 +1,4 @@
-import { ReactComponent as Logo } from "../../assets/Logo.svg";
+import { ReactComponent as Logo } from "../../assets/LogoExternal.svg";
 import * as S from "./styles";
 
 export interface ExternalTemplate {
@@ -18,7 +18,7 @@ const ExternalAccessContainer = ({
     <S.Wrapper>
       <S.WrapperLeft>
         <S.Logo>
-          <Logo fill="#FFFFF" />
+          <Logo />
         </S.Logo>
 
         <S.Image src={image} />
