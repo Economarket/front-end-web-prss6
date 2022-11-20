@@ -4,7 +4,7 @@ import CreatableSelect from "react-select/creatable";
 import { SelectProps } from ".";
 import IconChevronDownSelect from "../../assets/icons/chevronDownSelect";
 
-const CLASS_NAME_PREFIX = "zelo-select";
+const CLASS_NAME_PREFIX = "economarket-select";
 
 type ContainerProps = { error: boolean } & SelectProps;
 
