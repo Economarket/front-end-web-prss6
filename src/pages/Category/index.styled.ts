@@ -1,6 +1,34 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
 
+export const NoProductContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const NoProductImage = styled.img`
+    width: 30%;
+    margin: 3rem 0;
+`;
+
+export const NoProductButton = styled.button`
+    text-align: center;
+    font-family: 'Lato';
+    background-color: ${theme.colors.blue300};
+    border: none;
+    border-radius: 5px;
+    color: ${theme.colors.whiteFull};
+    cursor: pointer;
+    font-size: 2rem;
+    font-weight: 400;
+    padding: 1.5rem 6rem;
+
+    &:hover {
+        background-color: ${theme.colors.blue200}; 
+    }
+`;
 
 export const Header = styled.div`
     width: 60%;
