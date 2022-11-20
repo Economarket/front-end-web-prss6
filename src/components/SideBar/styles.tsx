@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import { mediaQuerySm } from "../../mixins/media-queries";
+import theme from "../../styles/theme";
 
 export const SidebarLink = styled(Link)`
   display: flex;
@@ -10,15 +11,30 @@ export const SidebarLink = styled(Link)`
   padding: 2rem;
   text-decoration: none;
 
+  &:visited {
+    color: ${theme.colors.blue200};
+  }
+
   &:hover {
-    background-color: #197aa6;
+    background-color: ${theme.colors.blue300};
     border-radius: 5px;
+    color: #fff;
+
+    .sidebarLabel {
+      color: #fff;
+    }
+  }
+
+  &:active {
+    color: #8cbcd2;
+    .sidebarLabel {
+      color: #8cbcd2;
+    }
   }
 `;
 
 export const SidebarLabel = styled.span`
   ${({ theme }) => css`
-    color: ${theme.colors.blue200};
     font-family: ${theme.font.family.primary};
     font-size: ${theme.font.sizes.medium};
     margin-left: 1rem;
