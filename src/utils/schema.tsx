@@ -42,12 +42,12 @@ export const schemaRegisterProduct = yup.object().shape({
     .trim()
     .min(3, "Preencha no mínimo com 3 caracteres"),
   brandId: yup.string().required("Escolha ou preencha a marca").nullable(),
-  unity: yup.string().required("Escolha a unidade").nullable(),
+  unityId: yup.string().required("Escolha a unidade").nullable(),
   price: yup
     .string()
     .required("Preencha o valor")
     .trim()
     .min(2, "Preencha no mínimo com 2 caracteres"),
-  category: yup.string().required("Escolha a categoria").nullable(),
-  market: yup.string().required("Escolha o mercado").nullable(),
+  categoryId: yup.string().required("Escolha a categoria").nullable(),
+  marketId: yup.string().required("Escolha o mercado").nullable(),
 });

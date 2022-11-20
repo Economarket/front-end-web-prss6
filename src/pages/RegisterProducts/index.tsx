@@ -1,7 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useCallback, useLayoutEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-// import { useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import InputText from "../../components/InputText";
 import Select from "../../components/Select";
@@ -9,20 +8,17 @@ import { postProduct } from "../../services/product";
 import { getFieldsUnity } from "../../services/unity";
 import { schemaRegisterProduct } from "../../utils/schema";
 import * as S from "../styles";
-import { SelectOption } from "../../components/Select/index";
-import { getBrand } from "../../services/brand";
+import { getBrand, postBrand } from "../../services/brand";
 import CreatableSelect from "../../components/CreatableSelect";
 import { searchCategory } from "../../services/category";
 import { searchMarket100 } from "../../services/market";
-import { Brand } from "../../services/models";
-import { currencyMask } from "../../fomatters/currencyMask";
+import { Brand, Category, Market, Unity } from "../../services/models";
+import { currencyMask, removeCurrencyMask } from "../../fomatters/currencyMask";
 
 export default function RegisterProducts() {
-  // const navigate = useNavigate();
-  const [categories, setCategories] = useState<SelectOption[]>([]);
-  const [markets, setMarkets] = useState<SelectOption[]>([]);
-  const [unities, setUnities] = useState<SelectOption[]>([]);
-  // const [brandiesOption, setBrandiesOption] = useState<SelectOption[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [markets, setMarkets] = useState<Market[]>([]);
+  const [unities, setUnities] = useState<Unity[]>([]);
   const [brandies, setBrandies] = useState<Brand[]>([]);
 
   // const [isLoading, setIsLoading] = useState(false);
@@ -36,10 +32,10 @@ export default function RegisterProducts() {
     defaultValues: {
       name: "",
       brandId: "",
-      unity: "",
+      unityId: "",
       price: "",
-      category: "",
-      market: "",
+      categoryId: "",
+      marketId: "",
     },
     resolver: yupResolver(schemaRegisterProduct),
   });
@@ -48,12 +44,7 @@ export default function RegisterProducts() {
     try {
       const response = await getFieldsUnity();
 
-      setUnities(
-        response.map((item: { abbreviation: any; description: any }) => ({
-          value: item.abbreviation,
-          label: item.description,
-        }))
-      );
+      setUnities(response);
     } catch (error) {
       console.log(error);
     }
@@ -73,12 +64,7 @@ export default function RegisterProducts() {
     try {
       const response = await searchCategory();
 
-      setCategories(
-        response.map((item: { id: any; name: any }) => ({
-          value: item.id,
-          label: item.name,
-        }))
-      );
+      setCategories(response);
     } catch (error) {
       console.log(error);
     }
@@ -88,12 +74,7 @@ export default function RegisterProducts() {
     try {
       const response = await searchMarket100();
 
-      setMarkets(
-        response.content.map((item: { id: any; name: any }) => ({
-          value: item.id,
-          label: item.name,
-        }))
-      );
+      setMarkets(response.content);
     } catch (error) {
       console.log(error);
     }
@@ -106,29 +87,21 @@ export default function RegisterProducts() {
     getMarkets();
   }, [getUnities, getBrandies, getCategories, getMarkets]);
 
+  const verifyBrand = async (brandId: string) => {
+    setValue("brandId", parseInt(brandId) ? brandId : await postBrand(brandId));
+  };
+
   const onSubmit = async (data: any) => {
-    console.log(data);
-    const dataRequest = {
-      ...data,
-    };
-    console.log(dataRequest);
-    console.log(data.brandId);
-    console.log(brandies);
-
-    const brand = brandies.find((b) => b.id === parseInt(data.brandId));
-
-    console.log(brand);
-    // await postProduct(
-    // data.name,
-    // brand,
-    // data.unity,
-    // data.price,
-    // data.category,
-    // data.market
-    //
-    // ).then(() => {
-    //   console.log(data);
-    // });
+    await postProduct({
+      name: data.name,
+      price: parseFloat(removeCurrencyMask(data.price)),
+      unity: data.unityId,
+      brand: { id: parseFloat(data.brandId) },
+      category: { id: parseFloat(data.categoryId) },
+      markets: [{ id: parseFloat(data.marketId) }],
+    }).then(() => {
+      console.log("colocar toast de produto cadastrado com sucesso");
+    });
   };
 
   return (
@@ -148,28 +121,31 @@ export default function RegisterProducts() {
           <CreatableSelect
             {...register("brandId")}
             isAutocomplete
-            options={brandies.map((item: { id?: any; brandName: any }) => ({
+            options={brandies.map((item: { id?: any; brandName?: any }) => ({
               value: item.id,
               label: item.brandName,
             }))}
             label="Marca"
             placeholder="Selecione ou digite a marca"
-            onChange={(option: { value: string }) =>
-              setValue("brandId", option.value)
-            }
+            onChange={(option: { value: string }) => verifyBrand(option.value)}
             errorMessage={errors.brandId?.message}
           />
 
           <Select
-            {...register("unity")}
+            {...register("unityId")}
             isAutocomplete
-            options={unities}
+            options={unities.map(
+              (item: { abbreviation?: any; description?: any }) => ({
+                value: item.abbreviation,
+                label: item.description,
+              })
+            )}
             label="Unidade"
             placeholder="Selecione a unidade"
             onChange={(option: { value: string }) =>
-              setValue("unity", option.value)
+              setValue("unityId", option.value)
             }
-            errorMessage={errors.unity?.message}
+            errorMessage={errors.unityId?.message}
           />
 
           <InputText
@@ -184,27 +160,33 @@ export default function RegisterProducts() {
           />
 
           <Select
-            {...register("category")}
+            {...register("categoryId")}
             isAutocomplete
-            options={categories}
+            options={categories.map((item: { id?: any; name?: any }) => ({
+              value: item.id,
+              label: item.name,
+            }))}
             label="Categoria"
             placeholder="Selecione a categoria"
             onChange={(option: { value: string }) =>
-              setValue("category", option.value)
+              setValue("categoryId", option.value)
             }
-            errorMessage={errors.category?.message}
+            errorMessage={errors.categoryId?.message}
           />
 
           <Select
-            {...register("market")}
+            {...register("marketId")}
             isAutocomplete
-            options={markets}
+            options={markets.map((item: { id?: any; name?: any }) => ({
+              value: item.id,
+              label: item.name,
+            }))}
             label="Mercado"
             placeholder="Selecione a mercado"
             onChange={(option: { value: string }) =>
-              setValue("market", option.value)
+              setValue("marketId", option.value)
             }
-            errorMessage={errors.market?.message}
+            errorMessage={errors.marketId?.message}
           />
 
           <Button text="Cadastrar" onClick={handleSubmit(onSubmit)} />

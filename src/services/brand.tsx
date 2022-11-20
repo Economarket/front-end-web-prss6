@@ -8,9 +8,9 @@ export async function putBrand(brandId: string) {
   return data;
 }
 
-export async function postBrand(brandId: string) {
+export async function postBrand(brandName: string) {
   const { data } = await api.post(`${REGISTER}${BRAND}`, {
-    brandId,
+    brandName,
   });
   return data;
 }
