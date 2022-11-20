@@ -6,4 +6,5 @@ export const currencyMask = (value: string) =>
         .replace(/(?=(\d{3})+(\D))\B/g, ".")
     : "";
 
-export const removeCurrencyMask = (value: string) => value.replace;
+export const removeCurrencyMask = (value: string) =>
+  value.replace(".", "").replace(",", ".");

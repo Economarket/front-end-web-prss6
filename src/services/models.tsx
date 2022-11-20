@@ -13,23 +13,23 @@ export interface Address {
 
 export interface Brand {
   id?: number;
-  brandName: String;
+  brandName?: String;
   searchName?: String;
 }
 
 export interface Category {
-  id: number;
+  id?: number;
   uuid: string;
-  name: string;
+  name?: string;
   searchName: string;
 }
 
 export interface Market {
-  id: number;
+  id?: number;
   uuid: string;
   // locateX?: string;
   // locateY?: string;
-  name: string;
+  name?: string;
   description?: string;
   logo?: string;
   address?: Address;
@@ -38,7 +38,7 @@ export interface Market {
 }
 
 export interface Product {
-  id: number;
+  id?: number;
   name: string;
   searchName?: string;
   price: number;
@@ -49,6 +49,17 @@ export interface Product {
   greaterThanLastPrice?: boolean | null;
 }
 
+export interface ProductPost {
+  id?: number;
+  name: string;
+  searchName?: string;
+  price: number;
+  brand: { id: number };
+  category: { id: number };
+  unity: string;
+  markets?: { id: number }[];
+  greaterThanLastPrice?: boolean | null;
+}
 export interface Schedule {
   oppeningHour: DateLocale;
   closingHour: DateLocale;
@@ -89,8 +100,8 @@ export interface Location {
 }
 
 export interface Unity {
-  abreviation: string;
-  description: string;
+  abbreviation?: string;
+  description?: string;
 }
 export interface ProductList {
   id: number;
@@ -104,5 +115,5 @@ export interface ShoppingList {
   productList?: ProductList[];
   user?: {
     id: number;
-  }
+  };
 }
