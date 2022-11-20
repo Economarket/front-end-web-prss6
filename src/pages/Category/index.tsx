@@ -10,8 +10,9 @@ import IconChevronLeft from "../../assets/icons/chevronLeft";
 import Select from "../../components/Select";
 import { searchProductByCategory } from "../../services/product";
 import ProductCard from "../../components/ProductCard";
+import EmptyBox from "../../assets/emptyBox.png";
 
-export default function Categories() {
+const Categories:React.FC = () => {
   const [categories, setCategories] = useState<Category[]>();
   const [products, setProducts] = useState<Product[]>();
   const [currentCategory, setCurrentCategory] = useState<Category>();
@@ -27,7 +28,7 @@ export default function Categories() {
       console.log(data);
       setProducts(data.content);
     }
-  }, [currentCategory, searchName]);
+  }, [searchName]);
 
   useEffect(() => {
     updateCategories();
@@ -92,12 +93,17 @@ export default function Categories() {
                   ))}
                 </S.CardGridList>
               ) : (
-                null
+                <I.NoProductContainer>
+                  <I.NoProductImage src={EmptyBox}/>
+                  <S.Title style={{textAlign: "center"}}>Nenhum produto foi encontrado</S.Title>
+                  <I.NoProductButton>Deseja cadastrá-lo?</I.NoProductButton>
+                </I.NoProductContainer>
               )}
           </S.CardCategoryContainer>
         </Fragment>
       ))}
     </S.Wrapper>
   );
-}
+};
 
+export default Categories;
