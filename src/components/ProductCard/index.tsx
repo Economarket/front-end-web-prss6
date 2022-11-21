@@ -30,8 +30,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) => {
           {product.name}
           <Info>{product.brand.brandName}</Info>
         </Name>
-        <Price>{`R$ ${product.price.toFixed(2)} / ${product.unity}`}</Price>
-        {product.market && <Info>Disponível em: {product.market?.name}</Info>}
+        <Price color={
+          product.greaterThanLastPrice === null 
+            ? "#004068" 
+            : product.greaterThanLastPrice 
+            ? "#c00" 
+            : "#0c0"}>
+          {`R$ ${product.price.toFixed(2)} / ${product.unity}`}
+        </Price>
+        {product.markets && <Info>Disponível em: {product.markets[0]?.name}</Info>}
         <Button>Adicionar a Lista de Compras</Button>
       </InfoContainer>
     </Container>

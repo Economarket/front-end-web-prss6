@@ -19,7 +19,11 @@ const ShoppingListItem: React.FC<ShoppingListItemProps> = ({ productList, onDele
                     />
                     <InfoContainer>
                         <Name>{productList.product.name}</Name>
-                        <Price>{`R$ ${productList.product.price.toFixed(2)}`}<small>{`/ ${productList.product.unity} ${productList.product.market?.name || ''}`}</small></Price>
+                        <Price>{`R$ ${productList.product.price.toFixed(2)}`}
+                            <small>
+                                {`/ ${productList.product.unity} ${productList.product.markets ? productList.product.markets[0]?.name : ''}`}
+                            </small>
+                        </Price>
                     </InfoContainer>
             </QtdContainer>
             <TrashContainer onClick={onDelete}>
