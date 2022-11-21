@@ -50,7 +50,11 @@ export const Name = styled(Lato)`
     font-weight: 600;
 `;
 
-export const Price = styled(Lato)`
+interface PriceProps {
+    color?: string;
+}
+export const Price = styled(Lato)<PriceProps>`
+    ${({color}) => (`color: ${color};` || '')}
     font-size: 1.6rem;
     font-weight: 600;
 `;

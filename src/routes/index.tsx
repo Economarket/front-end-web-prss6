@@ -10,7 +10,6 @@ import Home from '../pages/Home/index';
 import Login from '../pages/Login/index';
 import Profile from '../pages/Profile';
 import ShoppingList from '../pages/ShoppingList';
-import Tests from '../pages/Tests';
 import User from '../pages/User/index';
 import InternalAccessContainer from '../templates/InternalLayout';
 import PrivateRoute from './privateRoute';
@@ -32,7 +31,6 @@ export default function MyRoutes() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/novo-usuario" element={<User />} />
-      <Route path="/testes" element={<Tests />} />
 
       {/* <Route path="/listafavoritos" element={<ListaFavoritos />} /> */}
 
@@ -70,10 +68,10 @@ export default function MyRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/produtos" element={<Product />} />
         <Route path="/categorias" element={<Categories />} />
-        <Route path="/cadastroprodutos" element={<RegisterProducts />} />
-        <Route path="/listacompras" element={<ShoppingList />} />
-        <Route path="/mercadosProximos" element={<NearbyMarkets />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/cadastrar-produto" element={<RegisterProducts />} />
+        <Route path="/lista-compras" element={<ShoppingList />} />
+        <Route path="/mercados-proximos" element={<NearbyMarkets />} />
+        <Route path="/perfil" element={<Profile />} />
       </Route>
     </Routes>
   );

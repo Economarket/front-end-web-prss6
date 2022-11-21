@@ -1,32 +1,57 @@
+import { useCallback, useState } from 'react';
 import IconSearch from '../../assets/icons/search';
 import InputText from '../../components/InputText';
 import ProductCard from '../../components/ProductCard';
-import { products_mock } from '../../mock/mock';
+import { searchProductByName } from '../../services/product';
 import * as S from '../styles';
+import * as I from './index.styled';
+import { Product as ProductModel } from '../../services/models';
+import { useNavigate } from "react-router-dom";
+import EmptyBox from "../../assets/emptyBox.png";
 
-export default function Product() {
+const Product: React.FC = () => {
+  const navigate = useNavigate();
+
+  const [products, setProducts] = useState<ProductModel[]>();
+  const [searchName, setSearchName] = useState<string>();
+
+  const searchProducts = useCallback(async () => {
+      const data = await searchProductByName(searchName);
+      setProducts(data.content);
+  }, [searchName]);
+
   return (
     <S.Wrapper>
-      <S.Title> Produtos</S.Title>
-      
-      <S.Form>
+      <S.Title>Buscar Produtos</S.Title>
+      <I.Header>
         <InputText 
           name="buscaProduto" 
           placeholder="Nome do produto"
           icon={<IconSearch />}
-          iconPosition={'left'} />
-      </S.Form>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-around',
-          width: '100%',
-        }}
-      >
-        {products_mock.map((p) => (
-          <ProductCard product={p} onClick={() => console.log(p.name)} />
-        ))}
-      </div>
+          iconPosition={'left'}
+          onChange={(s) => setSearchName(s.target.value)}
+        />
+        <I.Search onClick={() => searchProducts()}>Buscar</I.Search>
+      </I.Header>
+      <S.CardContainer>
+        {(products && products.length > 0) ? (
+          <S.CardGridList>
+            {products.map((p) => (
+              <li>
+                <ProductCard product={p} onClick={() => console.log(p.name)} />
+              </li>
+            ))}
+          </S.CardGridList>
+        ) : (
+          <S.NoProductContainer>
+            <S.NoProductImage src={EmptyBox}/>
+            <S.Title style={{textAlign: "center"}}>Nenhum produto foi encontrado</S.Title>
+            <S.NoProductButton onClick={() => navigate({pathname: "/cadastroprodutos"})}>Deseja cadastrá-lo?</S.NoProductButton>
+          </S.NoProductContainer>
+        )}
+    </S.CardContainer>
     </S.Wrapper>
   );
-}
+};
+
+export default Product;
