@@ -16,7 +16,7 @@ const Product: React.FC = () => {
   const [products, setProducts] = useState<ProductModel[]>();
   const [searchName, setSearchName] = useState<string>("");
 
-  const debouncedSearch = useDebounce<string>(searchName, 1000);
+  const debouncedSearch = useDebounce<string>(searchName, 500);
 
   const searchProducts = useCallback(
     async (name: string) => {
