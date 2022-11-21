@@ -13,6 +13,7 @@ import React from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSession } from "../../contexts/session";
+import { Head } from "../../components/Head";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -61,6 +62,7 @@ export default function Login() {
 
   return (
     <>
+      <Head title="Login" />
       <ExternalAccessContainer title="Que bom te ver novamente!" image={login}>
         <S.Form onSubmit={handleSubmit(onSubmit)}>
           <InputText
