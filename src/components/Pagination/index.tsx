@@ -1,5 +1,9 @@
-import * as S from "./styles";
-import Button from "../Button";
+import * as S from './styles';
+import Button from '../Button';
+import IconChevronRigth from '../../assets/icons/chevronRight';
+import IconChevronBarLeft from '../../assets/icons/chevronBarLeft';
+import IconChevronBarRight from '../../assets/icons/chevronBarRight';
+import IconChevronLeft from '../../assets/icons/chevronLeft';
 
 export type PaginationProps = {
   listLength: number;
@@ -29,14 +33,14 @@ function Pagination({
   return (
     <S.Wrapper>
       <S.PageSize>
-        {listLength ? firstPageElement : 0} - {lastPageElement} de{" "}
+        {listLength ? firstPageElement : 0} - {lastPageElement} de{' '}
         {totalElements}
       </S.PageSize>
       <S.ButtonWrapper>
         <Button
           appearance="ghost"
           sizes="small"
-          // icon={FirstPage}
+          icon={IconChevronBarLeft}
           onClick={onFirstPage}
           disabled={pageNumber < 2}
         />
@@ -44,7 +48,7 @@ function Pagination({
         <Button
           appearance="ghost"
           sizes="small"
-          // icon={ChevronLeft}
+          icon={IconChevronLeft}
           onClick={onPreviousPage}
           disabled={pageNumber < 2}
         />
@@ -52,16 +56,16 @@ function Pagination({
         <Button
           appearance="ghost"
           sizes="small"
-          // icon={ChevronRight}
-          onClick={onNextPage}
-          disabled={pageNumber === totalPageNumber}
+          icon={IconChevronRigth}
+          onClick={onPreviousPage}
+          disabled={pageNumber < 2}
         />
 
         <Button
           appearance="ghost"
           sizes="small"
-          // icon={LastPage}
-          onClick={onLastPage}
+          icon={IconChevronBarRight}
+          onClick={onNextPage}
           disabled={pageNumber === totalPageNumber}
         />
       </S.ButtonWrapper>
