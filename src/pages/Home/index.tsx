@@ -33,7 +33,7 @@ export default function Home() {
               category={c}
               onClick={() => navigate({
                 pathname: '/categorias',
-                search: `category=${c.searchName}`
+                search: `category=${c.searchName}&external=true`
               })}
             />
           ))}

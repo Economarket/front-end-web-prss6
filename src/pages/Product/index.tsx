@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import IconSearch from '../../assets/icons/search';
 import InputText from '../../components/InputText';
 import ProductCard from '../../components/ProductCard';
@@ -13,12 +13,16 @@ const Product: React.FC = () => {
   const navigate = useNavigate();
 
   const [products, setProducts] = useState<ProductModel[]>();
-  const [searchName, setSearchName] = useState<string>();
+  const [searchName, setSearchName] = useState<string>("");
 
-  const searchProducts = useCallback(async () => {
-      const data = await searchProductByName(searchName);
+  const searchProducts = useCallback(async (name: string) => {
+      const data = await searchProductByName(name);
       setProducts(data.content);
-  }, [searchName]);
+  }, [setProducts]);
+
+  useEffect(() => {
+    searchProducts("");
+  }, [searchProducts]);
 
   return (
     <S.Wrapper>
@@ -31,7 +35,7 @@ const Product: React.FC = () => {
           iconPosition={'left'}
           onChange={(s) => setSearchName(s.target.value)}
         />
-        <I.Search onClick={() => searchProducts()}>Buscar</I.Search>
+        <I.Search onClick={() => searchProducts(searchName || "")}>Buscar</I.Search>
       </I.Header>
       <S.CardContainer>
         {(products && products.length > 0) ? (
