@@ -22,7 +22,8 @@ export const Header = styled.div`
   padding: 2rem 4rem;
   border-bottom: 2px solid;
   border-color: #d9d9d9;
-  min-height: 20vh;
+  min-height: 15rem;
+  max-width: 80%;
 
   ${mediaQuerySm(css``)};
 `;
@@ -49,8 +50,8 @@ export const Logo = styled.div`
   display: flex;
   justify-content: center;
   padding: 2rem;
-  min-height: 20vh;
-  min-width: 40vh;
+  min-height: 15rem;
+  min-width: 20%;
 `;
 
 export const WrapperText = styled.div`
@@ -74,23 +75,24 @@ export const Subtitle = styled.p`
     color: ${theme.colors.gray900};
     font-family: ${theme.font.family.secondary};
     font-size: ${theme.font.sizes.xsmall};
+    padding: 0.5rem;
   `}
 `;
 
 export const WrapperMiddle = styled.div`
   display: flex;
-  overflow-x: hidden;
 `;
 
 export const WrapperMenu = styled.div`
   border-right: 2px solid;
   border-color: #d9d9d9;
   padding: 1rem;
-  min-width: 40vh;
+  min-width: 20%;
 `;
 
 export const WrapperContentFooter = styled.div`
   width: 100%;
+  max-width: 80%;
   display: flex;
   flex-direction: column;
 `;
@@ -103,7 +105,5 @@ export const WrapperContent = styled.div`
 `;
 
 export const WrapperFoot = styled.div`
-  width: 79%;
   padding: 2rem;
-  min-height: 20vh;
 `;

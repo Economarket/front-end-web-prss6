@@ -20,7 +20,7 @@ export const Container = styled.div`
 `;
 
 export const CategoryImage = styled.img`
-    width: 60%;
+    width: 50%;
 `;
 
 export const CategoryName = styled.p`
@@ -28,4 +28,5 @@ export const CategoryName = styled.p`
     font-style: normal;
     font-weight: 400;
     font-size: 2rem;
+    text-align: right;
 `;

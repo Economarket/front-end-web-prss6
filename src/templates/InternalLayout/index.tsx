@@ -1,4 +1,3 @@
-import AddressUser from "../../assets/icons/address";
 import IconUser from "../../assets/icons/user";
 import { ReactComponent as Logo } from "../../assets/Logo.svg";
 import Button from "../../components/Button";
@@ -78,8 +77,7 @@ const InternalAccessContainer = ({
               EconoMarket
             </S.Subtitle>
             <S.Subtitle>
-              CNPJ 12.345.678/9123-45 / Enderço, nº 123, Bairro, Araraquara/SP -
-              CEP 12.345-678
+              CNPJ 12.345.678/9123-45 / Endereço Rua Doutor Aldo Benedito Pierri, 250 - Jardim Paulo Freire, Araraquara - SP, 14804-296
             </S.Subtitle>
           </S.WrapperFoot>
         </S.WrapperContentFooter>

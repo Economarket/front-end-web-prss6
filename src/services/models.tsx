@@ -12,8 +12,9 @@ export interface Address {
 }
 
 export interface Brand {
+  id?: number;
+  brandName?: String;
   searchName?: String;
-  brandName: String;
 }
 
 export interface Category {
@@ -21,40 +22,44 @@ export interface Category {
   uuid: string;
   name: string;
   searchName: string;
-  // product?: Product[];
 }
 
 export interface Market {
-  id: number;
+  id?: number;
   uuid: string;
-  locateX?: string;
-  locateY?: string;
-  name: string;
+  // locateX?: string;
+  // locateY?: string;
+  name?: string;
   description?: string;
   logo?: string;
   address?: Address;
   schedules?: Schedule[];
-  products?: Product[];
+  // products?: Product[];
 }
 
 export interface Product {
-  id: number;
+  id?: number;
   name: string;
   searchName?: string;
   price: number;
   brand: Brand;
   category: Category;
   unity: string;
-  market?: Market;
+  markets?: Market[] | null;
+  greaterThanLastPrice?: boolean | null;
 }
 
-export interface ProductList {
-  uuid?: String;
-  shoppingList: ShoppingList;
-  product: Product;
-  quantity: Number;
+export interface ProductPost {
+  id?: number;
+  name: string;
+  searchName?: string;
+  price: number;
+  brand: { id: number };
+  category: { id: number };
+  unity: string;
+  markets?: { id: number }[];
+  greaterThanLastPrice?: boolean | null;
 }
-
 export interface Schedule {
   oppeningHour: DateLocale;
   closingHour: DateLocale;
@@ -62,26 +67,22 @@ export interface Schedule {
   market: Market;
 }
 
-export interface ShoppingList {
-  uuid?: String;
-  user: User;
-  productList?: ProductList[];
+export interface Token {
+  access_token: string;
+  refresh_token: string;
 }
 
-export interface Token {
+export interface RefreshToken {
   access_token: string;
 }
 
 export interface User {
-  uuid?: String;
-  name: String;
-  password: String;
-  email: String;
-  experience?: Number;
-  shoppingLists?: ShoppingList[];
+  id: number;
+  uuid?: string;
+  name: string;
+  email: string;
   permissions?: Permission[];
   address?: Address;
-  tokens: RefreshToken[];
 }
 
 export interface UserLogin {
@@ -96,4 +97,23 @@ export interface RefreshToken {}
 export interface Location {
   lat: number;
   long: number;
+}
+
+export interface Unity {
+  abbreviation?: string;
+  description?: string;
+}
+export interface ProductList {
+  id: number;
+  product: Product;
+  quantity: number;
+}
+
+export interface ShoppingList {
+  id?: number;
+  name: string;
+  productList?: ProductList[];
+  user?: {
+    id: number;
+  };
 }

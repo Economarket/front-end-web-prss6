@@ -1,29 +1,33 @@
 import { categories_round_assets } from "../../assets/categories-round/categories-round";
 import IconSheet from "../../assets/icons/sheet";
 import TrashIcon from "../../assets/icons/trash";
-import { Product } from "../../services/models";
+import { ProductList } from "../../services/models";
 import { CategoryImage, Container, InfoContainer, Name, Price, QtdContainer, QtdInput, TrashContainer } from "./index.styled";
 
 interface ShoppingListItemProps {
-    product: Product;
+    productList: ProductList;
     onDelete?: () => void;
 }
-const ShoppingListItem: React.FC<ShoppingListItemProps> = ({ product, onDelete }) => {
+const ShoppingListItem: React.FC<ShoppingListItemProps> = ({ productList, onDelete }) => {
     return (
         <Container>
             <QtdContainer>
                 <IconSheet />
                 <CategoryImage 
-                    alt={product.category.name} 
-                    src={categories_round_assets[product.category.searchName]}
+                    alt={productList.product.category.name} 
+                    src={categories_round_assets[productList.product.category.searchName]}
                     />
                     <InfoContainer>
-                        <Name>{product.name}</Name>
-                        <Price>{`R$ ${product.price.toFixed(2)}`}<small>{`/ ${product.unity} ${product.market?.name || ''}`}</small></Price>
+                        <Name>{productList.product.name}</Name>
+                        <Price>{`R$ ${productList.product.price.toFixed(2)}`}
+                            <small>
+                                {`/ ${productList.product.unity} ${productList.product.markets ? productList.product.markets[0]?.name : ''}`}
+                            </small>
+                        </Price>
                     </InfoContainer>
             </QtdContainer>
             <TrashContainer onClick={onDelete}>
-                <QtdInput type="number" maxLength={3} placeholder={"0"} />
+                <QtdInput type="number" maxLength={3} placeholder={"0"} value={productList.quantity}/>
                 <TrashIcon />
             </TrashContainer>
         </Container>

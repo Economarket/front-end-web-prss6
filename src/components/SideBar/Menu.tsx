@@ -18,7 +18,7 @@ const SideBar: FC<SidebarLinkProps> = ({ item }) => {
     <>
       <S.SidebarLink to={item.path}>
         {item.icon}
-        <S.SidebarLabel>{item.title}</S.SidebarLabel>
+        <S.SidebarLabel className="sidebarLabel">{item.title}</S.SidebarLabel>
       </S.SidebarLink>
     </>
   );

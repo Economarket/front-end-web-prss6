@@ -5,6 +5,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     width: 20rem;
+    margin: 2rem 3rem;
     filter: drop-shadow(0px 4px 4px #0005);
 `;
 
@@ -49,7 +50,11 @@ export const Name = styled(Lato)`
     font-weight: 600;
 `;
 
-export const Price = styled(Lato)`
+interface PriceProps {
+    color?: string;
+}
+export const Price = styled(Lato)<PriceProps>`
+    ${({color}) => (`color: ${color};` || '')}
     font-size: 1.6rem;
     font-weight: 600;
 `;

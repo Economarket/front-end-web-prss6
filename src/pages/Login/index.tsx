@@ -13,7 +13,6 @@ import React from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSession } from "../../contexts/session";
-import { Toast } from "../../components/Toast/toast";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -22,6 +21,7 @@ export default function Login() {
   const {
     register,
     handleSubmit,
+    formState,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -32,11 +32,36 @@ export default function Login() {
   });
 
   const onSubmit = async (data: any) => {
-    await signin(data.email, data.password)
+    try {
+      await signin(data.email, data.password);
+    } catch (error) {
+      console.error(error);
+      notify();
+    }
+  };
+
+  const toastId = React.useRef(null);
+  const customId = "custom-id-yes";
+
+  const notify = () => {
+    if (!toast.isActive(customId)) {
+      toast("Usuário ou senha inválidos.", {
+        toastId: customId,
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+    handleSubmit(onSubmit);
   };
 
   return (
-    <S.Wrapper>
+    <>
       <ExternalAccessContainer title="Que bom te ver novamente!" image={login}>
         <S.Form onSubmit={handleSubmit(onSubmit)}>
           <InputText
@@ -55,7 +80,11 @@ export default function Login() {
             errorMessage={errors.password?.message}
           />
 
-          <Button text="Entrar" onClick={handleSubmit(onSubmit)} />
+          <Button
+            text="Entrar"
+            onClick={handleSubmit(onSubmit)}
+            disabled={formState.isSubmitting}
+          />
         </S.Form>
 
         <S.Text>
@@ -63,6 +92,6 @@ export default function Login() {
           <S.Link href="/novo-usuario">Cadastre-se</S.Link>
         </S.Text>
       </ExternalAccessContainer>
-    </S.Wrapper>
+    </>
   );
 }

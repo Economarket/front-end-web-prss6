@@ -1,5 +1,5 @@
 import { api } from "./api";
-import { MARKET, REGISTER } from "../constants";
+import { MARKET, REGISTER, SEARCH } from "../constants";
 
 export async function putMarket(marketId: string) {
     const { data } = await api.put(`${REGISTER}${MARKET}`, {
@@ -21,11 +21,16 @@ export async function deleteMarketById(marketId: string) {
 }
 
 export async function searchMarket() {
-    const { data } = await api.get(`${REGISTER}${MARKET}`, {});
+    const { data } = await api.get(`${SEARCH}${MARKET}`, {});
+    return data;
+}
+
+export async function searchMarket100() {
+    const { data } = await api.get(`${SEARCH}${MARKET}?size=100`, {});
     return data;
 }
 
 export async function searchMarketById(marketId: string) {
-    const { data } = await api.get(`${REGISTER}${MARKET}/${marketId}`, {});
+    const { data } = await api.get(`${SEARCH}${MARKET}/${marketId}`, {});
     return data;
 } 

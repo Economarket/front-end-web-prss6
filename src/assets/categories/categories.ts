@@ -1,5 +1,6 @@
 import bebidas from "./37ef972b-f772-475b-9545-02f9da7a4459.png";
 import carnes from "./533a1b7a-0cf6-41bb-b500-4e73dae3a7a5.png";
+import congelados from "./eb16eb55-f0f7-4a98-811e-67719b353472.png";
 import mercearia from "./460c364c-21b9-40ca-83db-b82efe2f7c0e.png";
 import cereais from "./0930bddf-7d3f-4d0a-a7b3-73255b091d0c.png";
 import doces from "./197e1773-3132-4520-b5cf-a6a92680ff1a.png";
@@ -12,20 +13,23 @@ import frios from "./1909caa1-ab93-48ab-ab5d-3e17a95afe92.png";
 import pet_shop from "./f54cbd95-d828-48d6-8f95-19fd5dd77632.png";
 import laticinios from "./1d079d9d-dbd7-4fd1-b34b-48fc51a14bf3.png";
 import padaria from "./e96a90ce-5e52-433a-a422-2daa8ab8dfb4.png";
+import bazar from "./0840aa78-57b8-4163-8b69-7a8c76eb2f69.png";
 
 export const categories_assets: { [key: string]: string } = {
     "bebidas": bebidas,
     "carnes": carnes,
+    "congelados": congelados,
     "mercearia": mercearia,
     "cereais": cereais,
     "doces": doces,
     "hortifruti": hortifruti,
-    "higiene_beleza": higiene_beleza,
+    "higieneebeleza": higiene_beleza,
     "limpeza": limpeza,
     "jardinagem": jardinagem,
+    "bazar": bazar,
     "outros": outros,
     "frios": frios,
-    "pet_shop": pet_shop,
+    "petshop": pet_shop,
     "laticinios": laticinios,
     "padaria": padaria,
 }

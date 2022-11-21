@@ -11,7 +11,7 @@ import InputPassword from "../../components/InputPassword";
 import PasswordRules from "../../components/PasswordRules";
 import { postUser } from "../../services/user";
 import { useNavigate } from "react-router-dom";
-import { searchCategory } from "../../services/category";
+import { getCategories } from "../../services/category";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -38,9 +38,8 @@ export default function Profile() {
   };
 
   const handle = async () => {
-    await searchCategory()
+    await getCategories()
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => console.error(error));

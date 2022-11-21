@@ -2,12 +2,9 @@ import styled from "styled-components";
 import theme from "../../styles/theme";
 
 export const CaroselContainer = styled.div`
-  padding-top: 2rem;
-  padding-left: 1rem;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width: 79%;
 `;
 
 export const CarouselViewport = styled.div`
