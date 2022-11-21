@@ -14,7 +14,6 @@ import { api } from "../services/api";
 import { signIn, signOut } from "../services/auth";
 import { Location, User } from "../services/models";
 import { getUserById } from "../services/user";
-import { Toast } from "../components/Toast/toast";
 
 type Token = {
   user_id: string;
