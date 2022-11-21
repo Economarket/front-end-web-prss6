@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router';
 
 export interface QueryParams {
   category?: string;
+  external?: boolean;
 };
 
 const useQuery = (): [QueryParams, (newQuery: QueryParams) => void] => {

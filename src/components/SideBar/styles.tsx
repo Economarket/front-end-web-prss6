@@ -11,24 +11,20 @@ export const SidebarLink = styled(Link)`
   padding: 2rem;
   text-decoration: none;
 
-  &:visited {
-    color: ${theme.colors.blue200};
-  }
-
   &:hover {
     background-color: ${theme.colors.blue300};
     border-radius: 5px;
-    color: #fff;
+    color: ${theme.colors.whiteFull};
 
     .sidebarLabel {
-      color: #fff;
+      color: ${theme.colors.whiteFull};
     }
   }
 
-  &:active {
-    color: #8cbcd2;
+  &, &:active, &:visited {
+    color: ${theme.colors.blue200};
     .sidebarLabel {
-      color: #8cbcd2;
+      color: ${theme.colors.blue200};
     }
   }
 `;
