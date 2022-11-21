@@ -50,7 +50,7 @@ const Product: React.FC = () => {
           <S.NoProductContainer>
             <S.NoProductImage src={EmptyBox}/>
             <S.Title style={{textAlign: "center"}}>Nenhum produto foi encontrado</S.Title>
-            <S.NoProductButton onClick={() => navigate({pathname: "/cadastro-produtos"})}>Deseja cadastrá-lo?</S.NoProductButton>
+            <S.NoProductButton onClick={() => navigate({pathname: "/cadastrar-produto"})}>Deseja cadastrá-lo?</S.NoProductButton>
           </S.NoProductContainer>
         )}
     </S.CardContainer>

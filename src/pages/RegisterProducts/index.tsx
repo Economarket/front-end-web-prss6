@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useCallback, useLayoutEffect, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../../components/Button";
 import InputText from "../../components/InputText";
@@ -14,6 +14,7 @@ import { searchCategory } from "../../services/category";
 import { searchMarket100 } from "../../services/market";
 import { Brand, Category, Market, Unity } from "../../services/models";
 import { currencyMask, removeCurrencyMask } from "../../fomatters/currencyMask";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function RegisterProducts() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -21,12 +22,12 @@ export default function RegisterProducts() {
   const [unities, setUnities] = useState<Unity[]>([]);
   const [brandies, setBrandies] = useState<Brand[]>([]);
 
-  // const [isLoading, setIsLoading] = useState(false);
-
   const {
     register,
     handleSubmit,
     setValue,
+    reset,
+    formState,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -39,6 +40,22 @@ export default function RegisterProducts() {
     },
     resolver: yupResolver(schemaRegisterProduct),
   });
+
+  useEffect(() => {
+    if (formState.isSubmitSuccessful) {
+      reset({
+        name: "",
+        brandId: "",
+        unityId: "",
+        price: "",
+        categoryId: "",
+        marketId: "",
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    }
+  }, [formState, reset]);
 
   const getUnities = useCallback(async () => {
     try {
@@ -99,99 +116,130 @@ export default function RegisterProducts() {
       brand: { id: parseFloat(data.brandId) },
       category: { id: parseFloat(data.categoryId) },
       markets: [{ id: parseFloat(data.marketId) }],
-    }).then(() => {
-      console.log("colocar toast de produto cadastrado com sucesso");
-    });
+    })
+      .then(() => {
+        notify();
+      })
+      .catch((error) => {
+        console.log("colocar toast de produto não cadastrado");
+        console.log(error);
+      });
+  };
+
+  const notify = () => {
+    if (!toast.isActive("custom-id-yes")) {
+      toast("Produto cadastrado com sucesso.", {
+        toastId: "custom-id-yes",
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+    handleSubmit(onSubmit);
   };
 
   return (
-    <S.WrapperRegisteProducts>
-      <S.Title>Vamos cadastrar um produto?</S.Title>
+    <>
+      <ToastContainer style={{ width: "250px", fontSize: "15px" }} />
+      <S.WrapperRegisteProducts>
+        <S.Title>Vamos cadastrar um produto?</S.Title>
 
-      <S.ProductContainer>
-        <S.Form>
-          <InputText
-            {...register("name")}
-            name="name"
-            label="Nome"
-            placeholder="Digite o nome do produto"
-            errorMessage={errors.name?.message}
-          />
+        <S.ProductContainer>
+          <S.Form>
+            <InputText
+              {...register("name")}
+              name="name"
+              label="Nome"
+              placeholder="Digite o nome do produto"
+              errorMessage={errors.name?.message}
+            />
 
-          <CreatableSelect
-            {...register("brandId")}
-            isAutocomplete
-            options={brandies.map((item: { id?: any; brandName?: any }) => ({
-              value: item.id,
-              label: item.brandName,
-            }))}
-            label="Marca"
-            placeholder="Selecione ou digite a marca"
-            onChange={(option: { value: string }) => verifyBrand(option.value)}
-            errorMessage={errors.brandId?.message}
-          />
+            <CreatableSelect
+              {...register("brandId")}
+              isAutocomplete
+              options={brandies.map((item: { id?: any; brandName?: any }) => ({
+                value: item.id,
+                label: item.brandName,
+              }))}
+              label="Marca"
+              placeholder="Selecione ou digite a marca"
+              onChange={(option: { value: string }) =>
+                verifyBrand(option.value)
+              }
+              errorMessage={errors.brandId?.message}
+            />
 
-          <Select
-            {...register("unityId")}
-            isAutocomplete
-            options={unities.map(
-              (item: { abbreviation?: any; description?: any }) => ({
-                value: item.abbreviation,
-                label: item.description,
-              })
-            )}
-            label="Unidade"
-            placeholder="Selecione a unidade"
-            onChange={(option: { value: string }) =>
-              setValue("unityId", option.value)
-            }
-            errorMessage={errors.unityId?.message}
-          />
+            <Select
+              {...register("unityId")}
+              isAutocomplete
+              options={unities.map(
+                (item: { abbreviation?: any; description?: any }) => ({
+                  value: item.abbreviation,
+                  label: item.description,
+                })
+              )}
+              label="Unidade"
+              placeholder="Selecione a unidade"
+              onChange={(option: { value: string }) =>
+                setValue("unityId", option.value)
+              }
+              errorMessage={errors.unityId?.message}
+            />
 
-          <InputText
-            {...register("price")}
-            name="price"
-            label="Valor"
-            placeholder="Digite o valor"
-            onChange={(event) => {
-              setValue("price", currencyMask(event.target.value));
-            }}
-            errorMessage={errors.price?.message}
-          />
+            <InputText
+              {...register("price")}
+              name="price"
+              label="Valor"
+              placeholder="Digite o valor"
+              onChange={(event) => {
+                setValue("price", currencyMask(event.target.value));
+              }}
+              errorMessage={errors.price?.message}
+            />
 
-          <Select
-            {...register("categoryId")}
-            isAutocomplete
-            options={categories.map((item: { id?: any; name?: any }) => ({
-              value: item.id,
-              label: item.name,
-            }))}
-            label="Categoria"
-            placeholder="Selecione a categoria"
-            onChange={(option: { value: string }) =>
-              setValue("categoryId", option.value)
-            }
-            errorMessage={errors.categoryId?.message}
-          />
+            <Select
+              {...register("categoryId")}
+              isAutocomplete
+              options={categories.map((item: { id?: any; name?: any }) => ({
+                value: item.id,
+                label: item.name,
+              }))}
+              label="Categoria"
+              placeholder="Selecione a categoria"
+              onChange={(option: { value: string }) =>
+                setValue("categoryId", option.value)
+              }
+              errorMessage={errors.categoryId?.message}
+            />
 
-          <Select
-            {...register("marketId")}
-            isAutocomplete
-            options={markets.map((item: { id?: any; name?: any }) => ({
-              value: item.id,
-              label: item.name,
-            }))}
-            label="Mercado"
-            placeholder="Selecione a mercado"
-            onChange={(option: { value: string }) =>
-              setValue("marketId", option.value)
-            }
-            errorMessage={errors.marketId?.message}
-          />
+            <Select
+              {...register("marketId")}
+              isAutocomplete
+              options={markets.map((item: { id?: any; name?: any }) => ({
+                value: item.id,
+                label: item.name,
+              }))}
+              label="Mercado"
+              placeholder="Selecione a mercado"
+              onChange={(option: { value: string }) =>
+                setValue("marketId", option.value)
+              }
+              errorMessage={errors.marketId?.message}
+            />
 
-          <Button text="Cadastrar" onClick={handleSubmit(onSubmit)} />
-        </S.Form>
-      </S.ProductContainer>
-    </S.WrapperRegisteProducts>
+            <Button
+              text="Cadastrar"
+              onClick={handleSubmit(onSubmit)}
+              disabled={formState.isSubmitting}
+            />
+          </S.Form>
+        </S.ProductContainer>
+      </S.WrapperRegisteProducts>
+    </>
   );
 }

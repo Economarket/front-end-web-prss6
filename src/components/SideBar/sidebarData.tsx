@@ -29,18 +29,18 @@ export const SidebarData: SidebarItem[] = [
   },
   {
     title: "Cadastro de produto",
-    path: "/cadastroprodutos",
+    path: "/cadastrar-produto",
     icon: <IconPlusCicle />,
   },
  
   {
     title: "Listas de compra",
-    path: "/listacompras",
+    path: "/lista-compras",
     icon: <IconListCheck />,
   },
   {
     title: "Mercados Próximos",
-    path: "/mercadosProximos",
+    path: "/mercados-proximos",
     icon: <IconMarkerPin />,
   },
  
