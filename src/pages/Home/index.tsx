@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useState } from "react";
 import Carousel from "../../components/Carousel";
 import CategoryCard from "../../components/CategoryCard";
-import MarketCard from "../../components/MarketCard";
+// import MarketCard from "../../components/MarketCard";
 import { getCategories } from "../../services/category";
 import { Category } from "../../services/models";
 import CookieConsent from "react-cookie-consent";

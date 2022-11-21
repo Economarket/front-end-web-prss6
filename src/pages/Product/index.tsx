@@ -8,12 +8,15 @@ import * as I from "./index.styled";
 import { Product as ProductModel } from "../../services/models";
 import { useNavigate } from "react-router-dom";
 import EmptyBox from "../../assets/emptyBox.png";
+import { useDebounce } from "usehooks-ts";
 
 const Product: React.FC = () => {
   const navigate = useNavigate();
 
   const [products, setProducts] = useState<ProductModel[]>();
   const [searchName, setSearchName] = useState<string>("");
+
+  const debouncedSearch = useDebounce<string>(searchName, 1000);
 
   const searchProducts = useCallback(
     async (name: string) => {
@@ -24,8 +27,8 @@ const Product: React.FC = () => {
   );
 
   useEffect(() => {
-    searchProducts(searchName);
-  }, [searchProducts, searchName]);
+    searchProducts(debouncedSearch);
+  }, [searchProducts, debouncedSearch]);
 
   return (
     <S.Wrapper>
