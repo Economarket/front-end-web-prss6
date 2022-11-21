@@ -4,15 +4,16 @@ import { useState } from "react";
 import Carousel from "../../components/Carousel";
 import CategoryCard from "../../components/CategoryCard";
 import MarketCard from "../../components/MarketCard";
-import { markets_mock } from "../../mock/mock";
 import { getCategories } from "../../services/category";
 import { Category } from "../../services/models";
 import CookieConsent from "react-cookie-consent";
 import * as S from "../styles";
 import theme from "../../styles/theme";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [categories, setCategories] = useState<Category[]>();
+  const navigate = useNavigate();
 
   const updateCategories = useCallback(async () => {
     setCategories(await getCategories());
@@ -30,7 +31,10 @@ export default function Home() {
           {categories.map((c) => (
             <CategoryCard
               category={c}
-              onClick={() => console.log(`Redirect to ${c.name} page...`)}
+              onClick={() => navigate({
+                pathname: '/categorias',
+                search: `category=${c.searchName}`
+              })}
             />
           ))}
         </Carousel>
@@ -40,7 +44,7 @@ export default function Home() {
       <br />
       <S.Title>Mercados próximos</S.Title>
       <S.CardsMarketContainer>
-        {markets_mock?.slice(0, 8).map((m) => {
+        {/*markets_mock?.slice(0, 8).map((m) => {
           return (
             <MarketCard
               key={m.id}
@@ -48,7 +52,7 @@ export default function Home() {
               onClick={() => console.log(`Redirect to ${m.name} page...`)}
             />
           );
-        })}
+        })*/}
       </S.CardsMarketContainer>
       <CookieConsent
         location="bottom"

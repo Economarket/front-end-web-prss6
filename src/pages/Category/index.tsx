@@ -11,8 +11,13 @@ import Select from "../../components/Select";
 import { searchProductByCategory } from "../../services/product";
 import ProductCard from "../../components/ProductCard";
 import EmptyBox from "../../assets/emptyBox.png";
+import useQuery from "../../hooks/use-query";
+import { useNavigate } from "react-router-dom";
 
 const Categories:React.FC = () => {
+  const navigate = useNavigate();
+  const [query, setQuery] = useQuery();
+
   const [categories, setCategories] = useState<Category[]>();
   const [products, setProducts] = useState<Product[]>();
   const [currentCategory, setCurrentCategory] = useState<Category>();
@@ -25,40 +30,54 @@ const Categories:React.FC = () => {
   const searchProducts = useCallback(async (category: Category) => {
     if(category){
       const data = await searchProductByCategory(category.id, searchName);
-      console.log(data);
       setProducts(data.content);
     }
   }, [searchName]);
 
   useEffect(() => {
+    if(query.category && categories){
+      const current = categories?.find((c) => (c.searchName === query.category));
+      if(current){
+        setCurrentCategory(current);
+      } else {
+        setCurrentCategory(undefined);
+        setQuery({});
+      }
+    } else {
+      setCurrentCategory(undefined);
+    }
+  }, [query, categories, setQuery]);
+
+  useEffect(() => {
     updateCategories();
   }, [updateCategories]);
+
   return (
     <S.Wrapper>
       {categories && (!currentCategory ? (
         <Fragment>
           <S.Title>Categorias</S.Title>
-          <S.CardCategoryContainer>
+          <S.CardContainer>
               <S.CardGridList>
                 {categories.map((c) => (
                   <li>
                     <CategoryCard
                       category={c}
                       onClick={() => {
-                        setCurrentCategory(c);
+                        setQuery({category: c.searchName});
                         searchProducts(c);
                       }}
                       />
                   </li>
                 ))}
               </S.CardGridList>
-          </S.CardCategoryContainer>
+          </S.CardContainer>
         </Fragment>
       ) : (
         <Fragment>
           <S.Title> Produtos</S.Title>
           <I.Header>
-            <I.Back onClick={() => setCurrentCategory(undefined)}><IconChevronLeft/> Voltar</I.Back>
+            <I.Back onClick={() => setQuery({category: undefined})}><IconChevronLeft/> Voltar</I.Back>
               <Select
                 isAutocomplete
                 options={categories.map(c => ({label: c.name, value: c.id}))}
@@ -66,7 +85,7 @@ const Categories:React.FC = () => {
                 onChange={(option) => {
                   const c = categories.find(c => (c.id === option.value));
                   if(c){
-                    setCurrentCategory(c);
+                    setQuery({category: c.searchName});
                     searchProducts(c);
                   }
                 }}
@@ -83,7 +102,7 @@ const Categories:React.FC = () => {
                 Buscar
               </I.Search>
           </I.Header>
-          <S.CardCategoryContainer>
+          <S.CardContainer>
               {(products && products.length > 0) ? (
                 <S.CardGridList>
                   {products.map((p) => (
@@ -93,13 +112,13 @@ const Categories:React.FC = () => {
                   ))}
                 </S.CardGridList>
               ) : (
-                <I.NoProductContainer>
-                  <I.NoProductImage src={EmptyBox}/>
+                <S.NoProductContainer>
+                  <S.NoProductImage src={EmptyBox}/>
                   <S.Title style={{textAlign: "center"}}>Nenhum produto foi encontrado</S.Title>
-                  <I.NoProductButton>Deseja cadastrá-lo?</I.NoProductButton>
-                </I.NoProductContainer>
+                  <S.NoProductButton onClick={() => navigate({pathname: "/cadastroprodutos"})}>Deseja cadastrá-lo?</S.NoProductButton>
+                </S.NoProductContainer>
               )}
-          </S.CardCategoryContainer>
+          </S.CardContainer>
         </Fragment>
       ))}
     </S.Wrapper>

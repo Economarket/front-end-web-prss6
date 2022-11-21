@@ -45,7 +45,7 @@ export interface Product {
   brand: Brand;
   category: Category;
   unity: string;
-  market?: Market | null;
+  markets?: Market[] | null;
   greaterThanLastPrice?: boolean | null;
 }
 
