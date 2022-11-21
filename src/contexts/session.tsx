@@ -52,7 +52,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
 
           const decode = jwt(response.access_token);
         })
-        .catch(_ => Toast("Usuário ou senha inválidos", "warning"));
+        .catch(_ => Toast("Usuário ou senha inválidos", "error"));
     } catch (error) {
       console.error(error);
     }
