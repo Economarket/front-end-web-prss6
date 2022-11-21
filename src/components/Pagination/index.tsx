@@ -1,11 +1,5 @@
-import IconButton from '../IconButton';
-import {
-  FirstPage,
-  ChevronLeft,
-  ChevronRight,
-  LastPage
-} from '@styled-icons/material-rounded';
-import * as S from './styles';
+import * as S from "./styles";
+import Button from "../Button";
 
 export type PaginationProps = {
   listLength: number;
@@ -30,43 +24,44 @@ function Pagination({
   onFirstPage,
   onLastPage,
   onNextPage,
-  onPreviousPage
+  onPreviousPage,
 }: PaginationProps) {
   return (
     <S.Wrapper>
       <S.PageSize>
-        {listLength ? firstPageElement : 0} - {lastPageElement} de{' '}
+        {listLength ? firstPageElement : 0} - {lastPageElement} de{" "}
         {totalElements}
       </S.PageSize>
       <S.ButtonWrapper>
-        <IconButton
-          icon={FirstPage}
+        <Button
+          appearance="ghost"
+          sizes="small"
+          // icon={FirstPage}
           onClick={onFirstPage}
-          color="offdark"
           disabled={pageNumber < 2}
-          margin="0 1.8rem 0 0"
         />
 
-        <IconButton
-          icon={ChevronLeft}
+        <Button
+          appearance="ghost"
+          sizes="small"
+          // icon={ChevronLeft}
           onClick={onPreviousPage}
-          color="offdark"
           disabled={pageNumber < 2}
-          margin="0 1.8rem 0 0"
         />
 
-        <IconButton
-          icon={ChevronRight}
+        <Button
+          appearance="ghost"
+          sizes="small"
+          // icon={ChevronRight}
           onClick={onNextPage}
-          color="offdark"
           disabled={pageNumber === totalPageNumber}
-          margin="0 1.8rem 0 0"
         />
 
-        <IconButton
-          icon={LastPage}
+        <Button
+          appearance="ghost"
+          sizes="small"
+          // icon={LastPage}
           onClick={onLastPage}
-          color="offdark"
           disabled={pageNumber === totalPageNumber}
         />
       </S.ButtonWrapper>
@@ -75,8 +70,6 @@ function Pagination({
 }
 
 export default Pagination;
-
-
 
 // import Pagination from '../../../components/Pagination';
 
@@ -97,7 +90,7 @@ export default Pagination;
 //           sortField,
 //           sortDirection
 //         );
-  
+
 //         setCompanies(data.content);
 //         handlePagination({
 //           lastPage: data.last,
@@ -122,11 +115,10 @@ export default Pagination;
 //     useEffect(() => {
 //       fetchCompanies();
 //     }, [fetchCompanies]);
-  
+
 //     useEffect(() => {
 //       onFirstPage();
 //     }, [onFirstPage, value]);
-  
 
 //     <Pagination
 //     {...paginationEvents}
