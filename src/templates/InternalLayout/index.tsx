@@ -1,11 +1,11 @@
-import IconUser from "../../assets/icons/user";
-import { ReactComponent as Logo } from "../../assets/Logo.svg";
-import Button from "../../components/Button";
-import Sidebar from "../../components/SideBar/sidebar";
-import * as S from "./styles";
-import { Outlet, useNavigate } from "react-router-dom";
-import { useSession } from "../../contexts/session";
-import IconLogOut from "../../assets/icons/logOut";
+import IconUser from '../../assets/icons/user';
+import { ReactComponent as Logo } from '../../assets/Logo.svg';
+import Button from '../../components/Button';
+import Sidebar from '../../components/SideBar/sidebar';
+import * as S from './styles';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { useSession } from '../../contexts/session';
+import IconLogOut from '../../assets/icons/logOut';
 
 export interface InternalTemplate {
   children?: React.ReactNode;
@@ -15,8 +15,8 @@ export interface InternalTemplate {
 }
 
 const InternalAccessContainer = ({
-  title = "Economize nas suas compras de mercado!",
-  subtitle = "Pesquise e encontre o melhor para você.",
+  title = 'Economize nas suas compras de mercado!',
+  subtitle = 'Pesquise e encontre o melhor para você.',
   children,
 }: InternalTemplate) => {
   const { user, logout } = useSession();
@@ -26,7 +26,7 @@ const InternalAccessContainer = ({
     <S.Wrapper>
       <S.WrapperHeader>
         <S.Logo>
-          <Logo fill="#197AA6" />
+          <Logo fill="#197AA6" onClick={() => navigate('/')} />
         </S.Logo>
 
         <S.Header>
@@ -48,7 +48,7 @@ const InternalAccessContainer = ({
                 sizes="small"
                 text="Usuario"
                 icon={IconUser}
-                onClick={() => navigate("/perfil")}
+                onClick={() => navigate('/perfil')}
               />
               <Button
                 appearance="ghost"
