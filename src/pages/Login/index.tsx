@@ -1,22 +1,21 @@
-import ExternalAccessContainer from "../../templates/ExternalLayout";
-
-import * as S from "../styles";
-import InputText from "../../components/InputText";
-import login from "../../assets/login.png";
-import Button from "../../components/Button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schemaLogin } from "../../utils/schema";
+
+import ExternalAccessContainer from "../../templates/ExternalLayout";
+import login from "../../assets/login.png";
+
+import InputText from "../../components/InputText";
+import Button from "../../components/Button";
 import InputPassword from "../../components/InputPassword";
-import { useNavigate } from "react-router-dom";
-import React from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import ToastHelper from "../../components/Toast/toast";
+
+import { schemaLogin } from "../../utils/schema";
 import { useSession } from "../../contexts/session";
 
+import * as S from "../styles";
+
 export default function Login() {
-  const navigate = useNavigate();
-  const { signin, user } = useSession();
+  const { signin } = useSession();
 
   const {
     register,
@@ -36,28 +35,8 @@ export default function Login() {
       await signin(data.email, data.password);
     } catch (error) {
       console.error(error);
-      notify();
+      ToastHelper("Usuário ou senha inválidos.", "error");
     }
-  };
-
-  const toastId = React.useRef(null);
-  const customId = "custom-id-yes";
-
-  const notify = () => {
-    if (!toast.isActive(customId)) {
-      toast("Usuário ou senha inválidos.", {
-        toastId: customId,
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
-    handleSubmit(onSubmit);
   };
 
   return (
