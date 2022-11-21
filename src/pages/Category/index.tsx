@@ -52,6 +52,13 @@ const Categories:React.FC = () => {
     updateCategories();
   }, [updateCategories]);
 
+  useEffect(() => {
+    if(currentCategory && query.external){
+      searchProducts(currentCategory);
+      setQuery({...query, external: undefined});
+    }
+  }, [searchProducts, query, currentCategory, setQuery]);
+
   return (
     <S.Wrapper>
       {categories && (!currentCategory ? (
