@@ -4,6 +4,7 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./styles/global";
 import theme from "./styles/theme";
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Routes from "./routes/";
 import { SessionProvider } from "./contexts/session";
