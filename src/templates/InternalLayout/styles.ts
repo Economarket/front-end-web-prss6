@@ -52,6 +52,7 @@ export const Logo = styled.div`
   padding: 2rem;
   min-height: 15rem;
   min-width: 20%;
+  cursor: pointer;
 `;
 
 export const WrapperText = styled.div`
