@@ -21,6 +21,7 @@ export default function Login() {
   const {
     register,
     handleSubmit,
+    formState,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -47,7 +48,7 @@ export default function Login() {
       toast("Usuário ou senha inválidos.", {
         toastId: customId,
         position: "top-right",
-        autoClose: 1000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -79,7 +80,11 @@ export default function Login() {
             errorMessage={errors.password?.message}
           />
 
-          <Button text="Entrar" onClick={handleSubmit(onSubmit)} />
+          <Button
+            text="Entrar"
+            onClick={handleSubmit(onSubmit)}
+            disabled={formState.isSubmitting}
+          />
         </S.Form>
 
         <S.Text>

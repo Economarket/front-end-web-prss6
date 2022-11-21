@@ -36,19 +36,18 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
 
   async function signin(email: string, password: string) {
-    try {
-      await signIn(email, password)
-        .then((response) => {
-          localStorage.setItem("token", response.access_token);
-          localStorage.setItem("refresh_token", response.refresh_token);
-          getUser(response.access_token);
-          navigate("/");
-          const decode = jwt(response.access_token);
-        })
-        .catch((error) => console.error(error));
-    } catch (error) {
-      console.error(error);
-    }
+    await signIn(email, password)
+      .then((response) => {
+        localStorage.setItem("token", response.access_token);
+        localStorage.setItem("refresh_token", response.refresh_token);
+        getUser(response.access_token);
+        navigate("/");
+        const decode = jwt(response.access_token);
+      })
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      });
   }
 
   async function logout() {
