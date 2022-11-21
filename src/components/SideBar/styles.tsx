@@ -11,7 +11,8 @@ export const SidebarLink = styled(Link)`
   padding: 2rem;
   text-decoration: none;
 
-  &:hover {
+  &:hover,
+  &:visited:hover {
     background-color: ${theme.colors.blue300};
     border-radius: 5px;
     color: ${theme.colors.whiteFull};
@@ -21,7 +22,9 @@ export const SidebarLink = styled(Link)`
     }
   }
 
-  &, &:active, &:visited {
+  &,
+  &:active,
+  &:visited {
     color: ${theme.colors.blue200};
     .sidebarLabel {
       color: ${theme.colors.blue200};

@@ -81,14 +81,34 @@ export const CardGridList = styled.ul<CardGridListProps>`
   align-items: center;
   padding: 0;
   list-style: none;
-  grid-template-columns: repeat(${({ itens_row}) => itens_row ?? 3}, 1fr);
-  
+  grid-template-columns: repeat(${({ itens_row }) => itens_row ?? 1}, 1fr);
+
+  @media (min-width: 720px) {
+    grid-template-columns: repeat(
+      ${({ itens_row }) => (itens_row ? itens_row + 1 : 2)},
+      1fr
+    );
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(
+      ${({ itens_row }) => (itens_row ? itens_row + 1 : 3)},
+      1fr
+    );
+  }
+
   @media (min-width: 1440px) {
-    grid-template-columns: repeat(${({ itens_row}) => itens_row ? itens_row + 1 : 4}, 1fr);
+    grid-template-columns: repeat(
+      ${({ itens_row }) => (itens_row ? itens_row + 1 : 4)},
+      1fr
+    );
   }
 
   @media (min-width: 1920px) {
-    grid-template-columns: repeat(${({ itens_row}) => itens_row ? itens_row + 2 : 5}, 1fr);
+    grid-template-columns: repeat(
+      ${({ itens_row }) => (itens_row ? itens_row + 2 : 5)},
+      1fr
+    );
   }
 `;
 
@@ -122,30 +142,30 @@ export const WrapperRegisteProducts = styled.div`
 `;
 
 export const NoProductContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const NoProductImage = styled.img`
-    width: 30%;
-    margin: 3rem 0;
+  width: 30%;
+  margin: 3rem 0;
 `;
 
 export const NoProductButton = styled.button`
-    text-align: center;
-    font-family: 'Lato';
-    background-color: ${theme.colors.blue300};
-    border: none;
-    border-radius: 5px;
-    color: ${theme.colors.whiteFull};
-    cursor: pointer;
-    font-size: 2rem;
-    font-weight: 400;
-    padding: 1.5rem 6rem;
+  text-align: center;
+  font-family: "Lato";
+  background-color: ${theme.colors.blue300};
+  border: none;
+  border-radius: 5px;
+  color: ${theme.colors.whiteFull};
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: 400;
+  padding: 1.5rem 6rem;
 
-    &:hover {
-        background-color: ${theme.colors.blue200}; 
-    }
+  &:hover {
+    background-color: ${theme.colors.blue200};
+  }
 `;

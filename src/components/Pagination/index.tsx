@@ -90,7 +90,6 @@ export default Pagination;
 //           sortField,
 //           sortDirection
 //         );
-
 //         setCompanies(data.content);
 //         handlePagination({
 //           lastPage: data.last,
