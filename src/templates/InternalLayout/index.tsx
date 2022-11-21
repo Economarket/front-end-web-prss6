@@ -48,7 +48,7 @@ const InternalAccessContainer = ({
                 sizes="small"
                 text="Usuario"
                 icon={IconUser}
-                onClick={() => navigate("/profile")}
+                onClick={() => navigate("/perfil")}
               />
               <Button
                 appearance="ghost"
@@ -77,7 +77,8 @@ const InternalAccessContainer = ({
               EconoMarket
             </S.Subtitle>
             <S.Subtitle>
-              CNPJ 12.345.678/9123-45 / Endereço Rua Doutor Aldo Benedito Pierri, 250 - Jardim Paulo Freire, Araraquara - SP, 14804-296
+              CNPJ 12.345.678/9123-45 / Endereço Rua Doutor Aldo Benedito
+              Pierri, 250 - Jardim Paulo Freire, Araraquara - SP, 14804-296
             </S.Subtitle>
           </S.WrapperFoot>
         </S.WrapperContentFooter>
