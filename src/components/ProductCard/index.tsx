@@ -13,9 +13,8 @@ import {
 
 interface ProductCardProps {
   product: Product;
-  onClick: () => void;
 }
-const ProductCard: React.FC<ProductCardProps> = ({ product, onClick }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <Container>
       <ImageContainer>

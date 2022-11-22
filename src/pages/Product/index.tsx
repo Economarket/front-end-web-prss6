@@ -47,7 +47,7 @@ const Product: React.FC = () => {
           <S.CardGridList>
             {products.map((p) => (
               <li>
-                <ProductCard product={p} onClick={() => console.log(p.name)} />
+                <ProductCard product={p} />
               </li>
             ))}
           </S.CardGridList>

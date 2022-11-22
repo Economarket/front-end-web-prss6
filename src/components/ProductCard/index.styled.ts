@@ -27,7 +27,7 @@ export const InfoContainer = styled.div`
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    height: 20rem;
+    height: 25rem;
     padding: 1rem;
     background-color: ${theme.colors.whiteFull};
     border: 1px solid #DDD;
