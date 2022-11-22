@@ -9,7 +9,6 @@ import { Product as ProductModel } from "../../services/models";
 import { useNavigate } from "react-router-dom";
 import EmptyBox from "../../assets/emptyBox.png";
 import { useDebounce } from "usehooks-ts";
-import { useScrollToBottom } from "use-scroll-to-bottom";
 
 const Product: React.FC = () => {
   const navigate = useNavigate();
@@ -38,7 +37,7 @@ const Product: React.FC = () => {
       setCurrentPage(currentPage + 1);
       setProducts(p => p?.concat(data.content));
     }
-  }, [currentPage, debouncedSearch]);
+  }, [currentPage, debouncedSearch, totalPages]);
 
   useEffect(() => {
     const options = {
@@ -78,7 +77,7 @@ const Product: React.FC = () => {
       </I.Header>
       <S.CardContainer>
         {products && products.length > 0 ? (
-          <div>
+          <Fragment>
             <S.CardGridList>
               {products.map((p) => (
                 <li>
@@ -87,14 +86,7 @@ const Product: React.FC = () => {
               ))}
               <li><p ref={loadMoreRef}></p></li>
             </S.CardGridList>
-            {/* {(currentPage !== undefined && !!totalPages && currentPage < totalPages - 1) && (
-              <S.NoProductButton
-                onClick={() => loadProducts()}
-              >
-                Carregar mais
-              </S.NoProductButton>
-            )} */}
-          </div>
+          </Fragment>
         ) : (
           <S.NoProductContainer>
             <S.NoProductImage src={EmptyBox} />
