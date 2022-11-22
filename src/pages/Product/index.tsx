@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import IconSearch from "../../assets/icons/search";
 import InputText from "../../components/InputText";
 import ProductCard from "../../components/ProductCard";
@@ -12,6 +12,7 @@ import { useDebounce } from "usehooks-ts";
 
 const Product: React.FC = () => {
   const navigate = useNavigate();
+  const loadMoreRef = useRef(null);
 
   const [products, setProducts] = useState<ProductModel[]>();
   const [searchName, setSearchName] = useState<string>("");
@@ -31,17 +32,32 @@ const Product: React.FC = () => {
   );
 
   const loadProducts = useCallback(async () => {
-    if(currentPage !==  undefined){
+    if(currentPage !== undefined && !!totalPages && currentPage < totalPages - 1){
       const data = await searchProductByName(debouncedSearch, currentPage+1);
       setCurrentPage(currentPage + 1);
       setProducts(p => p?.concat(data.content));
     }
-  }, [currentPage, debouncedSearch]);
+  }, [currentPage, debouncedSearch, totalPages]);
 
   useEffect(() => {
-    console.log(currentPage);
-    console.log(totalPages);
-  }, [currentPage, totalPages]);
+    const options = {
+      root: null,
+      rootMargin: "20px",
+      threshold: 1.0
+    };
+
+    const observer = new IntersectionObserver((entities) => {
+      const target = entities[0];
+
+      if (target.isIntersecting){
+        loadProducts();
+      }
+    }, options);
+
+    if (loadMoreRef.current){
+      observer.observe(loadMoreRef.current);
+    }
+  }, [loadProducts]);
 
   useEffect(() => {
     searchProducts(debouncedSearch);
@@ -68,14 +84,8 @@ const Product: React.FC = () => {
                   <ProductCard product={p} />
                 </li>
               ))}
+              <li><p ref={loadMoreRef}></p></li>
             </S.CardGridList>
-            {(currentPage !== undefined && !!totalPages && currentPage < totalPages - 1) && (
-              <S.NoProductButton
-                onClick={() => loadProducts()}
-              >
-                Carregar mais
-              </S.NoProductButton>
-            )}
           </Fragment>
         ) : (
           <S.NoProductContainer>
