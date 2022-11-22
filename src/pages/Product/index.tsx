@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import IconSearch from "../../assets/icons/search";
 import InputText from "../../components/InputText";
 import ProductCard from "../../components/ProductCard";
@@ -9,9 +9,11 @@ import { Product as ProductModel } from "../../services/models";
 import { useNavigate } from "react-router-dom";
 import EmptyBox from "../../assets/emptyBox.png";
 import { useDebounce } from "usehooks-ts";
+import { useScrollToBottom } from "use-scroll-to-bottom";
 
 const Product: React.FC = () => {
   const navigate = useNavigate();
+  const loadMoreRef = useRef(null);
 
   const [products, setProducts] = useState<ProductModel[]>();
   const [searchName, setSearchName] = useState<string>("");
@@ -31,7 +33,7 @@ const Product: React.FC = () => {
   );
 
   const loadProducts = useCallback(async () => {
-    if(currentPage !==  undefined){
+    if(currentPage !== undefined && !!totalPages && currentPage < totalPages - 1){
       const data = await searchProductByName(debouncedSearch, currentPage+1);
       setCurrentPage(currentPage + 1);
       setProducts(p => p?.concat(data.content));
@@ -39,9 +41,24 @@ const Product: React.FC = () => {
   }, [currentPage, debouncedSearch]);
 
   useEffect(() => {
-    console.log(currentPage);
-    console.log(totalPages);
-  }, [currentPage, totalPages]);
+    const options = {
+      root: null,
+      rootMargin: "20px",
+      threshold: 1.0
+    };
+
+    const observer = new IntersectionObserver((entities) => {
+      const target = entities[0];
+
+      if (target.isIntersecting){
+        loadProducts();
+      }
+    }, options);
+
+    if (loadMoreRef.current){
+      observer.observe(loadMoreRef.current);
+    }
+  }, [loadProducts]);
 
   useEffect(() => {
     searchProducts(debouncedSearch);
@@ -61,22 +78,23 @@ const Product: React.FC = () => {
       </I.Header>
       <S.CardContainer>
         {products && products.length > 0 ? (
-          <Fragment>
+          <div>
             <S.CardGridList>
               {products.map((p) => (
                 <li>
                   <ProductCard product={p} />
                 </li>
               ))}
+              <li><p ref={loadMoreRef}></p></li>
             </S.CardGridList>
-            {(currentPage !== undefined && !!totalPages && currentPage < totalPages - 1) && (
+            {/* {(currentPage !== undefined && !!totalPages && currentPage < totalPages - 1) && (
               <S.NoProductButton
                 onClick={() => loadProducts()}
               >
                 Carregar mais
               </S.NoProductButton>
-            )}
-          </Fragment>
+            )} */}
+          </div>
         ) : (
           <S.NoProductContainer>
             <S.NoProductImage src={EmptyBox} />
