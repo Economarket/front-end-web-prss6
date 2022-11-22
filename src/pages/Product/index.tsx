@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useEffect, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import IconSearch from "../../assets/icons/search";
 import InputText from "../../components/InputText";
 import ProductCard from "../../components/ProductCard";
@@ -9,17 +9,22 @@ import { Product as ProductModel } from "../../services/models";
 import { useNavigate } from "react-router-dom";
 import EmptyBox from "../../assets/emptyBox.png";
 import { useDebounce } from "usehooks-ts";
+import { useInfiniteScroll } from "../../hooks/use-infinite-scroll";
 
 const Product: React.FC = () => {
   const navigate = useNavigate();
-  const loadMoreRef = useRef(null);
 
   const [products, setProducts] = useState<ProductModel[]>();
   const [searchName, setSearchName] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>();
   const [totalPages, setTotalPages] = useState<number>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const debouncedSearch = useDebounce<string>(searchName, 500);
+  const { callApi } = useInfiniteScroll({
+    waitDispatchFinish: loading,
+    changePxBottomBeforeCall: 200,
+  });
 
   const searchProducts = useCallback(
     async (name: string) => {
@@ -33,31 +38,19 @@ const Product: React.FC = () => {
 
   const loadProducts = useCallback(async () => {
     if(currentPage !== undefined && !!totalPages && currentPage < totalPages - 1){
+      setLoading(true);
       const data = await searchProductByName(debouncedSearch, currentPage+1);
       setCurrentPage(currentPage + 1);
       setProducts(p => p?.concat(data.content));
+      setLoading(false);
     }
   }, [currentPage, debouncedSearch, totalPages]);
 
   useEffect(() => {
-    const options = {
-      root: null,
-      rootMargin: "20px",
-      threshold: 1.0
-    };
-
-    const observer = new IntersectionObserver((entities) => {
-      const target = entities[0];
-
-      if (target.isIntersecting){
-        loadProducts();
-      }
-    }, options);
-
-    if (loadMoreRef.current){
-      observer.observe(loadMoreRef.current);
+    if(callApi){
+      loadProducts();
     }
-  }, [loadProducts]);
+  }, [loadProducts, callApi]);
 
   useEffect(() => {
     searchProducts(debouncedSearch);
@@ -84,7 +77,6 @@ const Product: React.FC = () => {
                   <ProductCard product={p} />
                 </li>
               ))}
-              <li><p ref={loadMoreRef}></p></li>
             </S.CardGridList>
           </Fragment>
         ) : (

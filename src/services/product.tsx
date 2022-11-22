@@ -46,11 +46,12 @@ export const searchProductByName = async (name: string | undefined, page: number
 
 export const searchProductByCategory = async (
   category_id: number,
-  name: string | undefined
+  name: string | undefined,
+  page: number
 ) => {
   const { data } = await api.get(
-    `${SEARCH}${PRODUCT}${CATEGORY}/${category_id}${
-      name ? `?name=${name}` : ""
+    `${SEARCH}${PRODUCT}${CATEGORY}/${category_id}?page=${page}${
+      name ? `&name=${name}` : ""
     }`,
     {}
   );
