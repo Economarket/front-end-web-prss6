@@ -39,8 +39,8 @@ export async function searchProductByMarket() {
   return data;
 }
 
-export const searchProductByName = async (name: string | undefined) => {
-  const { data } = await api.get(`${SEARCH}${PRODUCT}${NAME}?name=${name}`, {});
+export const searchProductByName = async (name: string | undefined, page: number) => {
+  const { data } = await api.get(`${SEARCH}${PRODUCT}${NAME}?name=${name}&page=${page}`, {});
   return data;
 }
 

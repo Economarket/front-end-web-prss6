@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import IconSearch from "../../assets/icons/search";
 import InputText from "../../components/InputText";
 import ProductCard from "../../components/ProductCard";
@@ -15,16 +15,33 @@ const Product: React.FC = () => {
 
   const [products, setProducts] = useState<ProductModel[]>();
   const [searchName, setSearchName] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState<number>();
+  const [totalPages, setTotalPages] = useState<number>();
 
   const debouncedSearch = useDebounce<string>(searchName, 500);
 
   const searchProducts = useCallback(
     async (name: string) => {
-      const data = await searchProductByName(name);
+      const data = await searchProductByName(name, 0);
       setProducts(data.content);
+      setTotalPages(data.totalPages);
+      setCurrentPage(0);
     },
-    [setProducts]
+    [setProducts, setTotalPages, setCurrentPage]
   );
+
+  const loadProducts = useCallback(async () => {
+    if(currentPage !==  undefined){
+      const data = await searchProductByName(debouncedSearch, currentPage+1);
+      setCurrentPage(currentPage + 1);
+      setProducts(p => p?.concat(data.content));
+    }
+  }, [currentPage, debouncedSearch]);
+
+  useEffect(() => {
+    console.log(currentPage);
+    console.log(totalPages);
+  }, [currentPage, totalPages]);
 
   useEffect(() => {
     searchProducts(debouncedSearch);
@@ -44,13 +61,22 @@ const Product: React.FC = () => {
       </I.Header>
       <S.CardContainer>
         {products && products.length > 0 ? (
-          <S.CardGridList>
-            {products.map((p) => (
-              <li>
-                <ProductCard product={p} />
-              </li>
-            ))}
-          </S.CardGridList>
+          <Fragment>
+            <S.CardGridList>
+              {products.map((p) => (
+                <li>
+                  <ProductCard product={p} />
+                </li>
+              ))}
+            </S.CardGridList>
+            {(currentPage !== undefined && !!totalPages && currentPage < totalPages - 1) && (
+              <S.NoProductButton
+                onClick={() => loadProducts()}
+              >
+                Carregar mais
+              </S.NoProductButton>
+            )}
+          </Fragment>
         ) : (
           <S.NoProductContainer>
             <S.NoProductImage src={EmptyBox} />
