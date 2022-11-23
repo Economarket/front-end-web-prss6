@@ -11,6 +11,7 @@ import EmptyBox from "../../assets/emptyBox.png";
 import { useDebounce } from "usehooks-ts";
 import { useInfiniteScroll } from "../../hooks/use-infinite-scroll";
 import EditPriceModal from "./components/EditPriceModal";
+import Loading from "../../components/Loading";
 
 const Product: React.FC = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const Product: React.FC = () => {
   const debouncedSearch = useDebounce<string>(searchName, 500);
   const { callApi } = useInfiniteScroll({
     waitDispatchFinish: loading,
-    changePxBottomBeforeCall: 200,
+    changePxBottomBeforeCall: 100,
   });
 
   const searchProducts = useCallback(
@@ -95,6 +96,7 @@ const Product: React.FC = () => {
             </S.NoProductButton>
           </S.NoProductContainer>
         )}
+        <Loading loading={loading}/>
       </S.CardContainer>
     </S.Wrapper>
   );
