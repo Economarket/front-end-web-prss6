@@ -19,6 +19,11 @@ export async function postProduct(product: ProductPost) {
   return data;
 }
 
+export async function updateProduct(product: ProductPost) {
+  const { data } = await api.put(`${REGISTER}${PRODUCT}`, product);
+  return data;
+}
+
 export async function deleteProductById(productId: string) {
   const { data } = await api.delete(`${REGISTER}${PRODUCT}/${productId}`, {});
   return data;

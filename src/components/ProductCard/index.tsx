@@ -1,8 +1,10 @@
 import { categories_round_assets } from '../../assets/categories-round/categories-round';
+import EditPrice from '../../assets/icons/editPrice';
 import { Product } from '../../services/models';
 import {
   Button,
   Container,
+  EditButton,
   Image,
   ImageContainer,
   Info,
@@ -13,10 +15,13 @@ import {
 
 interface ProductCardProps {
   product: Product;
+  onAddProduct?: () => void;
+  onEditPrice?: () => void;
 }
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, onAddProduct, onEditPrice }) => {
   return (
     <Container>
+      <EditButton onClick={onEditPrice}><EditPrice className='icon'/></EditButton>
       <ImageContainer>
         <Image
           alt={product.category.name}
@@ -38,7 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           {`R$ ${product.price.toFixed(2)} / ${product.unity}`}
         </Price>
         {product.markets && <Info>Disponível em: {product.markets[0]?.name}</Info>}
-        <Button>Adicionar a Lista de Compras</Button>
+        <Button onClick={onAddProduct}>Adicionar a Lista de Compras</Button>
       </InfoContainer>
     </Container>
   );

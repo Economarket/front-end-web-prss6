@@ -10,11 +10,13 @@ import { useNavigate } from "react-router-dom";
 import EmptyBox from "../../assets/emptyBox.png";
 import { useDebounce } from "usehooks-ts";
 import { useInfiniteScroll } from "../../hooks/use-infinite-scroll";
+import EditPriceModal from "./components/EditPriceModal";
 
 const Product: React.FC = () => {
   const navigate = useNavigate();
 
   const [products, setProducts] = useState<ProductModel[]>();
+  const [currentProduct, setCurrentProduct] = useState<ProductModel>();
   const [searchName, setSearchName] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>();
   const [totalPages, setTotalPages] = useState<number>();
@@ -58,6 +60,7 @@ const Product: React.FC = () => {
 
   return (
     <S.Wrapper>
+      <EditPriceModal product={currentProduct} toggle={() => setCurrentProduct(undefined)}/>
       <S.Title>Buscar Produtos</S.Title>
       <I.Header>
         <InputText
@@ -74,7 +77,7 @@ const Product: React.FC = () => {
             <S.CardGridList>
               {products.map((p) => (
                 <li>
-                  <ProductCard product={p} />
+                  <ProductCard product={p} onEditPrice={() => setCurrentProduct(p)}/>
                 </li>
               ))}
             </S.CardGridList>
