@@ -14,23 +14,25 @@ import sempre_vale from "./sempre_vale.jpg";
 import tiba from "./tiba.jpg";
 import tonin from "./tonin.jpg";
 import vencedor from "./vencedor.jpg";
-
+import pao_de_acucar from "./pao_de_acucar.jpg";
 
 export const markets_assets: { [key: string]: string } = {
-    "savegnago": savegnago,
-    "assai": assai,
-    "14_supermercados": supermercados14,
-    "atacadao": atacadao,
-    "casa_deliza": casa_deliza,
-    "dia": dia,
-    "emporio_camargo": emporio_camargo,
-    "jau_serve": jau_serve,
-    "max_facil": max_facil,
-    "palomax": palomax,
-    "passarinho": passarinho,
-    "paulistao": paulistao,
-    "sempre_vale": sempre_vale,
-    "tiba": tiba,
-    "tonin": tonin,
-    "vencedor": vencedor
+    "Savegnago": savegnago,
+    "Assaí Atacadista": assai,
+    "Supermercado 14": supermercados14,
+    "Atacadão": atacadao,
+    "Casa Deliza": casa_deliza,
+    "Supermercado Dia": dia,
+    "Emporio Camargo": emporio_camargo,
+    "Jaú Serve": jau_serve,
+    "Max Fácil": max_facil,
+    "Palomax": palomax,
+    "Passarinho": passarinho,
+    "Paulistão": paulistao,
+    "Sempre Vale": sempre_vale,
+    "Tiba": tiba,
+    "Tonin Superatacado": tonin,
+    "Vencedor Atacadista": vencedor,
+    "Pão de Açúcar": pao_de_acucar,
+    
 }
