@@ -14,6 +14,7 @@ import EmptyBox from "../../assets/emptyBox.png";
 import useQuery from "../../hooks/use-query";
 import { useNavigate } from "react-router-dom";
 import { useInfiniteScroll } from "../../hooks/use-infinite-scroll";
+import EditPriceModal from "./components/EditPriceModal";
 
 const Categories:React.FC = () => {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ const Categories:React.FC = () => {
   const [categories, setCategories] = useState<Category[]>();
   const [products, setProducts] = useState<Product[]>();
   const [currentCategory, setCurrentCategory] = useState<Category>();
+  const [currentProduct, setCurrentProduct] = useState<Product>();
   const [searchName, setSearchName] = useState<string>();
   const [currentPage, setCurrentPage] = useState<number>();
   const [totalPages, setTotalPages] = useState<number>();
@@ -88,6 +90,7 @@ const Categories:React.FC = () => {
 
   return (
     <S.Wrapper>
+      <EditPriceModal product={currentProduct} toggle={() => setCurrentProduct(undefined)}/>
       {categories && (!currentCategory ? (
         <Fragment>
           <S.Title>Categorias</S.Title>
@@ -141,7 +144,7 @@ const Categories:React.FC = () => {
                 <S.CardGridList>
                   {products.map((p) => (
                     <li>
-                      <ProductCard product={p} />
+                      <ProductCard product={p} onEditPrice={() => setCurrentProduct(p)}/>
                     </li>
                   ))}
                 </S.CardGridList>

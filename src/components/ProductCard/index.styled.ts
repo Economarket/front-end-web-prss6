@@ -64,13 +64,14 @@ export const Info = styled(Lato)`
     font-weight: 400;
 `
 
-export const Button = styled.p`
+export const Button = styled.button`
     width: 100%;
     text-align: center;
     font-family: 'Lato';
     font-size: 1.5rem;
     font-weight: 600;
     padding: 0.5rem;
+    border: none;
     border-radius: ${theme.border.radius.medium};
     background-color: ${theme.colors.blue300};
     color: ${theme.colors.offwhite};
@@ -78,5 +79,24 @@ export const Button = styled.p`
     &:hover {
         cursor: pointer;
         background-color: ${theme.colors.blue200};
+    }
+`;
+
+export const EditButton = styled.button`
+    width: 3rem;
+    height: 3rem;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.75rem;
+    background: none;
+    border: none;
+    
+    & > .icon {
+        fill: ${theme.colors.blue200};
+    }
+
+    & > .icon:hover {
+        fill: ${theme.colors.blue300};
+        cursor: pointer;
     }
 `;
