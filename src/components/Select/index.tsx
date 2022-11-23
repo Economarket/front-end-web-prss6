@@ -16,6 +16,7 @@ type SelectProps = {
   label?: string;
   isAutocomplete?: boolean;
   errorMessage?: string;
+  className?: string;
 };
 
 const DropdownIndicator = () => <S.ArrowDown />;
@@ -36,13 +37,14 @@ const Select = ({
   label,
   isAutocomplete,
   errorMessage,
+  className,
 }: SelectProps) => {
   if (isLoading) {
     return renderSkeleton(label);
   }
 
   return (
-    <S.Wrapper>
+    <S.Wrapper className={className}>
       {label && (
         <S.WrapperLabel>
           <S.Label>{label}</S.Label>
