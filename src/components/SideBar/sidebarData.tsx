@@ -8,6 +8,7 @@ import { SidebarItem } from "./Menu";
 import IconSearch from "../../assets/icons/search";
 import IconMarkerPin from "../../assets/icons/markerPin";
 import IconShoppingBag from "../../assets/icons/shoppingBag";
+import IconStar from "../../assets/icons/star";
 
 export const SidebarData: SidebarItem[] = [
   {
@@ -42,6 +43,11 @@ export const SidebarData: SidebarItem[] = [
     title: "Mercados Próximos",
     path: "/mercados-proximos",
     icon: <IconMarkerPin />,
+  },
+  {
+    title: "Avalie a aplicação",
+    path: "https://docs.google.com/forms/d/e/1FAIpQLSe1sm7K5vxi30mw8CnU_-JPhApW4gw-nGPK4dCwSx-1q_gA-A/viewform",
+    icon: <IconStar />,
   },
  
 ];
