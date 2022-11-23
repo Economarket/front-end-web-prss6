@@ -38,18 +38,18 @@ export const newAccessToken = async () => {
   if(refresh_token){
     refreshToken(refresh_token).then((res) => {
       localStorage.setItem("token", res.access_token);
+      window.location.reload();
     }).catch(() => {
       const email = localStorage.getItem("email") || "";
       const password = localStorage.getItem("password") || "";
       signIn(email, password).then((res) => {
         localStorage.setItem("token", res.access_token);
         localStorage.setItem("refresh_token", res.refresh_token);
+        window.location.reload();
       }).catch(() => {
         logout();
       })
-    }).finally(() => {
-      window.location.reload();
-    });
+    })
   }
 };
 
