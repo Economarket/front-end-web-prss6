@@ -3,10 +3,14 @@ import theme from "../../styles/theme";
 
 export const Header = styled.div`
     width: 100%;
-    max-width: 75rem;
     display: flex;
     align-items: center;
     gap: 2rem;
+
+    & > .categories {
+        width: 50%;
+        max-width: 25rem;
+    }
 `;
 
 export const Back = styled.h2`
