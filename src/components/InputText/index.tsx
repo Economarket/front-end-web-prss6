@@ -24,6 +24,7 @@ export interface InputTextProps extends IconProps {
   required?: boolean;
   text?: string;
   value?: string;
+  className?: string;
 }
 
 const InputText = (
@@ -46,6 +47,7 @@ const InputText = (
     iconPosition = "right",
     iconClick,
     icon,
+    className,
     ...props
   }: InputTextProps,
   ref:
@@ -56,7 +58,7 @@ const InputText = (
 ) => {
   return (
     <>
-      <S.Wrapper>
+      <S.Wrapper className={className}>
         <S.Label htmlFor={name}>
           {required ? (
             <>

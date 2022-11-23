@@ -1,5 +1,6 @@
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
+import theme from "../../styles/theme";
 
 interface RangeDistanceProps {
   defaultValue: number;
@@ -19,14 +20,15 @@ const RangeDistance: React.FC<RangeDistanceProps> = ({
   return (
     <Slider
       defaultValue={defaultValue}
-      max={50}
+      min={1}
+      max={20}
       onChange={getValue}
-      trackStyle={{ backgroundColor: "#004068" }}
+      trackStyle={{ backgroundColor: theme.colors.blue200 }}
       handleStyle={{
-        borderColor: "#3B5249",
-        backgroundColor: "#3B5249",
+        border: "none",
+        backgroundColor: theme.colors.blue200,
       }}
-      railStyle={{ backgroundColor: "#d9d9d9" }}
+      railStyle={{ backgroundColor: theme.colors.gray500 }}
     />
   );
 };

@@ -12,17 +12,23 @@ import { useDebounce } from "usehooks-ts";
 import { useInfiniteScroll } from "../../hooks/use-infinite-scroll";
 import EditPriceModal from "./components/EditPriceModal";
 import Loading from "../../components/Loading";
+import { useLocalization } from "../../contexts/localization";
+import RangeDistance from "../../components/RangeDistance";
+import ToggleSwitch from "../../components/ToggleSwitch";
 
 const Product: React.FC = () => {
   const navigate = useNavigate();
-
+  const { locateX, locateY, distance, setDistance } = useLocalization();
+  
   const [products, setProducts] = useState<ProductModel[]>();
   const [currentProduct, setCurrentProduct] = useState<ProductModel>();
   const [searchName, setSearchName] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>();
   const [totalPages, setTotalPages] = useState<number>();
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [useLocation, setUseLocation] = useState<boolean>(true);
+  
+  const debounceDistance = useDebounce<number>(distance, 500);
   const debouncedSearch = useDebounce<string>(searchName, 500);
   const { callApi } = useInfiniteScroll({
     waitDispatchFinish: loading,
@@ -71,6 +77,20 @@ const Product: React.FC = () => {
           iconPosition={"left"}
           onChange={(s) => setSearchName(s.target.value)}
         />
+      </I.Header>
+      <I.Header>
+        <span className="c-1">
+          <p className="marketLabel">Produtos de mercados próximos</p>
+          <ToggleSwitch checked={useLocation} onToggle={() => setUseLocation(l => !l)}/>
+        </span>
+        {useLocation && (
+          <span className="c-2">
+            <p className="distanceLabel">Distância: {distance}</p>
+            <div className="range">
+              <RangeDistance defaultValue={distance} setValue={setDistance} />
+            </div>
+          </span>
+        )}
       </I.Header>
       <S.CardContainer>
         {products && products.length > 0 ? (

@@ -1,26 +1,31 @@
 import styled from "styled-components";
 import theme from "../../styles/theme";
 
-export const Search = styled.button`
-    padding: 1rem 6rem;
-    text-align: center;
-    font-family: 'Lato';
-    font-size: 1.5rem;
-    font-weight: 600;
-    background-color: ${theme.colors.blue300};
-    border: none;
-    border-radius: 5px;
-    color: ${theme.colors.whiteFull};
-    cursor: pointer;
-
-    &:hover {
-        background-color: ${theme.colors.blue200}; 
-    }
-`;
-
 export const Header = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
     gap: 2rem;
+    margin: 1rem 0;
+
+    & .c-1, .c-2 {
+        display: flex;
+        gap: 1rem;
+    }
+
+    & .c-1 {
+        width: fit-content;
+    }
+
+    & .distanceLabel, .marketLabel {
+        font-family: Lato;
+        font-size: 2rem;
+        color: ${theme.colors.blue300};
+    }
+
+    & .range {
+        width: 40rem;
+        display: flex;
+        align-items: center;
+    }
 `; 

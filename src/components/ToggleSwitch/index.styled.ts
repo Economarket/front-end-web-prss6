@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import theme from "../../styles/theme";
 
 export const Container = styled.div`
   margin: auto;
@@ -22,7 +23,7 @@ export const Mark = styled.div`
 `;
 
 export const Switch = styled.label<{ checked: boolean }>`
-  background: ${({ checked }) => (checked ? "#499F68" : "#9e9e9e")};
+  background: ${({ checked }) => (checked ? theme.colors.blue200 : theme.colors.gray500)};
   font-size: 1.5em;
   height: 1em;
   width: 2em;
