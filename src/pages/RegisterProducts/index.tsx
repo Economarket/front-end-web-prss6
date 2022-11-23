@@ -63,7 +63,7 @@ export default function RegisterProducts() {
 
       setUnities(response);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, []);
 
@@ -73,7 +73,7 @@ export default function RegisterProducts() {
 
       setBrandies(response.content);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, []);
 
@@ -83,7 +83,7 @@ export default function RegisterProducts() {
 
       setCategories(response);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, []);
 
@@ -93,7 +93,7 @@ export default function RegisterProducts() {
 
       setMarkets(response.content);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, []);
 
@@ -121,8 +121,7 @@ export default function RegisterProducts() {
         notify();
       })
       .catch((error) => {
-        console.log("colocar toast de produto não cadastrado");
-        console.log(error);
+        console.error(error);
       });
   };
 

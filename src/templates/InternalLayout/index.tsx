@@ -6,7 +6,10 @@ import * as S from "./styles";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useSession } from "../../contexts/session";
 import IconLogOut from "../../assets/icons/logOut";
-
+import { useLocalization } from "../../contexts/localization";
+import ModalConfirm from "../../components/ModalConfirme";
+import location from "../../assets/location.png";
+import { useEffect, useState } from "react";
 export interface InternalTemplate {
   children?: React.ReactNode;
   image?: string;
@@ -20,7 +23,23 @@ const InternalAccessContainer = ({
   children,
 }: InternalTemplate) => {
   const { user, logout } = useSession();
+  const { locateX, locateY, getPosition } = useLocalization();
   const navigate = useNavigate();
+  const [showModal, setShowModal] = useState<boolean>(true);
+
+  const handleConfirme = () => {
+    if (locateX && locateY) {
+      setShowModal(false);
+    } else {
+      setTimeout(() => {
+        logout();
+      }, 5000);
+    }
+  };
+
+  useEffect(() => {
+    getPosition();
+  }, [getPosition]);
 
   return (
     <S.Wrapper>
@@ -50,6 +69,7 @@ const InternalAccessContainer = ({
                 icon={IconUser}
                 onClick={() => navigate("/perfil")}
               />
+
               <Button
                 appearance="ghost"
                 sizes="small"
@@ -66,16 +86,33 @@ const InternalAccessContainer = ({
         <S.WrapperMenu>
           <Sidebar />
         </S.WrapperMenu>
+
+        {!locateX && !locateY && (
+          <ModalConfirm
+            isShow={showModal}
+            title={"Aviso"}
+            children={<S.Image src={location} />}
+            description={
+              "Para utilizar a aplicação e obter uma melhor experiência de navegação, é necessário autorizar da localização"
+            }
+            confirmButtonText={"Compreendo"}
+            onConfirm={handleConfirme}
+          />
+        )}
+
         <S.WrapperContentFooter>
           <S.WrapperContent>
             {children}
+
             <Outlet />
           </S.WrapperContent>
+
           <S.WrapperFoot>
             <S.Subtitle>
               © Copyright 2022 - EconoMarket - Todos os direitos reservados
               EconoMarket
             </S.Subtitle>
+
             <S.Subtitle>
               CNPJ 12.345.678/9123-45 / Endereço Rua Doutor Aldo Benedito
               Pierri, 250 - Jardim Paulo Freire, Araraquara - SP, 14804-296

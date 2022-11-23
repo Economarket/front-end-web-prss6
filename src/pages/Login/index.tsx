@@ -13,9 +13,11 @@ import { schemaLogin } from "../../utils/schema";
 import { useSession } from "../../contexts/session";
 
 import * as S from "../styles";
+import { useLocalization } from "../../contexts/localization";
 
 export default function Login() {
   const { signin } = useSession();
+  const { getPosition } = useLocalization();
 
   const {
     register,
@@ -33,6 +35,7 @@ export default function Login() {
   const onSubmit = async (data: any) => {
     try {
       await signin(data.email, data.password);
+      getPosition();
     } catch (error) {
       console.error(error);
       ToastHelper("Usuário ou senha inválidos.", "error");

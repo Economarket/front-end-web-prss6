@@ -16,6 +16,8 @@ export const CATEGORY = "/category";
 
 export const MARKET = "/market";
 
+export const DISTANCE = "/distance";
+
 export const PEPRMISSION = "/permission";
 
 export const BY_ID = "/";
@@ -39,6 +41,5 @@ export const UNITY = "/unity";
 export const ROLE_ADMIN = "ROLE_ADMIN";
 
 export const ROLE_USER = "ROLE_USER";
-
 
 export const PAGE_SIZE = 10;

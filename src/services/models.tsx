@@ -94,9 +94,11 @@ export interface Permission {}
 
 export interface RefreshToken {}
 
-export interface Location {
-  lat: number;
-  long: number;
+export interface Localization {
+  locateX: number;
+  locateY: number;
+  // locate - latitude
+  // locate - longitude
 }
 
 export interface Unity {
