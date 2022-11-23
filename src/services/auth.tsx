@@ -38,6 +38,7 @@ export const newAccessToken = async () => {
   if(refresh_token){
     refreshToken(refresh_token).then((res) => {
       localStorage.setItem("token", res.access_token);
+      window.location.reload();
     }).catch(() => {
       const email = localStorage.getItem("email") || "";
       const password = localStorage.getItem("password") || "";
@@ -47,9 +48,7 @@ export const newAccessToken = async () => {
       }).catch(() => {
         logout();
       })
-    }).finally(() => {
-      window.location.reload();
-    });
+    })
   }
 };
 
