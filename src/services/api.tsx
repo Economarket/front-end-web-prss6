@@ -8,9 +8,9 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((req) => {
-  const access_token: string = localStorage.getItem("token") || "";
+  const token: string = localStorage.getItem("refresh_token") || ""; //TODO: change token to access_token
   if(req.headers && !req.headers.Authorization){
-    req.headers.Authorization = `Bearer ${access_token}`;
+    req.headers.Authorization = `Bearer ${token}`;
   }
   return req;
 });

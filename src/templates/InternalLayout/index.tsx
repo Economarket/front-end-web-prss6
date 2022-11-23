@@ -45,7 +45,7 @@ const InternalAccessContainer = ({
     <S.Wrapper>
       <S.WrapperHeader>
         <S.Logo>
-          <Logo fill="#197AA6" />
+          <Logo fill="#197AA6" onClick={() => navigate("/")} />
         </S.Logo>
 
         <S.Header>

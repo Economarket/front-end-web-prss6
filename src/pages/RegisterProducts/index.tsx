@@ -14,7 +14,7 @@ import { searchCategory } from "../../services/category";
 import { searchMarket100 } from "../../services/market";
 import { Brand, Category, Market, Unity } from "../../services/models";
 import { currencyMask, removeCurrencyMask } from "../../fomatters/currencyMask";
-import { toast, ToastContainer } from "react-toastify";
+import ToastHelper from "../../components/Toast/toast";
 
 export default function RegisterProducts() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -118,33 +118,16 @@ export default function RegisterProducts() {
       markets: [{ id: parseFloat(data.marketId) }],
     })
       .then(() => {
-        notify();
+        ToastHelper("Produto cadastrado com sucesso.", "success");
       })
       .catch((error) => {
         console.error(error);
+        ToastHelper("Erro ao cadastrar produto.", "error");
       });
-  };
-
-  const notify = () => {
-    if (!toast.isActive("custom-id-yes")) {
-      toast("Produto cadastrado com sucesso.", {
-        toastId: "custom-id-yes",
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
-    handleSubmit(onSubmit);
   };
 
   return (
     <>
-      <ToastContainer style={{ width: "250px", fontSize: "15px" }} />
       <S.WrapperRegisteProducts>
         <S.Title>Vamos cadastrar um produto?</S.Title>
 

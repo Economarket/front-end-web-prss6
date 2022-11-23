@@ -13,6 +13,7 @@ import ProductCard from "../../components/ProductCard";
 import EmptyBox from "../../assets/emptyBox.png";
 import useQuery from "../../hooks/use-query";
 import { useNavigate } from "react-router-dom";
+import { useInfiniteScroll } from "../../hooks/use-infinite-scroll";
 
 const Categories:React.FC = () => {
   const navigate = useNavigate();
@@ -22,6 +23,14 @@ const Categories:React.FC = () => {
   const [products, setProducts] = useState<Product[]>();
   const [currentCategory, setCurrentCategory] = useState<Category>();
   const [searchName, setSearchName] = useState<string>();
+  const [currentPage, setCurrentPage] = useState<number>();
+  const [totalPages, setTotalPages] = useState<number>();
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const { callApi } = useInfiniteScroll({
+    waitDispatchFinish: loading,
+    changePxBottomBeforeCall: 200,
+  });
 
   const updateCategories = useCallback(async () => {
     setCategories(await getCategories());
@@ -29,10 +38,28 @@ const Categories:React.FC = () => {
 
   const searchProducts = useCallback(async (category: Category) => {
     if(category){
-      const data = await searchProductByCategory(category.id, searchName);
+      const data = await searchProductByCategory(category.id, searchName, 0);
       setProducts(data.content);
+      setTotalPages(data.totalPages);
+      setCurrentPage(0);
     }
   }, [searchName]);
+
+  const loadProducts = useCallback(async () => {
+    if(currentCategory && currentPage !== undefined && !!totalPages && currentPage < totalPages - 1){
+      setLoading(true);
+      const data = await searchProductByCategory(currentCategory.id, searchName, currentPage+1);
+      setCurrentPage(currentPage + 1);
+      setProducts(p => p?.concat(data.content));
+      setLoading(false);
+    }
+  }, [currentCategory, currentPage, searchName, totalPages]);
+
+  useEffect(() => {
+    if(callApi){
+      loadProducts();
+    }
+  }, [loadProducts, callApi]);
 
   useEffect(() => {
     if(query.category && categories){
@@ -114,7 +141,7 @@ const Categories:React.FC = () => {
                 <S.CardGridList>
                   {products.map((p) => (
                     <li>
-                      <ProductCard product={p} onClick={() => console.log(p.name)} />
+                      <ProductCard product={p} />
                     </li>
                   ))}
                 </S.CardGridList>
