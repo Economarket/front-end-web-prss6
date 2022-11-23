@@ -57,7 +57,7 @@ export interface ProductPost {
   brand: { id: number };
   category: { id: number };
   unity: string;
-  markets?: { id: number }[];
+  markets: { id: number }[];
   greaterThanLastPrice?: boolean | null;
 }
 export interface Schedule {

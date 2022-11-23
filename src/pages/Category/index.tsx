@@ -14,6 +14,8 @@ import EmptyBox from "../../assets/emptyBox.png";
 import useQuery from "../../hooks/use-query";
 import { useNavigate } from "react-router-dom";
 import { useInfiniteScroll } from "../../hooks/use-infinite-scroll";
+import EditPriceModal from "./components/EditPriceModal";
+import { useDebounce } from "usehooks-ts";
 
 const Categories:React.FC = () => {
   const navigate = useNavigate();
@@ -22,10 +24,13 @@ const Categories:React.FC = () => {
   const [categories, setCategories] = useState<Category[]>();
   const [products, setProducts] = useState<Product[]>();
   const [currentCategory, setCurrentCategory] = useState<Category>();
+  const [currentProduct, setCurrentProduct] = useState<Product>();
   const [searchName, setSearchName] = useState<string>();
   const [currentPage, setCurrentPage] = useState<number>();
   const [totalPages, setTotalPages] = useState<number>();
   const [loading, setLoading] = useState<boolean>(false);
+
+  const searchDebounce = useDebounce(searchName, 500);
 
   const { callApi } = useInfiniteScroll({
     waitDispatchFinish: loading,
@@ -36,14 +41,14 @@ const Categories:React.FC = () => {
     setCategories(await getCategories());
   }, []);
 
-  const searchProducts = useCallback(async (category: Category) => {
+  const searchProducts = useCallback(async (category: Category, search: string | undefined) => {
     if(category){
-      const data = await searchProductByCategory(category.id, searchName, 0);
+      const data = await searchProductByCategory(category.id, search, 0);
       setProducts(data.content);
       setTotalPages(data.totalPages);
       setCurrentPage(0);
     }
-  }, [searchName]);
+  }, []);
 
   const loadProducts = useCallback(async () => {
     if(currentCategory && currentPage !== undefined && !!totalPages && currentPage < totalPages - 1){
@@ -54,6 +59,12 @@ const Categories:React.FC = () => {
       setLoading(false);
     }
   }, [currentCategory, currentPage, searchName, totalPages]);
+
+  useEffect(() => {
+    if(currentCategory){
+      searchProducts(currentCategory, searchDebounce);
+    }
+  }, [currentCategory, searchDebounce, searchProducts]);
 
   useEffect(() => {
     if(callApi){
@@ -81,13 +92,13 @@ const Categories:React.FC = () => {
 
   useEffect(() => {
     if(currentCategory && query.external){
-      searchProducts(currentCategory);
       setQuery({...query, external: undefined});
     }
   }, [searchProducts, query, currentCategory, setQuery]);
 
   return (
     <S.Wrapper>
+      <EditPriceModal product={currentProduct} toggle={() => setCurrentProduct(undefined)}/>
       {categories && (!currentCategory ? (
         <Fragment>
           <S.Title>Categorias</S.Title>
@@ -99,7 +110,6 @@ const Categories:React.FC = () => {
                       category={c}
                       onClick={() => {
                         setQuery({category: c.searchName});
-                        searchProducts(c);
                       }}
                       />
                   </li>
@@ -113,6 +123,7 @@ const Categories:React.FC = () => {
           <I.Header>
             <I.Back onClick={() => setQuery({category: undefined})}><IconChevronLeft/> Voltar</I.Back>
               <Select
+                className="categories"
                 isAutocomplete
                 options={categories.map(c => ({label: c.name, value: c.id}))}
                 placeholder="Selecione a categoria"
@@ -120,7 +131,6 @@ const Categories:React.FC = () => {
                   const c = categories.find(c => (c.id === option.value));
                   if(c){
                     setQuery({category: c.searchName});
-                    searchProducts(c);
                   }
                 }}
                 value={{label: currentCategory.name, value: currentCategory.id}}
@@ -132,16 +142,13 @@ const Categories:React.FC = () => {
                 iconPosition={'left'} 
                 onChange={(s) => setSearchName(s.target.value)}
               />
-              <I.Search onClick={() => searchProducts(currentCategory)}>
-                Buscar
-              </I.Search>
           </I.Header>
           <S.CardContainer>
               {(products && products.length > 0) ? (
                 <S.CardGridList>
                   {products.map((p) => (
                     <li>
-                      <ProductCard product={p} />
+                      <ProductCard product={p} onEditPrice={() => setCurrentProduct(p)}/>
                     </li>
                   ))}
                 </S.CardGridList>
