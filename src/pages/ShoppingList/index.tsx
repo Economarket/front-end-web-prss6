@@ -8,16 +8,22 @@ import CreateListModal from './components/CreateListModal';
 import { MainContainer, NewListButton, NewListContainer, NoListButton, NoListContainer } from './index.styled';
 import NoList from "../../assets/listaDeComprasVazia.png";
 import DeleteListModal from './components/DeleteListModal';
+import Loading, { LoadingType } from '../../components/Loading';
 
 const ShoppingList: React.FC = () => {
   const [showCreateModal, setShowCreateModal] = useState<boolean>(false);
   const [toDeleteList, setToDeleteList] = useState<ShoppingModel>();
   const { user } = useSession();
   const [shoppingList, setShoppingList] = useState<ShoppingModel[]>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const updateShoppingList = useCallback(async () => {
-    if(user)
-      setShoppingList(await getShoppingList(user.id));
+    if(user){
+      setLoading(true);
+      const data = await getShoppingList(user.id);
+      setShoppingList(data);
+      setLoading(false);
+    }
   }, [user]);
 
   const handleCreateList = useCallback(async (name: string) => {
@@ -64,7 +70,7 @@ const ShoppingList: React.FC = () => {
       list={toDeleteList}
     />
     <Title> Lista de Compras</Title>
-    {shoppingList && shoppingList.length > 0 ? (
+    {!loading && (shoppingList && shoppingList.length > 0 ? (
       <Fragment>
         <NewListContainer>
           <Title>Minhas Listas</Title>
@@ -85,7 +91,8 @@ const ShoppingList: React.FC = () => {
         <Title>Você ainda não possui listas de compra</Title>
         <NoListButton onClick={() => setShowCreateModal(true)}>Criar nova lista</NoListButton>
       </NoListContainer>
-    )}
+    ))}
+    <Loading loading={loading} type={LoadingType.spinningBubbles}/>
   </MainContainer>
   );
 };

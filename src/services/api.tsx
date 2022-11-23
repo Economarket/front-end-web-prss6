@@ -1,6 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "../constants";
-import { refreshToken } from "./auth";
+import { newAccessToken } from "./auth";
 
 export const api = axios.create({
   baseURL: BASE_URL,
@@ -8,7 +8,7 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use((req) => {
-  const token: string = localStorage.getItem("refresh_token") || ""; //TODO: change token to access_token
+  const token: string = localStorage.getItem("token") || "";
   if(req.headers && !req.headers.Authorization){
     req.headers.Authorization = `Bearer ${token}`;
   }
@@ -24,19 +24,3 @@ api.interceptors.response.use((res) => {
   }
   return Promise.reject(error);
 });
-
-const newAccessToken = async () => {
-  return new Promise((resolve, reject) => {
-    try {
-      const refresh_token = localStorage.getItem("refresh_token");
-      if(refresh_token){
-        refreshToken(refresh_token).then((res) => {
-          localStorage.setItem("token", res.access_token);
-          // window.location.reload();
-        });
-      }
-    } catch (err) {
-      return reject(err);
-    }
-  });
-};

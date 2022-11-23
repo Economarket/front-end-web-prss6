@@ -11,9 +11,10 @@ import { useNavigate } from "react-router-dom";
 import jwt from "jwt-decode";
 
 import { api } from "../services/api";
-import { signIn, signOut } from "../services/auth";
+import { signIn } from "../services/auth";
 import { User } from "../services/models";
 import { getUserById } from "../services/user";
+import { logout as api_logout } from "../services/auth";
 
 type Token = {
   user_id: string;
@@ -37,8 +38,9 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     await signIn(email, password)
       .then((response) => {
         localStorage.setItem("token", response.access_token);
-
         localStorage.setItem("refresh_token", response.refresh_token);
+        localStorage.setItem("email", email);
+        localStorage.setItem("password", password);
 
         getUser(response.access_token);
 
@@ -51,25 +53,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   }
 
   async function logout() {
-    try {
-      const token = localStorage.getItem("token");
-      if (token) {
-        await signOut(token);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      localStorage.removeItem("token");
-      localStorage.removeItem("refresh_token");
-
-      delete api.defaults.headers.common["Authorization"];
-
-      setUser(null);
-
-      setTimeout(() => {
-        navigate("/login");
-      }, 50);
-    }
+    api_logout();
   }
 
   const getUser = useCallback(
