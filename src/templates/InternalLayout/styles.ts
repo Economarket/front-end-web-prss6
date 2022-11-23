@@ -1,5 +1,9 @@
 import styled, { css } from "styled-components";
-import { mediaQuerySm } from "../../mixins/media-queries";
+import {
+  mediaQueryLg,
+  mediaQuerySm,
+  mediaQueryXl,
+} from "../../mixins/media-queries";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -107,4 +111,21 @@ export const WrapperContent = styled.div`
 
 export const WrapperFoot = styled.div`
   padding: 2rem;
+`;
+
+export const Image = styled.img`
+  width: 0;
+  margin: auto;
+
+  ${mediaQuerySm(css`
+    width: 80%;
+  `)};
+
+  ${mediaQueryLg(css`
+    width: 70%;
+  `)};
+
+  ${mediaQueryXl(css`
+    width: 60%;
+  `)};
 `;

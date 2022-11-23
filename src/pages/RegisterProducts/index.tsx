@@ -1,20 +1,20 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import Button from '../../components/Button';
-import InputText from '../../components/InputText';
-import Select from '../../components/Select';
-import { postProduct } from '../../services/product';
-import { getFieldsUnity } from '../../services/unity';
-import { schemaRegisterProduct } from '../../utils/schema';
-import * as S from '../styles';
-import { getBrand, postBrand } from '../../services/brand';
-import CreatableSelect from '../../components/CreatableSelect';
-import { searchCategory } from '../../services/category';
-import { searchMarket100 } from '../../services/market';
-import { Brand, Category, Market, Unity } from '../../services/models';
-import { currencyMask, removeCurrencyMask } from '../../fomatters/currencyMask';
-import ToastHelper from '../../components/Toast/toast';
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import Button from "../../components/Button";
+import InputText from "../../components/InputText";
+import Select from "../../components/Select";
+import { postProduct } from "../../services/product";
+import { getFieldsUnity } from "../../services/unity";
+import { schemaRegisterProduct } from "../../utils/schema";
+import * as S from "../styles";
+import { getBrand, postBrand } from "../../services/brand";
+import CreatableSelect from "../../components/CreatableSelect";
+import { searchCategory } from "../../services/category";
+import { searchMarket100 } from "../../services/market";
+import { Brand, Category, Market, Unity } from "../../services/models";
+import { currencyMask, removeCurrencyMask } from "../../fomatters/currencyMask";
+import ToastHelper from "../../components/Toast/toast";
 
 export default function RegisterProducts() {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -31,12 +31,12 @@ export default function RegisterProducts() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: '',
-      brandId: '',
-      unityId: '',
-      price: '',
-      categoryId: '',
-      marketId: '',
+      name: "",
+      brandId: "",
+      unityId: "",
+      price: "",
+      categoryId: "",
+      marketId: "",
     },
     resolver: yupResolver(schemaRegisterProduct),
   });
@@ -44,12 +44,12 @@ export default function RegisterProducts() {
   useEffect(() => {
     if (formState.isSubmitSuccessful) {
       reset({
-        name: '',
-        brandId: '',
-        unityId: '',
-        price: '',
-        categoryId: '',
-        marketId: '',
+        name: "",
+        brandId: "",
+        unityId: "",
+        price: "",
+        categoryId: "",
+        marketId: "",
       });
       setTimeout(() => {
         window.location.reload();
@@ -63,7 +63,7 @@ export default function RegisterProducts() {
 
       setUnities(response);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, []);
 
@@ -73,7 +73,7 @@ export default function RegisterProducts() {
 
       setBrandies(response.content);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, []);
 
@@ -83,7 +83,7 @@ export default function RegisterProducts() {
 
       setCategories(response);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, []);
 
@@ -93,7 +93,7 @@ export default function RegisterProducts() {
 
       setMarkets(response.content);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }, []);
 
@@ -105,7 +105,7 @@ export default function RegisterProducts() {
   }, [getUnities, getBrandies, getCategories, getMarkets]);
 
   const verifyBrand = async (brandId: string) => {
-    setValue('brandId', parseInt(brandId) ? brandId : await postBrand(brandId));
+    setValue("brandId", parseInt(brandId) ? brandId : await postBrand(brandId));
   };
 
   const onSubmit = async (data: any) => {
@@ -118,11 +118,11 @@ export default function RegisterProducts() {
       markets: [{ id: parseFloat(data.marketId) }],
     })
       .then(() => {
-        ToastHelper('Produto cadastrado com sucesso.', 'success');
+        ToastHelper("Produto cadastrado com sucesso.", "success");
       })
       .catch((error) => {
-        console.log(error);
-        ToastHelper('Erro ao cadastrar produto.', 'error');
+        console.error(error);
+        ToastHelper("Erro ao cadastrar produto.", "error");
       });
   };
 
@@ -134,7 +134,7 @@ export default function RegisterProducts() {
         <S.ProductContainer>
           <S.Form>
             <InputText
-              {...register('name')}
+              {...register("name")}
               name="name"
               label="Nome"
               placeholder="Digite o nome do produto"
@@ -142,7 +142,7 @@ export default function RegisterProducts() {
             />
 
             <CreatableSelect
-              {...register('brandId')}
+              {...register("brandId")}
               isAutocomplete
               options={brandies.map((item: { id?: any; brandName?: any }) => ({
                 value: item.id,
@@ -157,35 +157,35 @@ export default function RegisterProducts() {
             />
 
             <Select
-              {...register('unityId')}
+              {...register("unityId")}
               isAutocomplete
               options={unities.map(
                 (item: { abbreviation?: any; description?: any }) => ({
                   value: item.abbreviation,
                   label: item.description,
-                }),
+                })
               )}
               label="Unidade"
               placeholder="Selecione a unidade"
               onChange={(option: { value: string }) =>
-                setValue('unityId', option.value)
+                setValue("unityId", option.value)
               }
               errorMessage={errors.unityId?.message}
             />
 
             <InputText
-              {...register('price')}
+              {...register("price")}
               name="price"
               label="Valor"
               placeholder="Digite o valor"
               onChange={(event) => {
-                setValue('price', currencyMask(event.target.value));
+                setValue("price", currencyMask(event.target.value));
               }}
               errorMessage={errors.price?.message}
             />
 
             <Select
-              {...register('categoryId')}
+              {...register("categoryId")}
               isAutocomplete
               options={categories.map((item: { id?: any; name?: any }) => ({
                 value: item.id,
@@ -194,13 +194,13 @@ export default function RegisterProducts() {
               label="Categoria"
               placeholder="Selecione a categoria"
               onChange={(option: { value: string }) =>
-                setValue('categoryId', option.value)
+                setValue("categoryId", option.value)
               }
               errorMessage={errors.categoryId?.message}
             />
 
             <Select
-              {...register('marketId')}
+              {...register("marketId")}
               isAutocomplete
               options={markets.map((item: { id?: any; name?: any }) => ({
                 value: item.id,
@@ -209,7 +209,7 @@ export default function RegisterProducts() {
               label="Mercado"
               placeholder="Selecione a mercado"
               onChange={(option: { value: string }) =>
-                setValue('marketId', option.value)
+                setValue("marketId", option.value)
               }
               errorMessage={errors.marketId?.message}
             />

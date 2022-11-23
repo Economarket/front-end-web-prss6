@@ -3,25 +3,42 @@ import { useCallback } from "react";
 import { useState } from "react";
 import Carousel from "../../components/Carousel";
 import CategoryCard from "../../components/CategoryCard";
-// import MarketCard from "../../components/MarketCard";
+import MarketCard from "../../components/MarketCard";
 import { getCategories } from "../../services/category";
-import { Category } from "../../services/models";
+import { Category, Market } from "../../services/models";
 import CookieConsent from "react-cookie-consent";
 import * as S from "../styles";
 import theme from "../../styles/theme";
 import { useNavigate } from "react-router-dom";
+import { getMarketByDistance } from "../../services/market";
+import { useLocalization } from "../../contexts/localization";
 
 export default function Home() {
   const [categories, setCategories] = useState<Category[]>();
+  const [markets, setMarkets] = useState<Market[]>([]);
   const navigate = useNavigate();
+  const { locateX, locateY, distance } = useLocalization();
 
   const updateCategories = useCallback(async () => {
     setCategories(await getCategories());
   }, []);
 
+  const getMarkets = useCallback(async () => {
+    try {
+      if (locateX && locateY) {
+        const response = await getMarketByDistance(distance, locateX, locateY);
+
+        setMarkets(response);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }, [distance, locateX, locateY]);
+
   useEffect(() => {
     updateCategories();
-  }, [updateCategories]);
+    getMarkets();
+  }, [updateCategories, getMarkets]);
 
   return (
     <S.HomeContainer>
@@ -31,20 +48,19 @@ export default function Home() {
           {categories.map((c) => (
             <CategoryCard
               category={c}
-              onClick={() => navigate({
-                pathname: '/categorias',
-                search: `category=${c.searchName}&external=true`
-              })}
+              onClick={() =>
+                navigate({
+                  pathname: "/categorias",
+                  search: `category=${c.searchName}&external=true`,
+                })
+              }
             />
           ))}
         </Carousel>
       )}
-      <br />
-      <br />
-      <br />
       <S.Title>Mercados próximos</S.Title>
       <S.CardsMarketContainer>
-        {/*markets_mock?.slice(0, 8).map((m) => {
+        {markets.map((m) => {
           return (
             <MarketCard
               key={m.id}
@@ -52,7 +68,7 @@ export default function Home() {
               onClick={() => console.log(`Redirect to ${m.name} page...`)}
             />
           );
-        })*/}
+        })}
       </S.CardsMarketContainer>
       <CookieConsent
         location="bottom"
