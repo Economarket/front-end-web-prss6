@@ -45,6 +45,7 @@ export const newAccessToken = async () => {
       signIn(email, password).then((res) => {
         localStorage.setItem("token", res.access_token);
         localStorage.setItem("refresh_token", res.refresh_token);
+        window.location.reload();
       }).catch(() => {
         logout();
       })
