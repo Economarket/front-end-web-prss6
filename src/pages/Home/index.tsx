@@ -12,9 +12,12 @@ import theme from "../../styles/theme";
 import { useNavigate } from "react-router-dom";
 import { getMarketByDistance } from "../../services/market";
 import { useLocalization } from "../../contexts/localization";
+import { isMobile } from "react-device-detect";
+import InstallAppModal from "./components/InstallAppModal";
 
 export default function Home() {
   const [categories, setCategories] = useState<Category[]>();
+  const [showMobile, setShowMobile] = useState<boolean>(true);
   const [markets, setMarkets] = useState<Market[]>([]);
   const navigate = useNavigate();
   const { locateX, locateY, distance } = useLocalization();
@@ -42,6 +45,7 @@ export default function Home() {
 
   return (
     <S.HomeContainer>
+      <InstallAppModal isShown={isMobile && showMobile} close={() => setShowMobile(false)}/>
       <S.Title>Categorias</S.Title>
       {categories && (
         <Carousel>
