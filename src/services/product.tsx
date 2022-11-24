@@ -2,6 +2,7 @@ import { api } from "./api";
 import { ProductPost } from "./models";
 import {
   CATEGORY,
+  DISTANCE,
   MARKET,
   NAME,
   PRODUCT,
@@ -49,6 +50,13 @@ export const searchProductByName = async (name: string | undefined, page: number
   return data;
 }
 
+export const searchProductByDistance = async (distance: number, locateX: number, locateY: number, name: string | undefined, page: number) => {
+  const { data } = await api.get(`${SEARCH}${PRODUCT}${DISTANCE}?page=${page}&distance=${distance}&locateX=${locateX}&locateY=${locateY}${
+    name ? `&name=${name}` : ""
+  }`);
+  return data;
+}
+
 export const searchProductByCategory = async (
   category_id: number,
   name: string | undefined,
@@ -61,4 +69,4 @@ export const searchProductByCategory = async (
     {}
   );
   return data;
-};
+}

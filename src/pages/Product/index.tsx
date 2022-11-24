@@ -2,7 +2,7 @@ import { Fragment, useCallback, useEffect, useState } from "react";
 import IconSearch from "../../assets/icons/search";
 import InputText from "../../components/InputText";
 import ProductCard from "../../components/ProductCard";
-import { searchProductByName } from "../../services/product";
+import { searchProductByDistance, searchProductByName } from "../../services/product";
 import * as S from "../styles";
 import * as I from "./index.styled";
 import { Product as ProductModel } from "../../services/models";
@@ -26,7 +26,7 @@ const Product: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>();
   const [totalPages, setTotalPages] = useState<number>();
   const [loading, setLoading] = useState<boolean>(false);
-  const [useLocation, setUseLocation] = useState<boolean>(true);
+  const [useLocation, setUseLocation] = useState<boolean>(false);
   
   const debounceDistance = useDebounce<number>(distance, 500);
   const debouncedSearch = useDebounce<string>(searchName, 500);
@@ -36,13 +36,18 @@ const Product: React.FC = () => {
   });
 
   const searchProducts = useCallback(
-    async (name: string) => {
-      const data = await searchProductByName(name, 0);
+    async (name: string, location: boolean) => {
+      let data = null;
+      if(location && locateX && locateY){
+        data = await searchProductByDistance(debounceDistance, locateX, locateY, name, 0);
+      } else {
+        data = await searchProductByName(name, 0);
+      }
       setProducts(data.content);
       setTotalPages(data.totalPages);
       setCurrentPage(0);
     },
-    [setProducts, setTotalPages, setCurrentPage]
+    [locateX, locateY, debounceDistance]
   );
 
   const loadProducts = useCallback(async () => {
@@ -62,8 +67,8 @@ const Product: React.FC = () => {
   }, [loadProducts, callApi]);
 
   useEffect(() => {
-    searchProducts(debouncedSearch);
-  }, [searchProducts, debouncedSearch]);
+    searchProducts(debouncedSearch, useLocation);
+  }, [searchProducts, debouncedSearch, useLocation]);
 
   return (
     <S.Wrapper>
