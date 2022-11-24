@@ -6,7 +6,7 @@ import ModalContainer from "../../../../components/ModalContainer";
 import { currencyMask, removeCurrencyMask } from "../../../../fomatters/currencyMask";
 import { Product } from "../../../../services/models";
 import { updateProduct } from "../../../../services/product";
-import { Body, CloseButton, Container, Header, InputPrice, InputsContainer, SaveButton, Title } from "./index.styled";
+import * as I from "../index.styled";
 
 interface EditPriceModalProps {
     product?: Product;
@@ -38,34 +38,35 @@ const EditPriceModal: React.FC<EditPriceModalProps> = ({ product, toggle }) => {
 
     return (
         <ModalContainer isShown={!!product} toggle={toggle}>
-            <Container>
-                <Header>
+            <I.Container>
+                <I.Header>
                     <span style={{display: "flex", alignItems: "center", gap: "1rem"}}>
                         <EditPrice className='icon'/>
-                        <Title>Edição de preço</Title>
+                        <I.Title>Edição de preço</I.Title>
                     </span>
-                    <CloseButton  onClick={toggle}>
+                    <I.CloseButton  onClick={toggle}>
                         <IconClose />
-                    </CloseButton>
-                </Header>
-                <Body>
-                    <InputsContainer>
-                        <InputPrice 
+                    </I.CloseButton>
+                </I.Header>
+                <I.Body>
+                    <I.Description>Digite o novo preço do produto</I.Description>
+                    <I.InputsContainer>
+                        <I.InputPrice 
                             value={currencyMask(product ? product.price.toString() : "")}
                             disabled={true}
                         />
                         <IconChevronRigth />
-                        <InputPrice 
+                        <I.InputPrice 
                             placeholder="Digite o preço atual"
                             value={price}
                             onChange={(event) => {
                                 setPrice(currencyMask(event.target.value));
                             }}
                         />
-                    </InputsContainer>
-                    <SaveButton onClick={handleEditPrice}>Salvar novo preço $</SaveButton>
-                </Body>
-            </Container>
+                    </I.InputsContainer>
+                    <I.SaveButton onClick={handleEditPrice}>Salvar novo preço $</I.SaveButton>
+                </I.Body>
+            </I.Container>
         </ModalContainer>
     )
 };

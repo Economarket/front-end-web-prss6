@@ -15,13 +15,15 @@ import Loading from "../../components/Loading";
 import { useLocalization } from "../../contexts/localization";
 import RangeDistance from "../../components/RangeDistance";
 import ToggleSwitch from "../../components/ToggleSwitch";
+import AddShoppingListModal from "./components/AddShoppingListModal";
 
 const Product: React.FC = () => {
   const navigate = useNavigate();
   const { locateX, locateY, distance, setDistance } = useLocalization();
   
   const [products, setProducts] = useState<ProductModel[]>();
-  const [currentProduct, setCurrentProduct] = useState<ProductModel>();
+  const [currentEditProduct, setCurrentEditProduct] = useState<ProductModel>();
+  const [currentSaveProduct, setCurrentSaveProduct] = useState<ProductModel>();
   const [searchName, setSearchName] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>();
   const [totalPages, setTotalPages] = useState<number>();
@@ -72,7 +74,8 @@ const Product: React.FC = () => {
 
   return (
     <S.Wrapper>
-      <EditPriceModal product={currentProduct} toggle={() => setCurrentProduct(undefined)}/>
+      <EditPriceModal product={currentEditProduct} toggle={() => setCurrentEditProduct(undefined)}/>
+      <AddShoppingListModal product={currentSaveProduct} toggle={() => setCurrentSaveProduct(undefined)}/>
       <S.Title>Buscar Produtos</S.Title>
       <I.Header>
         <InputText
@@ -103,7 +106,11 @@ const Product: React.FC = () => {
             <S.CardGridList>
               {products.map((p) => (
                 <li>
-                  <ProductCard product={p} onEditPrice={() => setCurrentProduct(p)}/>
+                  <ProductCard 
+                    product={p} 
+                    onEditPrice={() => setCurrentEditProduct(p)}
+                    onAddProduct={() => setCurrentSaveProduct(p)}
+                  />
                 </li>
               ))}
             </S.CardGridList>
