@@ -15,6 +15,7 @@ import useQuery from "../../hooks/use-query";
 import { useNavigate } from "react-router-dom";
 import { useInfiniteScroll } from "../../hooks/use-infinite-scroll";
 import EditPriceModal from "./components/EditPriceModal";
+import AddShoppingListModal from "./components/AddShoppingListModal";
 import { useDebounce } from "usehooks-ts";
 
 const Categories:React.FC = () => {
@@ -24,7 +25,8 @@ const Categories:React.FC = () => {
   const [categories, setCategories] = useState<Category[]>();
   const [products, setProducts] = useState<Product[]>();
   const [currentCategory, setCurrentCategory] = useState<Category>();
-  const [currentProduct, setCurrentProduct] = useState<Product>();
+  const [currentEditProduct, setCurrentEditProduct] = useState<Product>();
+  const [currentSaveProduct, setCurrentSaveProduct] = useState<Product>();
   const [searchName, setSearchName] = useState<string>();
   const [currentPage, setCurrentPage] = useState<number>();
   const [totalPages, setTotalPages] = useState<number>();
@@ -98,7 +100,8 @@ const Categories:React.FC = () => {
 
   return (
     <S.Wrapper>
-      <EditPriceModal product={currentProduct} toggle={() => setCurrentProduct(undefined)}/>
+      <EditPriceModal product={currentEditProduct} toggle={() => setCurrentEditProduct(undefined)}/>
+      <AddShoppingListModal product={currentSaveProduct} toggle={() => setCurrentSaveProduct(undefined)}/>
       {categories && (!currentCategory ? (
         <Fragment>
           <S.Title>Categorias</S.Title>
@@ -148,7 +151,11 @@ const Categories:React.FC = () => {
                 <S.CardGridList>
                   {products.map((p) => (
                     <li>
-                      <ProductCard product={p} onEditPrice={() => setCurrentProduct(p)}/>
+                      <ProductCard 
+                        product={p} 
+                        onEditPrice={() => setCurrentEditProduct(p)}
+                        onAddProduct={() => setCurrentSaveProduct(p)}
+                      />
                     </li>
                   ))}
                 </S.CardGridList>
