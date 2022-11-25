@@ -31,3 +31,16 @@ export const addProductToShoppingList = async (shopping_list: ShoppingList, prod
   };
   return updateShoppingList(sl);
 };
+export const deleteProductToShoppingList = async (shopping_list: ShoppingList, product: ProductList, user_id: number) => {
+  const product_list = shopping_list.productList
+  const index = product_list.indexOf(product)
+  product_list.splice(index, 1)
+  const sl: ShoppingList = {
+    ...shopping_list, 
+    productList: product_list,
+    user: {
+      id: user_id
+    }
+  };
+  return updateShoppingList(sl);
+};

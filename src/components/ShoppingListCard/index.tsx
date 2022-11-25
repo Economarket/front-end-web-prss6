@@ -4,8 +4,9 @@ import IconChevronUp from "../../assets/icons/chevronUp";
 import IconListCheck from "../../assets/icons/listCheck";
 import IconPlusCicle from "../../assets/icons/plusCicle";
 import IconTrash from "../../assets/icons/trash";
-import { ShoppingList } from "../../services/models";
+import { ProductList, ShoppingList } from "../../services/models";
 import ShoppingListItem from "../ShoppingListItem";
+import { useSession } from "../../contexts/session";
 import {
   ActionButton,
   Body,
@@ -20,15 +21,19 @@ import {
 interface ShoppingListCardProps {
   shoppingList: ShoppingList;
   onDeleteList: () => void;
-  onDeleteProduct: () => void;
+  updateShoppingList: () => void;
 }
 const ShoppingListCard: React.FC<ShoppingListCardProps> = ({
   shoppingList,
   onDeleteList,
-  onDeleteProduct,
+  updateShoppingList,
 }) => {
   const [open, setOpen] = useState<boolean>(false);
+  const [toDeleteProduct, setToDeleteProduct] = useState<ProductList>();
   const size = useMemo(() => shoppingList.productList?.length, [shoppingList]);
+  const { user } = useSession();
+
+
 
   return (
     <Container>
@@ -54,7 +59,9 @@ const ShoppingListCard: React.FC<ShoppingListCardProps> = ({
             <ShoppingListItem
               key={index}
               productList={p}
-              onDelete={onDeleteProduct}
+              shoppingList={shoppingList}
+              onDelete={() => setToDeleteProduct(p)}
+              updateShoppingList={updateShoppingList}
             />
           ))}
         </Body>
