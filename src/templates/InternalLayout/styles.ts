@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
 
   ${mediaQuerySm(css``)}
+  overflow-x: hidden;
 `;
 
 export const WrapperHeader = styled.div`
