@@ -51,9 +51,9 @@ const ShoppingListItem: React.FC<ShoppingListItemProps> = ({
           </Price>
         </InfoContainer>
       </QtdContainer>
-      <TrashContainer onClick={handleDeleteProduct}>
+      <TrashContainer >
         <QtdInput type="number" maxLength={3} placeholder={"0"} value={productList.quantity} />
-        <TrashIcon />
+        <TrashIcon onClick={handleDeleteProduct}/>
       </TrashContainer>
     </Container>
   );
