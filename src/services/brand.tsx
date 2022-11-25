@@ -26,7 +26,12 @@ export async function searchBrand() {
 }
 
 export async function getBrand() {
-  const { data } = await api.get(`${FIELDUTILS}${BRAND}?size=100`, {});
+  const { data } = await api.get(`${FIELDUTILS}${BRAND}?size=1000`, {});
+  return data;
+}
+
+export async function getBrandTotalElements(size: number) {
+  const { data } = await api.get(`${FIELDUTILS}${BRAND}?size=${size}`, {});
   return data;
 }
 

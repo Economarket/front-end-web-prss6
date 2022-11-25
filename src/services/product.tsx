@@ -39,15 +39,30 @@ export async function searchProductById(productId: string) {
   return data;
 }
 
-export async function searchProductByMarket() {
-  const { data } = await api.get(`${REGISTER}${PRODUCT}${MARKET}`, {});
+export async function searchProductByMarket(
+  market_id: number,
+  name: string | undefined,
+  page: number
+) {
+  const { data } = await api.get(
+    `${SEARCH}${PRODUCT}${MARKET}/${market_id}?page=${page}${
+      name ? `&name=${name}` : ""
+    }`,
+    {}
+  );
   return data;
 }
 
-export const searchProductByName = async (name: string | undefined, page: number) => {
-  const { data } = await api.get(`${SEARCH}${PRODUCT}${NAME}?name=${name}&page=${page}`, {});
+export const searchProductByName = async (
+  name: string | undefined,
+  page: number
+) => {
+  const { data } = await api.get(
+    `${SEARCH}${PRODUCT}${NAME}?name=${name}&page=${page}`,
+    {}
+  );
   return data;
-}
+};
 
 export const searchProductByCategory = async (
   category_id: number,

@@ -25,11 +25,11 @@ export interface Category {
 }
 
 export interface Market {
-  id?: number;
+  id: number;
   uuid: string;
   // locateX?: string;
   // locateY?: string;
-  name?: string;
+  name: string;
   description?: string;
   logo?: string;
   address?: Address;
