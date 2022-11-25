@@ -15,7 +15,9 @@ import useQuery from "../../hooks/use-query";
 import { useNavigate } from "react-router-dom";
 import { useInfiniteScroll } from "../../hooks/use-infinite-scroll";
 import EditPriceModal from "./components/EditPriceModal";
+import AddShoppingListModal from "./components/AddShoppingListModal";
 import { useDebounce } from "usehooks-ts";
+import Loading from "../../components/Loading";
 
 const Categories:React.FC = () => {
   const navigate = useNavigate();
@@ -24,11 +26,12 @@ const Categories:React.FC = () => {
   const [categories, setCategories] = useState<Category[]>();
   const [products, setProducts] = useState<Product[]>();
   const [currentCategory, setCurrentCategory] = useState<Category>();
-  const [currentProduct, setCurrentProduct] = useState<Product>();
+  const [currentEditProduct, setCurrentEditProduct] = useState<Product>();
+  const [currentSaveProduct, setCurrentSaveProduct] = useState<Product>();
   const [searchName, setSearchName] = useState<string>();
   const [currentPage, setCurrentPage] = useState<number>();
   const [totalPages, setTotalPages] = useState<number>();
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const searchDebounce = useDebounce(searchName, 500);
 
@@ -43,10 +46,12 @@ const Categories:React.FC = () => {
 
   const searchProducts = useCallback(async (category: Category, search: string | undefined) => {
     if(category){
+      setLoading(true);
       const data = await searchProductByCategory(category.id, search, 0);
       setProducts(data.content);
       setTotalPages(data.totalPages);
       setCurrentPage(0);
+      setLoading(false);
     }
   }, []);
 
@@ -98,7 +103,8 @@ const Categories:React.FC = () => {
 
   return (
     <S.Wrapper>
-      <EditPriceModal product={currentProduct} toggle={() => setCurrentProduct(undefined)}/>
+      <EditPriceModal product={currentEditProduct} toggle={() => setCurrentEditProduct(undefined)}/>
+      <AddShoppingListModal product={currentSaveProduct} toggle={() => setCurrentSaveProduct(undefined)}/>
       {categories && (!currentCategory ? (
         <Fragment>
           <S.Title>Categorias</S.Title>
@@ -144,11 +150,15 @@ const Categories:React.FC = () => {
               />
           </I.Header>
           <S.CardContainer>
-              {(products && products.length > 0) ? (
+              {products && ((products.length > 0) ? (
                 <S.CardGridList>
                   {products.map((p) => (
                     <li>
-                      <ProductCard product={p} onEditPrice={() => setCurrentProduct(p)}/>
+                      <ProductCard 
+                        product={p} 
+                        onEditPrice={() => setCurrentEditProduct(p)}
+                        onAddProduct={() => setCurrentSaveProduct(p)}
+                      />
                     </li>
                   ))}
                 </S.CardGridList>
@@ -158,8 +168,9 @@ const Categories:React.FC = () => {
                   <S.Title style={{textAlign: "center"}}>Nenhum produto foi encontrado</S.Title>
                   <S.NoProductButton onClick={() => navigate({pathname: "/cadastrar-produto"})}>Deseja cadastrá-lo?</S.NoProductButton>
                 </S.NoProductContainer>
-              )}
+              ))}
           </S.CardContainer>
+          <Loading loading={true}/>
         </Fragment>
       ))}
     </S.Wrapper>

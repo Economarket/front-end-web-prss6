@@ -1,85 +1,84 @@
-import ExternalAccessContainer from "../../templates/ExternalLayout";
-
-import * as S from "../styles";
-import InputText from "../../components/InputText";
-import registerUser from "../../assets/registerUser.png";
-import Button from "../../components/Button";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { schemaRegisterUser } from "../../utils/schema";
-import { useForm } from "react-hook-form";
-import InputPassword from "../../components/InputPassword";
-import PasswordRules from "../../components/PasswordRules";
-import { postUser } from "../../services/user";
-import { useNavigate } from "react-router-dom";
-import { getCategories } from "../../services/category";
+import * as S from '../styles';
+import InputText from '../../components/InputText';
+import Button from '../../components/Button';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { schemaRegisterUser } from '../../utils/schema';
+import { useForm } from 'react-hook-form';
+import InputPassword from '../../components/InputPassword';
+import { postUser } from '../../services/user';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { User } from '../../services/models';
 
 export default function Profile() {
   const navigate = useNavigate();
+  const [user, setUser] = useState<string>();
 
   const {
     register,
     handleSubmit,
-    watch,
+    setValue,
+    reset,
+    formState,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
     },
     resolver: yupResolver(schemaRegisterUser),
   });
 
   const onSubmit = async (data: any) => {
     await postUser(data.name, data.password, data.email).then(() => {
-      navigate("/login");
+      navigate('');
     });
   };
 
-  const handle = async () => {
-    await getCategories()
-      .then((response) => {
-        return response;
-      })
-      .catch((error) => console.error(error));
-  };
   return (
-    <S.Wrapper>
-      <S.Form onSubmit={handleSubmit(onSubmit)}>
-        <InputText
-          {...register("name")}
-          name="name"
-          label="Nome"
-          placeholder="Digite seu nome"
-          errorMessage={errors.name?.message}
-        />
-        <InputText
-          {...register("email")}
-          name="email"
-          label="E-mail"
-          placeholder="Digite seu e-mail"
-          errorMessage={errors.email?.message}
-        />
-        <InputPassword
-          {...register("password")}
-          name="password"
-          label="Senha"
-          placeholder="Digite uma senha"
-          errorMessage={errors.password?.message}
-        />
-        <InputPassword
-          {...register("confirmPassword")}
-          name="confirmPassword"
-          label="Confirme a senha"
-          placeholder="Confirme a senha"
-          errorMessage={errors.confirmPassword?.message}
-        />
+    <>
+      <S.WrapperRegisteProducts>
+        <S.Title>Deseja atualizar seu perfil?</S.Title>
 
-        <PasswordRules password={watch("password")} />
+        <S.ProductContainer>
+          <S.Form>
+            <InputText
+              {...register('name')}
+              name="name"
+              label="Nome"
+              errorMessage={errors.name?.message}
+            />
+            <InputText
+              {...register('email')}
+              name="email"
+              label="E-mail"
+              errorMessage={errors.email?.message}
+            />
+            <InputPassword
+              {...register('password')}
+              name="password"
+              label="Senha"
+              placeholder="Senha atual"
+              errorMessage={errors.password?.message}
+            />
+            <InputPassword
+              {...register('confirmPassword')}
+              name="confirmPassword"
+              label=""
+              placeholder="Nova senha"
+              errorMessage={errors.confirmPassword?.message}
+            />
 
-        <Button text="Cadastrar" onClick={handleSubmit(handle)} />
-      </S.Form>
-    </S.Wrapper>
+            <Button
+              text="Salvar Aterações"
+              onClick={handleSubmit(onSubmit)}
+              disabled={formState.isSubmitting}
+            />
+          </S.Form>
+        </S.ProductContainer>
+      </S.WrapperRegisteProducts>
+    </>
   );
 }

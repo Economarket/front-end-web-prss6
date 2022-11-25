@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import theme from "../../../../styles/theme";
+import theme from "../../../styles/theme";
 
 export const Container = styled.div`
     display: flex;
@@ -20,6 +20,11 @@ export const Header = styled.div`
         fill: ${theme.colors.whiteFull};
         width: 3rem;
     }
+
+    & .icon-plus {
+        filter: invert(100%);
+        width: 3rem;
+    }
 `;
 
 export const Body = styled.div`
@@ -36,11 +41,20 @@ export const InputsContainer = styled.div`
     display: flex;
     width: 100%;
     justify-content: space-between;
+    gap: 1rem;
 `;
 
 export const Title = styled.h2`
     font-family: Lato;
     color: ${theme.colors.whiteFull}
+`;
+
+export const Description = styled.p`
+  font-family: Lato;
+  color: ${theme.colors.gray900};
+  font-size: 1.5rem;
+  text-align: center;
+  align-self: flex-start;
 `;
 
 export const CloseButton = styled.button`
@@ -57,8 +71,7 @@ export const CloseButton = styled.button`
 export const SaveButton = styled.button`
     font-size: 1.5rem;
     font-weight: 600;
-    width: 60%;
-    padding: 1rem 0;
+    padding: 1rem 1rem;
     color: ${theme.colors.backgroundWhite};
     border: none;
     background-color: ${theme.colors.blue300};
@@ -67,6 +80,10 @@ export const SaveButton = styled.button`
     &:hover {
         cursor: pointer;
         background-color: ${theme.colors.blue200};
+    }
+
+    &:disabled {
+        background-color: ${theme.colors.gray300};
     }
 `;
 
@@ -78,4 +95,8 @@ export const InputPrice = styled.input`
     border: none;
     background: #ddd;
     padding: .5rem;
+`;
+
+export const InputQtd = styled(InputPrice)`
+    width: 5rem;
 `;

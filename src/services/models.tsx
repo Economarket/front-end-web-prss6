@@ -106,7 +106,7 @@ export interface Unity {
   description?: string;
 }
 export interface ProductList {
-  id: number;
+  id?: number;
   product: Product;
   quantity: number;
 }
@@ -114,7 +114,7 @@ export interface ProductList {
 export interface ShoppingList {
   id?: number;
   name: string;
-  productList?: ProductList[];
+  productList: ProductList[];
   user?: {
     id: number;
   };

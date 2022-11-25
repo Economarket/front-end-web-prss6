@@ -33,8 +33,8 @@ const Loading: React.FC<LoadingProps> = ({ loading, type }) => {
                 <ReactLoading 
                     type={type || LoadingType.balls} 
                     color={theme.colors.blue200} 
-                    height={200} 
-                    width={200}
+                    height={100} 
+                    width={80}
                 />
             )}
         </div>
