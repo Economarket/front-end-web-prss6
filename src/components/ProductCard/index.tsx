@@ -1,5 +1,5 @@
 import { categories_round_assets } from '../../assets/categories-round/categories-round';
-import EditPrice from '../../assets/icons/editPrice';
+import IconEditPrice from '../../assets/icons/editPrice';
 import { Product } from '../../services/models';
 import {
   Button,
@@ -21,7 +21,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product, onAddProduct, onEditPrice }) => {
   return (
     <Container>
-      <EditButton onClick={onEditPrice}><EditPrice className='icon'/></EditButton>
+      <EditButton onClick={onEditPrice}><IconEditPrice className='icon'/></EditButton>
       <ImageContainer>
         <Image
           alt={product.category.name}

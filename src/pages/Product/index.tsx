@@ -11,7 +11,7 @@ import EmptyBox from "../../assets/emptyBox.png";
 import { useDebounce } from "usehooks-ts";
 import { useInfiniteScroll } from "../../hooks/use-infinite-scroll";
 import EditPriceModal from "./components/EditPriceModal";
-import Loading from "../../components/Loading";
+import Loading, { LoadingType } from "../../components/Loading";
 import { useLocalization } from "../../contexts/localization";
 import RangeDistance from "../../components/RangeDistance";
 import ToggleSwitch from "../../components/ToggleSwitch";
@@ -131,7 +131,7 @@ const Product: React.FC = () => {
           </S.NoProductContainer>
         ))}
       </S.CardContainer>
-      <Loading loading={loading}/>
+      <Loading loading={loading} type={LoadingType.spinningBubbles}/>
     </S.Wrapper>
   );
 };
