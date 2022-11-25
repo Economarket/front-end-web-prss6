@@ -45,7 +45,10 @@ export default function Home() {
 
   return (
     <S.HomeContainer>
-      <InstallAppModal isShown={isMobile && showMobile} close={() => setShowMobile(false)}/>
+      <InstallAppModal
+        isShown={isMobile && showMobile}
+        close={() => setShowMobile(false)}
+      />
       <S.Title>Categorias</S.Title>
       {categories && (
         <Carousel>
@@ -69,7 +72,12 @@ export default function Home() {
             <MarketCard
               key={m.id}
               market={m}
-              onClick={() => console.log(`Redirect to ${m.name} page...`)}
+              onClick={() =>
+                navigate({
+                  pathname: "/mercados-proximos",
+                  search: `market=${m.name}&external=true`,
+                })
+              }
             />
           );
         })}
