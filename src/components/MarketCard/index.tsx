@@ -27,7 +27,7 @@ const MarketCard: React.FC<MarketCardProps> = ({ market, onClick }) => {
           <Address>{`${market.address?.street}, ${market.address?.number}`}</Address>
           <Address>{`CEP: ${market.address?.cep}`}</Address>
         </AddressContainer>
-        <Button onClick={onClick}>Ir para essa loja</Button>
+        <Button onClick={onClick}>Ver produtos</Button>
       </InfoContainer>
     </Container>
   );

@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
 
   ${mediaQuerySm(css``)}
+  overflow-x: hidden;
 `;
 
 export const WrapperHeader = styled.div`
@@ -26,8 +27,7 @@ export const Header = styled.div`
   padding: 2rem 4rem;
   border-bottom: 2px solid;
   border-color: #d9d9d9;
-  min-height: 15rem;
-  max-width: 80%;
+  min-height: 14rem;
 
   ${mediaQuerySm(css``)};
 `;
@@ -54,8 +54,8 @@ export const Logo = styled.div`
   display: flex;
   justify-content: center;
   padding: 2rem;
-  min-height: 15rem;
-  min-width: 20%;
+  min-height: 14rem;
+  min-width: 30rem;
   cursor: pointer;
 `;
 
@@ -92,12 +92,13 @@ export const WrapperMenu = styled.div`
   border-right: 2px solid;
   border-color: #d9d9d9;
   padding: 1rem;
-  min-width: 20%;
+  min-width: 30rem;
 `;
 
 export const WrapperContentFooter = styled.div`
   width: 100%;
-  max-width: 80%;
+  max-width: calc(100vw - 30rem);
+  min-height: calc(100vh - 14rem);
   display: flex;
   flex-direction: column;
 `;

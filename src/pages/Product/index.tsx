@@ -11,7 +11,7 @@ import EmptyBox from "../../assets/emptyBox.png";
 import { useDebounce } from "usehooks-ts";
 import { useInfiniteScroll } from "../../hooks/use-infinite-scroll";
 import EditPriceModal from "./components/EditPriceModal";
-import Loading from "../../components/Loading";
+import Loading, { LoadingType } from "../../components/Loading";
 import { useLocalization } from "../../contexts/localization";
 import RangeDistance from "../../components/RangeDistance";
 import ToggleSwitch from "../../components/ToggleSwitch";
@@ -40,6 +40,7 @@ const Product: React.FC = () => {
   const searchProducts = useCallback(
     async (name: string, location: boolean) => {
       let data = null;
+      setLoading(true);
       if(location && locateX && locateY){
         data = await searchProductByDistance(debounceDistance, locateX, locateY, name, 0);
       } else {
@@ -48,6 +49,7 @@ const Product: React.FC = () => {
       setProducts(data.content);
       setTotalPages(data.totalPages);
       setCurrentPage(0);
+      setLoading(false);
     },
     [locateX, locateY, debounceDistance]
   );
@@ -101,7 +103,7 @@ const Product: React.FC = () => {
         )}
       </I.Header>
       <S.CardContainer>
-        {products && products.length > 0 ? (
+        {products && (products.length > 0 ? (
           <Fragment>
             <S.CardGridList>
               {products.map((p) => (
@@ -127,9 +129,9 @@ const Product: React.FC = () => {
               Deseja cadastrá-lo?
             </S.NoProductButton>
           </S.NoProductContainer>
-        )}
-        <Loading loading={loading}/>
+        ))}
       </S.CardContainer>
+      <Loading loading={loading} type={LoadingType.spinningBubbles}/>
     </S.Wrapper>
   );
 };

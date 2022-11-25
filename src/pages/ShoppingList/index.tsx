@@ -9,6 +9,7 @@ import { MainContainer, NewListButton, NewListContainer, NoListButton, NoListCon
 import NoList from "../../assets/listaDeComprasVazia.png";
 import DeleteListModal from './components/DeleteListModal';
 import Loading, { LoadingType } from '../../components/Loading';
+import ToastHelper from '../../components/Toast/toast';
 
 const ShoppingList: React.FC = () => {
   const [showCreateModal, setShowCreateModal] = useState<boolean>(false);
@@ -36,16 +37,24 @@ const ShoppingList: React.FC = () => {
         },
         productList: []
       };
-      const { status } = await createShoppingList(shopping_list);
-      if(status === 200) updateShoppingList();
+      await createShoppingList(shopping_list).then(() => {
+        updateShoppingList();
+        ToastHelper("Lista criada com sucesso!", "success");
+      }).catch(() => {
+        ToastHelper("Erro ao criar a Lista", "error");
+      });
     }
   }, [user, updateShoppingList]);
   
   const handleDeleteList = useCallback(async () => {
     if(!!toDeleteList && toDeleteList.id){
-      const { status } = await deleteShoppingList(toDeleteList.id);
-      setToDeleteList(undefined);
-      if(status === 200) updateShoppingList();
+      await deleteShoppingList(toDeleteList.id).then(() => {
+        setToDeleteList(undefined);
+        updateShoppingList();
+        ToastHelper("Lista deletada com sucesso!", "success");
+      }).catch(() => {
+        ToastHelper("Erro ao deletar a Lista", "error");
+      });
     }
   }, [toDeleteList, updateShoppingList]);
   

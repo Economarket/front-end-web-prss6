@@ -17,6 +17,7 @@ import { useInfiniteScroll } from "../../hooks/use-infinite-scroll";
 import EditPriceModal from "./components/EditPriceModal";
 import AddShoppingListModal from "./components/AddShoppingListModal";
 import { useDebounce } from "usehooks-ts";
+import Loading from "../../components/Loading";
 
 const Categories:React.FC = () => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const Categories:React.FC = () => {
   const [searchName, setSearchName] = useState<string>();
   const [currentPage, setCurrentPage] = useState<number>();
   const [totalPages, setTotalPages] = useState<number>();
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const searchDebounce = useDebounce(searchName, 500);
 
@@ -45,10 +46,12 @@ const Categories:React.FC = () => {
 
   const searchProducts = useCallback(async (category: Category, search: string | undefined) => {
     if(category){
+      setLoading(true);
       const data = await searchProductByCategory(category.id, search, 0);
       setProducts(data.content);
       setTotalPages(data.totalPages);
       setCurrentPage(0);
+      setLoading(false);
     }
   }, []);
 
@@ -147,7 +150,7 @@ const Categories:React.FC = () => {
               />
           </I.Header>
           <S.CardContainer>
-              {(products && products.length > 0) ? (
+              {products && ((products.length > 0) ? (
                 <S.CardGridList>
                   {products.map((p) => (
                     <li>
@@ -165,8 +168,9 @@ const Categories:React.FC = () => {
                   <S.Title style={{textAlign: "center"}}>Nenhum produto foi encontrado</S.Title>
                   <S.NoProductButton onClick={() => navigate({pathname: "/cadastrar-produto"})}>Deseja cadastrá-lo?</S.NoProductButton>
                 </S.NoProductContainer>
-              )}
+              ))}
           </S.CardContainer>
+          <Loading loading={true}/>
         </Fragment>
       ))}
     </S.Wrapper>

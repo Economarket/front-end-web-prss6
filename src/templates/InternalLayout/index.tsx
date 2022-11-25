@@ -105,7 +105,7 @@ const InternalAccessContainer = ({
             title={'Aviso'}
             children={<S.Image src={location} />}
             description={
-              'Para utilizar a aplicação e obter uma melhor experiência de navegação, é necessário autorizar da localização'
+              'Para utilizar a aplicação e obter uma melhor experiência de navegação, é necessário autorizar a localização'
             }
             confirmButtonText={'Compreendo'}
             onConfirm={handleConfirme}

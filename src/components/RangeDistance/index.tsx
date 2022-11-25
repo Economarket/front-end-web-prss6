@@ -28,7 +28,7 @@ const RangeDistance: React.FC<RangeDistanceProps> = ({
         border: "none",
         backgroundColor: theme.colors.blue200,
       }}
-      railStyle={{ backgroundColor: theme.colors.gray500 }}
+      railStyle={{ backgroundColor: "#d9d9d9" }}
     />
   );
 };
