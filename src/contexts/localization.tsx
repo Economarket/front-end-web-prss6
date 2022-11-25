@@ -29,11 +29,6 @@ export function LocalizationProvider({ children }: { children: ReactNode }) {
   const { logout } = useSession();
 
   const getPosition = useCallback(() => {
-    console.log("entrou");
-    console.log(!("geolocation" in navigator));
-    console.log(locateX);
-    console.log(distance);
-
     if (!("geolocation" in navigator)) {
       ToastHelper(
         "Problema ao tentar acessar o permissionamento de localização. A aplicação necessita acessar a localização.",
