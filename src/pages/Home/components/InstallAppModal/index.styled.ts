@@ -12,7 +12,7 @@ export const Container = styled.div`
     bottom: 2rem;
     margin: auto;
 
-    padding: 2rem;
+    padding: 3rem;
     background-color: ${theme.colors.whiteFull};
     border-radius: ${theme.border.radius.xxlarge};
     border: 2px solid ${theme.colors.blue300};
@@ -22,6 +22,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    align-items: center;
 `;
 
 export const ButtonContainer = styled.div`
@@ -32,14 +33,27 @@ export const ButtonContainer = styled.div`
     gap: 3rem;
 `;
 
+export const Message = styled.span`
+    font-size: 4rem;
+    font-family: 'Merriweather', serif;
+    font-weight: 600;
+    text-align: center;
+    color: ${theme.colors.blue200};
+`;
+
+export const Download = styled(Message)`
+    font-size: 5rem;
+`;
+
 export const Image = styled.img`
-    width: 100%;
+    max-width: 50%;
+    height: auto;
 `;
 
 export const Button = styled.button`
     padding: 2rem 0;
     font-size: 4rem;
-    font-family: Lato;
+    font-family: 'Merriweather', serif;
     font-weight: 600;
     border: none;
     border-radius: ${theme.border.radius.large};
