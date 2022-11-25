@@ -44,3 +44,17 @@ export const deleteProductToShoppingList = async (shopping_list: ShoppingList, p
   };
   return updateShoppingList(sl);
 };
+
+export const editProductToShoppingList = async (shopping_list: ShoppingList, product: ProductList, quantity: number, user_id: number) => {
+  const product_list = shopping_list.productList
+  const index = product_list.indexOf(product)
+  product_list[index].quantity = quantity
+  const sl: ShoppingList = {
+    ...shopping_list, 
+    productList: product_list,
+    user: {
+      id: user_id
+    }
+  };
+  return updateShoppingList(sl);
+};

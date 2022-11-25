@@ -4,7 +4,8 @@ import TrashIcon from "../../assets/icons/trash";
 import { ProductList, ShoppingList } from "../../services/models";
 import { CategoryImage, Container, InfoContainer, Name, Price, QtdContainer, QtdInput, TrashContainer } from "./index.styled";
 import { useSession } from "../../contexts/session";
-import { deleteProductToShoppingList } from "../../services/shopping";
+import { useState } from "react";
+import { deleteProductToShoppingList, editProductToShoppingList } from "../../services/shopping";
 import ToastHelper from "../Toast/toast";
 
 
@@ -21,6 +22,7 @@ const ShoppingListItem: React.FC<ShoppingListItemProps> = ({
   updateShoppingList,
 }) => {
   const { user } = useSession();
+  const [edit, setEdit] = useState({ type: "number" })
   
   const handleDeleteProduct = async () => {
     if(user){
@@ -30,6 +32,20 @@ const ShoppingListItem: React.FC<ShoppingListItemProps> = ({
         updateShoppingList()
       }catch{
         ToastHelper("Erro ao excluir", "error")
+      }
+    }
+  }
+
+  const handleEditProduct = async (e: any) => {
+    if(user){
+      try{
+        setEdit(e.target.value)
+        const quantity = e.target.value
+        await editProductToShoppingList(shoppingList, productList, quantity, user.id);
+        ToastHelper("Produto editado com sucesso", "success")
+        updateShoppingList()
+      }catch{
+        ToastHelper("Erro ao editar", "error")
       }
     }
   }
@@ -52,7 +68,7 @@ const ShoppingListItem: React.FC<ShoppingListItemProps> = ({
         </InfoContainer>
       </QtdContainer>
       <TrashContainer >
-        <QtdInput type="number" maxLength={3} placeholder={"0"} value={productList.quantity} />
+        <QtdInput type="number" maxLength={3} placeholder={"0"} defaultValue={productList.quantity} onChange={handleEditProduct}/>
         <TrashIcon onClick={handleDeleteProduct}/>
       </TrashContainer>
     </Container>
