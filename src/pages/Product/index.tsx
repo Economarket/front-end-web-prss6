@@ -128,8 +128,8 @@ const Product: React.FC = () => {
             </S.NoProductButton>
           </S.NoProductContainer>
         )}
-        <Loading loading={loading}/>
       </S.CardContainer>
+      <Loading loading={loading}/>
     </S.Wrapper>
   );
 };
