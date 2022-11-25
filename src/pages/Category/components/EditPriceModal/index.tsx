@@ -3,6 +3,7 @@ import IconChevronRigth from "../../../../assets/icons/chevronRight";
 import IconClose from "../../../../assets/icons/close";
 import EditPrice from "../../../../assets/icons/editPrice";
 import ModalContainer from "../../../../components/ModalContainer";
+import ToastHelper from "../../../../components/Toast/toast";
 import { currencyMask, removeCurrencyMask } from "../../../../fomatters/currencyMask";
 import { Product } from "../../../../services/models";
 import { updateProduct } from "../../../../services/product";
@@ -31,9 +32,12 @@ const EditPriceModal: React.FC<EditPriceModalProps> = ({ product, toggle }) => {
                 brand: { id: product.brand.id },
                 category: { id: product.category.id},
                 markets: [{ id: product.markets[0].id }],
-            });
+            }).then(() => {
+                ToastHelper("Preço do produto editado com sucesso!", "success");
+            }).catch(() => {
+                ToastHelper("Erro ao editar o preço do produto!", "error");
+            }).finally(() => toggle());
         }
-        toggle();
     }, [toggle, product, price]);
 
     return (

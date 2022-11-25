@@ -4,27 +4,25 @@ import Button from '../../components/Button';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { schemaRegisterUser } from '../../utils/schema';
 import { useForm } from 'react-hook-form';
-import InputPassword from '../../components/InputPassword';
-import { postUser } from '../../services/user';
+// import InputPassword from '../../components/InputPassword';
+import { updateUser } from '../../services/user';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import { User } from '../../services/models';
+import { useSession } from '../../contexts/session';
+import ToastHelper from '../../components/Toast/toast';
 
 export default function Profile() {
-  const navigate = useNavigate();
-  const [user, setUser] = useState<string>();
+  const { user } = useSession();
 
   const {
     register,
     handleSubmit,
-    setValue,
-    reset,
     formState,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: '',
-      email: '',
+      name: user?.name,
+      email: user?.email,
       password: '',
       confirmPassword: '',
     },
@@ -32,8 +30,18 @@ export default function Profile() {
   });
 
   const onSubmit = async (data: any) => {
-    await postUser(data.name, data.password, data.email).then(() => {
-      navigate('');
+    if(!user){
+      return;
+    }
+    const newUser: User = {
+      id: user?.id,
+      name: data.name,
+      email: data.email,
+    }
+    await updateUser(newUser).then(() => {
+      ToastHelper("Dados atualizados com sucesso!", "success");
+    }).catch(() => {
+      ToastHelper("Erro ao atualizar dados", "error");
     });
   };
 
@@ -56,7 +64,7 @@ export default function Profile() {
               label="E-mail"
               errorMessage={errors.email?.message}
             />
-            <InputPassword
+            {/* <InputPassword
               {...register('password')}
               name="password"
               label="Senha"
@@ -69,11 +77,11 @@ export default function Profile() {
               label=""
               placeholder="Nova senha"
               errorMessage={errors.confirmPassword?.message}
-            />
+            /> */}
 
             <Button
               text="Salvar Aterações"
-              onClick={handleSubmit(onSubmit)}
+              onClick={() => handleSubmit(onSubmit)}
               disabled={formState.isSubmitting}
             />
           </S.Form>
