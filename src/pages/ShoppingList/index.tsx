@@ -58,9 +58,6 @@ const ShoppingList: React.FC = () => {
     }
   }, [toDeleteList, updateShoppingList]);
   
-  const handleDeleteProduct = useCallback(() => {
-    
-  }, []);
   
   useEffect(() => {
     updateShoppingList();
@@ -90,7 +87,7 @@ const ShoppingList: React.FC = () => {
             key={s.id} 
             shoppingList={s}
             onDeleteList={() => setToDeleteList(s)}
-            onDeleteProduct={() => handleDeleteProduct()}
+            updateShoppingList={updateShoppingList}
           />
         ))}
       </Fragment>

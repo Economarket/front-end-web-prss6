@@ -4,7 +4,7 @@ export default function IconTrash(
   props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>,
 ) {
   return (
-    <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg" pointer-events="none">
       <path d="M24.4688 6.34375H4.53125" stroke="#004068" stroke-width="1.09375" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="M11.7812 11.7812V19.0312" stroke="#004068" stroke-width="1.09375" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="M17.2188 11.7812V19.0312" stroke="#004068" stroke-width="1.09375" stroke-linecap="round" stroke-linejoin="round"/>
