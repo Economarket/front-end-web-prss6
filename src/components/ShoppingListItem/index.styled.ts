@@ -53,18 +53,19 @@ export const Price = styled(Lato)`
 export const QtdInput = styled.input`
     font-size: 2rem;
     text-align: right;
-    width: 10rem;
+    width: 6rem;
     padding: 1rem;
     border: 1px  solid ${theme.colors.blue300};
     border-radius: ${theme.border.radius.large};
-    margin: 0 5rem;
 `;
 
 export const TrashContainer = styled.div`
-    cursor: pointer;
+    display: flex;
+    gap: 2rem;
 `;
 
 export const TrashIconContainer = styled.div`
     cursor: pointer;
-    text-align: right;
+    display: flex;
+    align-items: center;
 `;

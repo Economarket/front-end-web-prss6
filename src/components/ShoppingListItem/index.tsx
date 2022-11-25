@@ -1,39 +1,42 @@
+import { useCallback, useEffect, useState } from "react";
+import { useDebounce } from "usehooks-ts";
 import { categories_round_assets } from "../../assets/categories-round/categories-round";
 import IconSheet from "../../assets/icons/sheet";
 import TrashIcon from "../../assets/icons/trash";
-import { ProductList, ShoppingList } from "../../services/models";
-import { CategoryImage, Container, InfoContainer, Name, Price, QtdContainer, QtdInput, TrashContainer, TrashIconContainer } from "./index.styled";
 import { useSession } from "../../contexts/session";
-import { deleteProductToShoppingList } from "../../services/shopping";
-import ToastHelper from "../Toast/toast";
+import { ProductList, ShoppingList } from "../../services/models";
+import { editPriceToShoppingList } from "../../services/shopping";
+import { CategoryImage, Container, InfoContainer, Name, Price, QtdContainer, QtdInput, TrashContainer, TrashIconContainer } from "./index.styled";
 
 
 interface ShoppingListItemProps {
   productList: ProductList;
-  shoppingList: ShoppingList;
-  updateShoppingList: () => void;
+  sl?: ShoppingList;
+  update?: () => void;
   onDelete?: () => void;
 }
 const ShoppingListItem: React.FC<ShoppingListItemProps> = ({
   productList,
-  shoppingList,
+  sl,
+  update,
   onDelete,
-  updateShoppingList,
 }) => {
+  const [qtd, setQtd] = useState<number>(productList.quantity);
+  const qtdDebounce = useDebounce(qtd, 1000);
   const { user } = useSession();
 
-  const handleDeleteProduct = async () => {
-    if (user) {
-      try {
-        await deleteProductToShoppingList(shoppingList, productList, user.id);
-        ToastHelper("Produto excluído com sucesso", "success")
-        updateShoppingList()
-      } catch {
-        ToastHelper("Erro ao excluir", "error")
+  const editPrice = useCallback(async (quantity: number) => {
+    if(user && sl && productList.id){
+      if(await editPriceToShoppingList(sl, productList, user.id, quantity) && update){
+        update();
       }
     }
-  }
+  }, [productList, sl, update, user]);
 
+  useEffect(() => {
+    editPrice(qtdDebounce);
+  }, [editPrice, qtdDebounce]);
+  
   return (
     <Container>
       <QtdContainer>
@@ -52,8 +55,14 @@ const ShoppingListItem: React.FC<ShoppingListItemProps> = ({
         </InfoContainer>
       </QtdContainer>
       <TrashContainer >
-        <QtdInput type="number" maxLength={3} placeholder={"0"} value={productList.quantity} />
-        <TrashIconContainer onClick={handleDeleteProduct}>
+        <QtdInput 
+          type="number" 
+          min={0}
+          maxLength={3} 
+          value={qtd} 
+          onChange={(e) => setQtd(parseInt(e.target.value))}
+        />
+        <TrashIconContainer onClick={onDelete}>
           <TrashIcon  />
         </TrashIconContainer>
       </TrashContainer>  

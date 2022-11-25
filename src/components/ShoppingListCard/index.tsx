@@ -1,21 +1,17 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import IconChevronDown from "../../assets/icons/chevronDown";
 import IconChevronUp from "../../assets/icons/chevronUp";
 import IconListCheck from "../../assets/icons/listCheck";
 import IconPlusCicle from "../../assets/icons/plusCicle";
 import IconTrash from "../../assets/icons/trash";
-import { ProductList, ShoppingList } from "../../services/models";
-import ShoppingListItem from "../ShoppingListItem";
 import { useSession } from "../../contexts/session";
+import { ProductList, ShoppingList } from "../../services/models";
+import { deleteProductToShoppingList } from "../../services/shopping";
+import ShoppingListItem from "../ShoppingListItem";
+import ToastHelper from "../Toast/toast";
 import {
-  ActionButton,
-  Body,
-  Header,
-  HeaderContainer,
-  Container,
-  Title,
-  InfoContainer,
-  AddButton,
+  ActionButton, AddButton, Body, Container, Header,
+  HeaderContainer, InfoContainer, Title
 } from "./index.styled";
 
 interface ShoppingListCardProps {
@@ -29,11 +25,19 @@ const ShoppingListCard: React.FC<ShoppingListCardProps> = ({
   updateShoppingList,
 }) => {
   const [open, setOpen] = useState<boolean>(false);
-  const [toDeleteProduct, setToDeleteProduct] = useState<ProductList>();
-  const size = useMemo(() => shoppingList.productList?.length, [shoppingList]);
+  const [size, total] = useMemo(() => [shoppingList.productList?.length, shoppingList.totalPrice], [shoppingList]);
   const { user } = useSession();
 
-
+  const handleDeleteProduct = useCallback(async (productList: ProductList) => {
+    if (user) {
+        await deleteProductToShoppingList(shoppingList, productList, user.id).then(() => {
+          updateShoppingList();
+          ToastHelper("Produto removido da lista com sucesso!", "success");
+        }).catch(() => {
+          ToastHelper("Erro ao remover produto da lista.", "error");
+        });
+    }
+  }, [shoppingList, updateShoppingList, user]);
 
   return (
     <Container>
@@ -58,10 +62,10 @@ const ShoppingListCard: React.FC<ShoppingListCardProps> = ({
           {shoppingList.productList.map((p, index) => (
             <ShoppingListItem
               key={index}
+              sl={shoppingList}
+              update={updateShoppingList}
               productList={p}
-              shoppingList={shoppingList}
-              onDelete={() => setToDeleteProduct(p)}
-              updateShoppingList={updateShoppingList}
+              onDelete={() => handleDeleteProduct(p)}
             />
           ))}
         </Body>
@@ -69,7 +73,7 @@ const ShoppingListCard: React.FC<ShoppingListCardProps> = ({
       <InfoContainer>
         <Title style={{ fontSize: "1.75rem" }}>
           {size
-            ? `Possui ${size} produtos`
+            ? `Possui ${size} produtos - Total: R$ ${(total ?? 0).toFixed(2)}`
             : "Você ainda não adicionou produtos a esta lista"}
         </Title>
         {open && (

@@ -115,6 +115,7 @@ export interface ShoppingList {
   id?: number;
   name: string;
   productList: ProductList[];
+  totalPrice?: number;
   user?: {
     id: number;
   };
