@@ -3,6 +3,7 @@ import IconClose from "../../../../assets/icons/close";
 import IconPlusCicle from "../../../../assets/icons/plusCicle";
 import ModalContainer from "../../../../components/ModalContainer";
 import Select from "../../../../components/Select";
+import ToastHelper from "../../../../components/Toast/toast";
 import { useSession } from "../../../../contexts/session";
 import { Product, ProductList, ShoppingList, User } from "../../../../services/models";
 import { addProductToShoppingList, getShoppingList } from "../../../../services/shopping";
@@ -22,14 +23,17 @@ const AddShoppingListModal: React.FC<AddShoppingListModalProps> = ({ product, to
         setLists(await getShoppingList(u.id));
     }, []);
 
-    const handleSaveProduct = useCallback(() => {
+    const handleSaveProduct = useCallback(async () => {
         if(user && selectedList && product){
             const productList: ProductList = {
                 product: product,
                 quantity: qtd
             }
-            addProductToShoppingList(selectedList, productList, user.id);
-            toggle();
+            await addProductToShoppingList(selectedList, productList, user.id).then(() => {
+                ToastHelper("Produto adicionado à lista com sucesso!", "success");
+            }).catch(() => {
+                ToastHelper("Erro ao adicionar produto à lista!", "error");
+            }).finally(() => toggle());
         }
     }, [user, selectedList, product, qtd, toggle]);
 
