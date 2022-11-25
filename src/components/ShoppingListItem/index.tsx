@@ -2,7 +2,7 @@ import { categories_round_assets } from "../../assets/categories-round/categorie
 import IconSheet from "../../assets/icons/sheet";
 import TrashIcon from "../../assets/icons/trash";
 import { ProductList, ShoppingList } from "../../services/models";
-import { CategoryImage, Container, InfoContainer, Name, Price, QtdContainer, QtdInput, TrashContainer } from "./index.styled";
+import { CategoryImage, Container, InfoContainer, Name, Price, QtdContainer, QtdInput, TrashContainer, TrashIconContainer } from "./index.styled";
 import { useSession } from "../../contexts/session";
 import { deleteProductToShoppingList } from "../../services/shopping";
 import ToastHelper from "../Toast/toast";
@@ -14,21 +14,21 @@ interface ShoppingListItemProps {
   updateShoppingList: () => void;
   onDelete?: () => void;
 }
-const ShoppingListItem: React.FC<ShoppingListItemProps> = ({ 
+const ShoppingListItem: React.FC<ShoppingListItemProps> = ({
   productList,
-  shoppingList, 
+  shoppingList,
   onDelete,
   updateShoppingList,
 }) => {
   const { user } = useSession();
-  
+
   const handleDeleteProduct = async () => {
-    if(user){
-      try{
+    if (user) {
+      try {
         await deleteProductToShoppingList(shoppingList, productList, user.id);
         ToastHelper("Produto excluído com sucesso", "success")
         updateShoppingList()
-      }catch{
+      } catch {
         ToastHelper("Erro ao excluir", "error")
       }
     }
@@ -53,8 +53,11 @@ const ShoppingListItem: React.FC<ShoppingListItemProps> = ({
       </QtdContainer>
       <TrashContainer >
         <QtdInput type="number" maxLength={3} placeholder={"0"} value={productList.quantity} />
-        <TrashIcon onClick={handleDeleteProduct}/>
-      </TrashContainer>
+        <TrashIconContainer onClick={handleDeleteProduct}>
+          <TrashIcon  />
+        </TrashIconContainer>
+      </TrashContainer>  
+        
     </Container>
   );
 };

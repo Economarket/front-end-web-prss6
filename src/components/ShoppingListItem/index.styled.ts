@@ -52,7 +52,7 @@ export const Price = styled(Lato)`
 
 export const QtdInput = styled.input`
     font-size: 2rem;
-    text-align: center;
+    text-align: right;
     width: 10rem;
     padding: 1rem;
     border: 1px  solid ${theme.colors.blue300};
@@ -62,4 +62,9 @@ export const QtdInput = styled.input`
 
 export const TrashContainer = styled.div`
     cursor: pointer;
+`;
+
+export const TrashIconContainer = styled.div`
+    cursor: pointer;
+    text-align: right;
 `;
