@@ -17,37 +17,41 @@ export const SidebarData: SidebarItem[] = [
     iconClosed: <AiFillCaretDown />,
     iconOpened: <AiFillCaretUp />,
   },
+
   {
     title: "Produtos",
     path: "/produtos",
     icon: <IconShoppingBag />,
   },
+
   {
     title: "Categorias",
     path: "/categorias",
     icon: <IconCategoryPieChart />,
   },
-  {
-    title: "Cadastro de produto",
-    path: "/cadastrar-produto",
-    icon: <IconPlusCicle />,
-  },
- 
-  {
-    title: "Listas de compra",
-    path: "/lista-compras",
-    icon: <IconListCheck />,
-  },
+
   {
     title: "Mercados Próximos",
     path: "/mercados-proximos",
     icon: <IconMarkerPin />,
   },
+
+  {
+    title: "Listas de compra",
+    path: "/lista-compras",
+    icon: <IconListCheck />,
+  },
+
+  {
+    title: "Cadastro de produto",
+    path: "/cadastrar-produto",
+    icon: <IconPlusCicle />,
+  },
+
   {
     title: "Avalie a aplicação",
     path: "https://docs.google.com/forms/d/e/1FAIpQLSe1sm7K5vxi30mw8CnU_-JPhApW4gw-nGPK4dCwSx-1q_gA-A/viewform",
     icon: <IconStar />,
     external: true,
   },
- 
 ];

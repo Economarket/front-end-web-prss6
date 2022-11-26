@@ -121,6 +121,7 @@ export const ProductContainer = styled.div`
     justify-content: center;
     padding: 2rem;
     width: 60%;
+    min-width: 276px;
   `};
 `;
 
@@ -174,7 +175,3 @@ export const NoProductButton = styled.button`
 export const WrapperHead = styled.div`
   display: flex;
 `;
-
-
-
-
