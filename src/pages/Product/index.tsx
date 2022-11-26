@@ -2,7 +2,10 @@ import { Fragment, useCallback, useEffect, useState } from "react";
 import IconSearch from "../../assets/icons/search";
 import InputText from "../../components/InputText";
 import ProductCard from "../../components/ProductCard";
-import { searchProductByDistance, searchProductByName } from "../../services/product";
+import {
+  searchProductByDistance,
+  searchProductByName,
+} from "../../services/product";
 import * as S from "../styles";
 import * as I from "./index.styled";
 import { Product as ProductModel } from "../../services/models";
@@ -20,7 +23,7 @@ import AddShoppingListModal from "./components/AddShoppingListModal";
 const Product: React.FC = () => {
   const navigate = useNavigate();
   const { locateX, locateY, distance, setDistance } = useLocalization();
-  
+
   const [products, setProducts] = useState<ProductModel[]>();
   const [currentEditProduct, setCurrentEditProduct] = useState<ProductModel>();
   const [currentSaveProduct, setCurrentSaveProduct] = useState<ProductModel>();
@@ -29,7 +32,7 @@ const Product: React.FC = () => {
   const [totalPages, setTotalPages] = useState<number>();
   const [loading, setLoading] = useState<boolean>(false);
   const [useLocation, setUseLocation] = useState<boolean>(false);
-  
+
   const debounceDistance = useDebounce<number>(distance, 500);
   const debouncedSearch = useDebounce<string>(searchName, 500);
   const { callApi } = useInfiniteScroll({
@@ -41,8 +44,14 @@ const Product: React.FC = () => {
     async (name: string, location: boolean) => {
       let data = null;
       setLoading(true);
-      if(location && locateX && locateY){
-        data = await searchProductByDistance(debounceDistance, locateX, locateY, name, 0);
+      if (location && locateX && locateY) {
+        data = await searchProductByDistance(
+          debounceDistance,
+          locateX,
+          locateY,
+          name,
+          0
+        );
       } else {
         data = await searchProductByName(name, 0);
       }
@@ -55,17 +64,21 @@ const Product: React.FC = () => {
   );
 
   const loadProducts = useCallback(async () => {
-    if(currentPage !== undefined && !!totalPages && currentPage < totalPages - 1){
+    if (
+      currentPage !== undefined &&
+      !!totalPages &&
+      currentPage < totalPages - 1
+    ) {
       setLoading(true);
-      const data = await searchProductByName(debouncedSearch, currentPage+1);
+      const data = await searchProductByName(debouncedSearch, currentPage + 1);
       setCurrentPage(currentPage + 1);
-      setProducts(p => p?.concat(data.content));
+      setProducts((p) => p?.concat(data.content));
       setLoading(false);
     }
   }, [currentPage, debouncedSearch, totalPages]);
 
   useEffect(() => {
-    if(callApi){
+    if (callApi) {
       loadProducts();
     }
   }, [loadProducts, callApi]);
@@ -76,8 +89,14 @@ const Product: React.FC = () => {
 
   return (
     <S.Wrapper>
-      <EditPriceModal product={currentEditProduct} toggle={() => setCurrentEditProduct(undefined)}/>
-      <AddShoppingListModal product={currentSaveProduct} toggle={() => setCurrentSaveProduct(undefined)}/>
+      <EditPriceModal
+        product={currentEditProduct}
+        toggle={() => setCurrentEditProduct(undefined)}
+      />
+      <AddShoppingListModal
+        product={currentSaveProduct}
+        toggle={() => setCurrentSaveProduct(undefined)}
+      />
       <S.Title>Buscar Produtos</S.Title>
       <I.Header>
         <InputText
@@ -91,47 +110,54 @@ const Product: React.FC = () => {
       <I.Header>
         <span className="c-1">
           <p className="marketLabel">Produtos de mercados próximos</p>
-          <ToggleSwitch checked={useLocation} onToggle={() => setUseLocation(l => !l)}/>
+          <ToggleSwitch
+            checked={useLocation}
+            onToggle={() => setUseLocation((l) => !l)}
+          />
         </span>
         {useLocation && (
           <span className="c-2">
-            <p className="distanceLabel">Distância: {distance}</p>
             <div className="range">
-              <RangeDistance defaultValue={distance} setValue={setDistance} />
+              <RangeDistance
+                defaultValue={distance}
+                setValue={setDistance}
+                distance={distance}
+              />
             </div>
           </span>
         )}
       </I.Header>
       <S.CardContainer>
-        {products && (products.length > 0 ? (
-          <Fragment>
-            <S.CardGridList>
-              {products.map((p) => (
-                <li>
-                  <ProductCard 
-                    product={p} 
-                    onEditPrice={() => setCurrentEditProduct(p)}
-                    onAddProduct={() => setCurrentSaveProduct(p)}
-                  />
-                </li>
-              ))}
-            </S.CardGridList>
-          </Fragment>
-        ) : (
-          <S.NoProductContainer>
-            <S.NoProductImage src={EmptyBox} />
-            <S.Title style={{ textAlign: "center" }}>
-              Nenhum produto foi encontrado
-            </S.Title>
-            <S.NoProductButton
-              onClick={() => navigate({ pathname: "/cadastrar-produto" })}
-            >
-              Deseja cadastrá-lo?
-            </S.NoProductButton>
-          </S.NoProductContainer>
-        ))}
+        {products &&
+          (products.length > 0 ? (
+            <Fragment>
+              <S.CardGridList>
+                {products.map((p) => (
+                  <li>
+                    <ProductCard
+                      product={p}
+                      onEditPrice={() => setCurrentEditProduct(p)}
+                      onAddProduct={() => setCurrentSaveProduct(p)}
+                    />
+                  </li>
+                ))}
+              </S.CardGridList>
+            </Fragment>
+          ) : (
+            <S.NoProductContainer>
+              <S.NoProductImage src={EmptyBox} />
+              <S.Title style={{ textAlign: "center" }}>
+                Nenhum produto foi encontrado
+              </S.Title>
+              <S.NoProductButton
+                onClick={() => navigate({ pathname: "/cadastrar-produto" })}
+              >
+                Deseja cadastrá-lo?
+              </S.NoProductButton>
+            </S.NoProductContainer>
+          ))}
       </S.CardContainer>
-      <Loading loading={loading} type={LoadingType.spinningBubbles}/>
+      <Loading loading={loading} type={LoadingType.spinningBubbles} />
     </S.Wrapper>
   );
 };

@@ -1,15 +1,14 @@
-import * as S from '../styles';
-import InputText from '../../components/InputText';
-import Button from '../../components/Button';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { schemaRegisterUser } from '../../utils/schema';
-import { useForm } from 'react-hook-form';
-// import InputPassword from '../../components/InputPassword';
-import { updateUser } from '../../services/user';
-import { useNavigate } from 'react-router-dom';
-import { User } from '../../services/models';
-import { useSession } from '../../contexts/session';
-import ToastHelper from '../../components/Toast/toast';
+import * as S from "../styles";
+import InputText from "../../components/InputText";
+import Button from "../../components/Button";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schemaUpdateUser } from "../../utils/schema";
+import { useForm } from "react-hook-form";
+// import InputPassword from "../../components/InputPassword";
+import { updateUser } from "../../services/user";
+import { useSession } from "../../contexts/session";
+import ToastHelper from "../../components/Toast/toast";
+import { useEffect } from "react";
 
 export default function Profile() {
   const { user } = useSession();
@@ -17,71 +16,72 @@ export default function Profile() {
   const {
     register,
     handleSubmit,
+    reset,
     formState,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: user?.name,
-      email: user?.email,
-      password: '',
-      confirmPassword: '',
+      name: user?.name || "",
+      email: user?.email || "",
     },
-    resolver: yupResolver(schemaRegisterUser),
+    resolver: yupResolver(schemaUpdateUser),
   });
 
+  useEffect(() => {
+    if (formState.isSubmitSuccessful) {
+      reset({
+        name: "",
+        email: "",
+      });
+    }
+  }, [formState, reset]);
+
   const onSubmit = async (data: any) => {
-    if(!user){
+    if (!user) {
       return;
     }
-    const newUser: User = {
-      id: user?.id,
-      name: data.name,
-      email: data.email,
-    }
-    await updateUser(newUser).then(() => {
+    const name = data.name ? data.name : user.name;
+    const email = data.email ? data.email : user.email;
+    const password = localStorage.getItem("password");
+    const userUpdate = {
+      id: user.id,
+      name: name,
+      email: email,
+      password: password,
+    };
+    try {
+      await updateUser(userUpdate);
       ToastHelper("Dados atualizados com sucesso!", "success");
-    }).catch(() => {
+    } catch (error) {
       ToastHelper("Erro ao atualizar dados", "error");
-    });
+      console.log(error);
+    }
   };
-
   return (
     <>
       <S.WrapperRegisteProducts>
-        <S.Title>Deseja atualizar seu perfil?</S.Title>
+        <S.Title>Quer atualizar seu perfil?</S.Title>
 
         <S.ProductContainer>
-          <S.Form>
+          <S.Form onSubmit={handleSubmit(onSubmit)}>
             <InputText
-              {...register('name')}
+              {...register("name")}
               name="name"
               label="Nome"
+              placeholder="Digite seu nome"
               errorMessage={errors.name?.message}
             />
             <InputText
-              {...register('email')}
+              {...register("email")}
               name="email"
               label="E-mail"
+              placeholder="Digite seu e-mail"
               errorMessage={errors.email?.message}
             />
-            {/* <InputPassword
-              {...register('password')}
-              name="password"
-              label="Senha"
-              placeholder="Senha atual"
-              errorMessage={errors.password?.message}
-            />
-            <InputPassword
-              {...register('confirmPassword')}
-              name="confirmPassword"
-              label=""
-              placeholder="Nova senha"
-              errorMessage={errors.confirmPassword?.message}
-            /> */}
 
             <Button
               text="Salvar Aterações"
-              onClick={() => handleSubmit(onSubmit)}
+              onClick={handleSubmit(onSubmit)}
               disabled={formState.isSubmitting}
             />
           </S.Form>
