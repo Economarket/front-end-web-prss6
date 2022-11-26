@@ -18,7 +18,7 @@ export const Back = styled.h2`
     align-items: center;
     color: ${theme.colors.blue200};
     font-family: ${theme.font.family.primary};
-    font-size: ${theme.font.sizes.medium};
+    font-size: ${theme.font.sizes.small};
     transition: 0.5s;
 
     &:hover {

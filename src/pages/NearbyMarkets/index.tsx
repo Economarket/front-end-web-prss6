@@ -8,7 +8,6 @@ import MarketCard from "../../components/MarketCard";
 import ProductCard from "../../components/ProductCard";
 import RangeDistance from "../../components/RangeDistance";
 import Select from "../../components/Select";
-import { useLocalization } from "../../contexts/localization";
 import { useInfiniteScroll } from "../../hooks/use-infinite-scroll";
 import useQuery from "../../hooks/use-query";
 import { getMarketByDistance } from "../../services/market";
@@ -21,6 +20,7 @@ import * as S from "../styles";
 
 import * as I from "./styles";
 import EditPriceModal from "../Product/components/EditPriceModal";
+import { useLocalization } from "../../contexts/localization";
 
 export default function NearbyMarkets() {
   const [markets, setMarkets] = useState<Market[]>();
@@ -130,13 +130,11 @@ export default function NearbyMarkets() {
           <>
             <S.WrapperHead>
               <S.Title>Mercados próximos</S.Title>
-              <S.WrapperRangeDistance>
-                <S.WrapperTextFilter>
-                  <S.TextFilter>Escolha o raio</S.TextFilter>
-                  <S.TextFilter>{distance} km</S.TextFilter>
-                </S.WrapperTextFilter>
-                <RangeDistance defaultValue={distance} setValue={setDistance} />
-              </S.WrapperRangeDistance>
+              <RangeDistance
+                defaultValue={distance}
+                setValue={setDistance}
+                distance={distance}
+              />
             </S.WrapperHead>
             <S.CardsMarketContainer>
               {markets.map((m) => {

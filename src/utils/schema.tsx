@@ -35,6 +35,20 @@ export const schemaRegisterUser = yup.object().shape({
     .oneOf([yup.ref("password")], "As senhas não correspondem."),
 });
 
+export const schemaUpdateUser = yup.object().shape({
+  name: yup
+    .string()
+    .required("Preencha o nome")
+    .trim()
+    .min(3, "Preencha no mínimo com 3 caracteres"),
+  email: yup
+    .string()
+    .required("Preencha o e-mail")
+    .trim()
+    .min(3, "Preencha no mínimo com 3 caracteres")
+    .email("Preencha com um e-mail válido"),
+});
+
 export const schemaRegisterProduct = yup.object().shape({
   name: yup
     .string()
