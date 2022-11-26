@@ -1,16 +1,16 @@
-import IconUser from "../../assets/icons/user";
-import { ReactComponent as Logo } from "../../assets/Logo.svg";
-import Button from "../../components/Button";
-import Sidebar from "../../components/SideBar/sidebar";
-import * as S from "./styles";
-import { Outlet, useNavigate } from "react-router-dom";
-import { useSession } from "../../contexts/session";
-import IconLogOut from "../../assets/icons/logOut";
-import { useLocalization } from "../../contexts/localization";
-import ModalConfirm from "../../components/ModalConfirme";
-import location from "../../assets/location.png";
-import { useEffect, useState } from "react";
-import IconAndroidLogo from "../../assets/icons/androidLogo";
+import IconUser from '../../assets/icons/user';
+import { ReactComponent as Logo } from '../../assets/Logo.svg';
+import Button from '../../components/Button';
+import Sidebar from '../../components/SideBar/sidebar';
+import * as S from './styles';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { useSession } from '../../contexts/session';
+import IconLogOut from '../../assets/icons/logOut';
+import { useLocalization } from '../../contexts/localization';
+import ModalConfirm from '../../components/ModalConfirme';
+import location from '../../assets/location.png';
+import { useEffect, useState } from 'react';
+import IconAndroidLogo from '../../assets/icons/androidLogo';
 export interface InternalTemplate {
   children?: React.ReactNode;
   image?: string;
@@ -19,8 +19,8 @@ export interface InternalTemplate {
 }
 
 const InternalAccessContainer = ({
-  title = "Economize nas suas compras de mercado!",
-  subtitle = "Pesquise e encontre o melhor para você.",
+  title = 'Economize nas suas compras de mercado!',
+  subtitle = 'Pesquise e encontre o melhor para você.',
   children,
 }: InternalTemplate) => {
   const { user, logout } = useSession();
@@ -46,7 +46,7 @@ const InternalAccessContainer = ({
     <S.Wrapper>
       <S.WrapperHeader>
         <S.Logo>
-          <Logo fill="#197AA6" onClick={() => navigate("/")} />
+          <Logo fill="#197AA6" onClick={() => navigate('/')} />
         </S.Logo>
 
         <S.Header>
@@ -63,32 +63,52 @@ const InternalAccessContainer = ({
             </S.WrapperData>
 
             <S.WrapperIcons>
-              <Button
-                appearance="ghost"
-                sizes="small"
-                text="Usuario"
-                icon={IconUser}
-                onClick={() => navigate("/perfil")}
-              />
-
-              <Button
-                appearance="ghost"
-                sizes="small"
-                text="Android"
-                icon={IconAndroidLogo}
-                onClick={() =>
-                  window.location.replace(
-                    "https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40bergue/econo-market-dd237a39271945b3939a4d2e1504cd01-signed.apk"
-                  )
-                }
-              />
-              <Button
-                appearance="ghost"
-                sizes="small"
-                text="Sair"
-                icon={IconLogOut}
-                onClick={() => logout()}
-              />
+              <S.TooltipCard>
+                <S.TooltipText>
+                  <Button
+                    appearance="ghost"
+                    sizes="small"
+                    text="Usuario"
+                    icon={IconUser}
+                    onClick={() => navigate('/perfil')}
+                  />
+                </S.TooltipText>
+                <S.TooltipBox>
+                  <p>Edite seu perfil</p>
+                </S.TooltipBox>
+              </S.TooltipCard>
+              <S.TooltipCard>
+                <S.TooltipText>
+                  <Button
+                    appearance="ghost"
+                    sizes="small"
+                    text="Android"
+                    icon={IconAndroidLogo}
+                    onClick={() =>
+                      window.location.replace(
+                        'https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40bergue/econo-market-dd237a39271945b3939a4d2e1504cd01-signed.apk',
+                      )
+                    }
+                  />
+                </S.TooltipText>
+                <S.TooltipBox>
+                  <p>Apk para Android</p>
+                </S.TooltipBox>
+              </S.TooltipCard>
+              <S.TooltipCard>
+                <S.TooltipText>
+                  <Button
+                    appearance="ghost"
+                    sizes="small"
+                    text="Sair"
+                    icon={IconLogOut}
+                    onClick={() => logout()}
+                  />
+                </S.TooltipText>
+                <S.TooltipBox>
+                  <p>Sair</p>
+                </S.TooltipBox>
+              </S.TooltipCard>
             </S.WrapperIcons>
           </S.WrapperUser>
         </S.Header>
@@ -102,12 +122,12 @@ const InternalAccessContainer = ({
         {!locateX && !locateY && (
           <ModalConfirm
             isShow={showModal}
-            title={"Aviso"}
+            title={'Aviso'}
             children={<S.Image src={location} />}
             description={
-              "Para utilizar a aplicação e obter uma melhor experiência de navegação, é necessário autorizar a localização"
+              'Para utilizar a aplicação e obter uma melhor experiência de navegação, é necessário autorizar a localização'
             }
-            confirmButtonText={"Compreendo"}
+            confirmButtonText={'Compreendo'}
             onConfirm={handleConfirme}
           />
         )}
