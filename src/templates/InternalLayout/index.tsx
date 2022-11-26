@@ -58,7 +58,7 @@ const InternalAccessContainer = ({
 
           <S.WrapperUser>
             <S.WrapperData>
-              <S.Subtitle>Olá, {user?.name}</S.Subtitle>
+              <S.SubtitleUser>Olá, {user?.name}!</S.SubtitleUser>
               {/* <S.Subtitle>Endereco{address}</S.Subtitle> */}
             </S.WrapperData>
 

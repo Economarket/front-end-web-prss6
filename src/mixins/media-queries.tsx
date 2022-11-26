@@ -4,9 +4,9 @@ export const mediaQueries: any = {
   xs: 375,
   sm: 480,
   md: 600,
-  lg: 801,
-  xl: 1025,
-  xxl: 1281,
+  lg: 800,
+  xl: 1024,
+  xxl: 1280,
 };
 
 const buildMediaQuery = (size: string) => (rules: any) =>
