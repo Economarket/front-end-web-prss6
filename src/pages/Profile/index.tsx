@@ -53,7 +53,7 @@ export default function Profile() {
       ToastHelper("Dados atualizados com sucesso!", "success");
     } catch (error) {
       ToastHelper("Erro ao atualizar dados", "error");
-      console.log(error);
+      console.error(error);
     }
   };
   return (
