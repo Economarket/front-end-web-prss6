@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { mediaQueryMd } from "../mixins/media-queries";
 import theme from "../styles/theme";
 
 export const Wrapper = styled.div`
@@ -10,7 +11,12 @@ export const Wrapper = styled.div`
 `;
 
 export const HomeContainer = styled(Wrapper)`
-  padding: 3rem;
+  ${mediaQueryMd(
+    css`
+      padding: 3rem;
+      max-width: calc(100vw - 30rem);
+    `
+  )};
 `;
 
 export const Form = styled.form`
