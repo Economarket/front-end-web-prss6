@@ -125,7 +125,6 @@ export const SubtitleUser = styled.p`
     font-size: ${theme.font.sizes.xsmall};
     font-weight: ${theme.font.weight.normal};
     padding: 0.5rem;
-    display: contents;
   `}
 `;
 
@@ -137,12 +136,16 @@ export const WrapperMenu = styled.div`
   border-right: 2px solid;
   border-color: #d9d9d9;
   padding: 1rem;
-  min-width: 30rem;
+  ${mediaQueryMd(
+    css`
+      min-width: 30rem;
+    `
+  )};
 `;
 
 export const WrapperContentFooter = styled.div`
   width: 100%;
-  max-width: calc(100vw - 30rem);
+  /* max-width: calc(100vw - 30rem); */
   min-height: calc(100vh - 14rem);
   display: flex;
   flex-direction: column;

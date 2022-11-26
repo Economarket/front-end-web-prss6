@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
-import { mediaQuerySm } from "../../mixins/media-queries";
+import { mediaQueryMd, mediaQuerySm } from "../../mixins/media-queries";
 import theme from "../../styles/theme";
 
 export const SidebarLink = styled(Link)`
@@ -62,18 +62,21 @@ export const ExternalLink = styled.a`
 `;
 
 export const SidebarLabel = styled.span`
-  ${({ theme }) => css`
-    font-family: ${theme.font.family.primary};
-    font-size: ${theme.font.sizes.medium};
-    margin-left: 1rem;
-  `}
+  display: none;
+
+  ${mediaQueryMd(
+    css`
+      display: block;
+      ${({ theme }) => css`
+        font-family: ${theme.font.family.primary};
+        font-size: ${theme.font.sizes.medium};
+        margin-left: 1rem;
+      `}
+    `
+  )};
 `;
 
-export const SidebarNav = styled.div<{ sidebar: boolean }>`
-  position: fixed;
-  top: 17rem;
-  left: ${({ sidebar }) => (sidebar ? "0" : "-100%")};
-  transition: 350ms;
+export const SidebarNav = styled.div`
   ${mediaQuerySm(
     css`
       position: static;
