@@ -4,7 +4,6 @@ import Button from "../../components/Button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaUpdateUser } from "../../utils/schema";
 import { useForm } from "react-hook-form";
-// import InputPassword from "../../components/InputPassword";
 import { updateUser } from "../../services/user";
 import { useSession } from "../../contexts/session";
 import ToastHelper from "../../components/Toast/toast";
