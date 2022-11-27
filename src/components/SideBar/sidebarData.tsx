@@ -49,7 +49,7 @@ export const SidebarData: SidebarItem[] = [
   },
 
   {
-    title: "Avalie a aplicação",
+    title: "Avalie nosso Website",
     path: "https://docs.google.com/forms/d/e/1FAIpQLSe1sm7K5vxi30mw8CnU_-JPhApW4gw-nGPK4dCwSx-1q_gA-A/viewform",
     icon: <IconStar />,
     external: true,
