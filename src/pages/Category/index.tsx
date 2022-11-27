@@ -17,7 +17,7 @@ import { useInfiniteScroll } from "../../hooks/use-infinite-scroll";
 import EditPriceModal from "./components/EditPriceModal";
 import AddShoppingListModal from "./components/AddShoppingListModal";
 import { useDebounce } from "usehooks-ts";
-import Loading from "../../components/Loading";
+import Loading, { LoadingType } from "../../components/Loading";
 
 const Categories:React.FC = () => {
   const navigate = useNavigate();
@@ -139,7 +139,10 @@ const Categories:React.FC = () => {
                     setQuery({category: c.searchName});
                   }
                 }}
-                value={{label: currentCategory.name, value: currentCategory.id}}
+                value={{
+                  label: currentCategory.name, 
+                  value: currentCategory.id
+                }}
               />
               <InputText 
                 name="buscaProduto" 
@@ -150,7 +153,8 @@ const Categories:React.FC = () => {
               />
           </I.Header>
           <S.CardContainer>
-              {products && ((products.length > 0) ? (
+            {products && (
+              (products.length > 0) ? (
                 <S.CardGridList>
                   {products.map((p) => (
                     <li>
@@ -168,9 +172,10 @@ const Categories:React.FC = () => {
                   <S.Title style={{textAlign: "center"}}>Nenhum produto foi encontrado</S.Title>
                   <S.NoProductButton onClick={() => navigate({pathname: "/cadastrar-produto"})}>Deseja cadastrá-lo?</S.NoProductButton>
                 </S.NoProductContainer>
-              ))}
+              ))
+            }
           </S.CardContainer>
-          <Loading loading={true}/>
+          <Loading loading={loading} type={LoadingType.spinningBubbles} />
         </Fragment>
       ))}
     </S.Wrapper>

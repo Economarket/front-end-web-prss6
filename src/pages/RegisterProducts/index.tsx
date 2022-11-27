@@ -202,9 +202,9 @@ export default function RegisterProducts() {
             <Select
               {...register("marketId")}
               isAutocomplete
-              options={markets.map((item: { id?: any; name?: any }) => ({
+              options={markets.map((item: Market) => ({
                 value: item.id,
-                label: item.name,
+                label: `${item.name} - ${item.address?.street}`,
               }))}
               label="Mercado"
               placeholder="Selecione a mercado"

@@ -7,12 +7,14 @@ interface RangeDistanceProps {
   defaultValue: number;
   setValue: (value: number) => void;
   distance: any;
+  show: boolean;
 }
 
 const RangeDistance: React.FC<RangeDistanceProps> = ({
   defaultValue,
   setValue,
   distance,
+  show,
 }) => {
   const getValue = (e: number | number[]) => {
     if (e) {
@@ -22,7 +24,7 @@ const RangeDistance: React.FC<RangeDistanceProps> = ({
 
   return (
     <>
-      <S.WrapperRangeDistance>
+      <S.WrapperRangeDistance show={show}>
         <S.WrapperTextFilter>
           <S.TextFilter>Escolha o raio</S.TextFilter>
           <S.TextFilter>{distance} km</S.TextFilter>

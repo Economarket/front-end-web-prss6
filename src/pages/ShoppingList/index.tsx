@@ -118,7 +118,8 @@ const ShoppingList: React.FC = () => {
               Criar nova lista
             </NoListButton>
           </NoListContainer>
-        ))}
+        ))
+      }
       <Loading loading={loading} type={LoadingType.spinningBubbles} />
     </MainContainer>
   );

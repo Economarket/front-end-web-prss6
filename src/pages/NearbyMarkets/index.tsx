@@ -21,6 +21,8 @@ import * as S from "../styles";
 import * as I from "./styles";
 import EditPriceModal from "../Product/components/EditPriceModal";
 import { useLocalization } from "../../contexts/localization";
+import AddShoppingListModal from "./components/AddShoppingListModal";
+import Loading, { LoadingType } from "../../components/Loading";
 
 export default function NearbyMarkets() {
   const [markets, setMarkets] = useState<Market[]>();
@@ -28,7 +30,6 @@ export default function NearbyMarkets() {
   const debounceDistance = useDebounce<number>(distance, 500);
   const [currentMarket, setCurrentMarket] = useState<Market>();
   const [products, setProducts] = useState<Product[]>();
-  const [currentProduct, setCurrentProduct] = useState<Product>();
   const [searchName, setSearchName] = useState<string>();
   const [currentPage, setCurrentPage] = useState<number>();
   const [totalPages, setTotalPages] = useState<number>();
@@ -36,6 +37,8 @@ export default function NearbyMarkets() {
   const [query, setQuery] = useQuery();
   const navigate = useNavigate();
   const searchDebounce = useDebounce(searchName, 500);
+  const [currentEditProduct, setCurrentEditProduct] = useState<Product>();
+  const [currentSaveProduct, setCurrentSaveProduct] = useState<Product>();
 
   const { callApi } = useInfiniteScroll({
     waitDispatchFinish: loading,
@@ -53,10 +56,12 @@ export default function NearbyMarkets() {
   const searchProducts = useCallback(
     async (market: Market, search: string | undefined) => {
       if (market) {
+        setLoading(true);
         const data = await searchProductByMarket(market.id, search, 0);
         setProducts(data.content);
         setTotalPages(data.totalPages);
         setCurrentPage(0);
+        setLoading(false);
       }
     },
     []
@@ -122,8 +127,12 @@ export default function NearbyMarkets() {
   return (
     <S.Wrapper>
       <EditPriceModal
-        product={currentProduct}
-        toggle={() => setCurrentProduct(undefined)}
+        product={currentEditProduct}
+        toggle={() => setCurrentEditProduct(undefined)}
+      />
+      <AddShoppingListModal
+        product={currentSaveProduct}
+        toggle={() => setCurrentSaveProduct(undefined)}
       />
       {markets &&
         (!currentMarket ? (
@@ -131,6 +140,7 @@ export default function NearbyMarkets() {
             <S.WrapperHead>
               <S.Title>Mercados próximos</S.Title>
               <RangeDistance
+                show={true}
                 defaultValue={distance}
                 setValue={setDistance}
                 distance={distance}
@@ -160,7 +170,10 @@ export default function NearbyMarkets() {
               <Select
                 className="markets"
                 isAutocomplete
-                options={markets.map((m) => ({ label: m.name, value: m.id }))}
+                options={markets.map((m) => ({ 
+                  label: `${m.name} - ${m.address?.street}`, 
+                  value: m.id 
+                }))}
                 placeholder="Selecione a o mercado"
                 onChange={(option) => {
                   const m = markets.find((m) => m.id === option.value);
@@ -169,7 +182,7 @@ export default function NearbyMarkets() {
                   }
                 }}
                 value={{
-                  label: currentMarket.name,
+                  label: `${currentMarket.name} - ${currentMarket.address?.street}`,
                   value: currentMarket.id,
                 }}
               />
@@ -182,31 +195,35 @@ export default function NearbyMarkets() {
               />
             </I.Header>
             <S.CardContainer>
-              {products && products.length > 0 ? (
-                <S.CardGridList>
-                  {products.map((p) => (
-                    <li>
-                      <ProductCard
-                        product={p}
-                        onEditPrice={() => setCurrentProduct(p)}
-                      />
-                    </li>
-                  ))}
-                </S.CardGridList>
-              ) : (
-                <S.NoProductContainer>
-                  <S.NoProductImage src={EmptyBox} />
-                  <S.Title style={{ textAlign: "center" }}>
-                    Nenhum produto foi encontrado
-                  </S.Title>
-                  <S.NoProductButton
-                    onClick={() => navigate({ pathname: "/cadastrar-produto" })}
-                  >
-                    Deseja cadastrá-lo?
-                  </S.NoProductButton>
-                </S.NoProductContainer>
-              )}
+              {products && 
+                (products.length > 0 ? (
+                  <S.CardGridList>
+                    {products.map((p) => (
+                      <li>
+                        <ProductCard
+                          product={p}
+                          onEditPrice={() => setCurrentEditProduct(p)}
+                          onAddProduct={() => setCurrentSaveProduct(p)}
+                        />
+                      </li>
+                    ))}
+                  </S.CardGridList>
+                ) : (
+                  <S.NoProductContainer>
+                    <S.NoProductImage src={EmptyBox} />
+                    <S.Title style={{ textAlign: "center" }}>
+                      Nenhum produto foi encontrado
+                    </S.Title>
+                    <S.NoProductButton
+                      onClick={() => navigate({ pathname: "/cadastrar-produto" })}
+                    >
+                      Deseja cadastrá-lo?
+                    </S.NoProductButton>
+                  </S.NoProductContainer>
+                ))
+              }
             </S.CardContainer>
+            <Loading loading={loading} type={LoadingType.spinningBubbles} />
           </>
         ))}
     </S.Wrapper>

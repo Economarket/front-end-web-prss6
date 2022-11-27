@@ -43,8 +43,7 @@ const ShoppingListCard: React.FC<ShoppingListCardProps> = ({
     <Container>
       <Header>
         <HeaderContainer>
-          <IconListCheck />
-          <Title>{shoppingList.name}</Title>
+          <Title><IconListCheck />{shoppingList.name}</Title>
         </HeaderContainer>
         <HeaderContainer>
           <ActionButton onClick={onDeleteList}>

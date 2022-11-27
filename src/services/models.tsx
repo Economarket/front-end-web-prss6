@@ -27,8 +27,6 @@ export interface Category {
 export interface Market {
   id: number;
   uuid: string;
-  // locateX?: string;
-  // locateY?: string;
   name: string;
   description?: string;
   logo?: string;

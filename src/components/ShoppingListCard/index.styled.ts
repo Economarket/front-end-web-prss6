@@ -56,6 +56,9 @@ export const Body = styled.div<{ show: boolean }>`
 `
 
 export const Title = styled.h3`
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
     text-align: center;
     color: ${theme.colors.blue200};
     font-family: ${theme.font.family.primary};

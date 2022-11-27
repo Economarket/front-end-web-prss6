@@ -7,9 +7,9 @@ export const Header = styled.div`
     align-items: center;
     gap: 2rem;
 
-    & > .categories {
-        width: 50%;
-        max-width: 25rem;
+    & > .markets {
+        width: 100%;
+        max-width: 50rem;
     }
 `;
 

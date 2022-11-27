@@ -115,17 +115,16 @@ const Product: React.FC = () => {
             onToggle={() => setUseLocation((l) => !l)}
           />
         </span>
-        {useLocation && (
-          <span className="c-2">
-            <div className="range">
-              <RangeDistance
-                defaultValue={distance}
-                setValue={setDistance}
-                distance={distance}
-              />
-            </div>
-          </span>
-        )}
+        <span className="c-2">
+          <div className="range">
+            <RangeDistance
+              show={useLocation}
+              defaultValue={distance}
+              setValue={setDistance}
+              distance={distance}
+            />
+          </div>
+        </span>
       </I.Header>
       <S.CardContainer>
         {products &&
@@ -155,7 +154,8 @@ const Product: React.FC = () => {
                 Deseja cadastrá-lo?
               </S.NoProductButton>
             </S.NoProductContainer>
-          ))}
+          ))
+        }
       </S.CardContainer>
       <Loading loading={loading} type={LoadingType.spinningBubbles} />
     </S.Wrapper>

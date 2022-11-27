@@ -1,4 +1,4 @@
-import styled, { css, DefaultTheme } from "styled-components";
+import styled, { css } from "styled-components";
 
 export const TextFilter = styled.p`
   ${({ theme }) => css`
@@ -14,7 +14,11 @@ export const WrapperTextFilter = styled.div`
   justify-content: space-between;
 `;
 
-export const WrapperRangeDistance = styled.div`
+interface WrapperRangeDistanceProps {
+  show: boolean;
+}
+export const WrapperRangeDistance = styled.div<WrapperRangeDistanceProps>`
+  visibility: ${({ show }) => show ? 'visible' : 'hidden'};
   width: 100%;
   margin-bottom: 2rem;
 `;

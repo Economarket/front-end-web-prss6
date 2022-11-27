@@ -29,6 +29,8 @@ export const NewListButton = styled.button`
     border-radius: 5px;
     color: ${theme.colors.whiteFull};
     cursor: pointer;
+    max-width: 20rem;
+    width: 100%;
 
     &:hover {
         background-color: ${theme.colors.blue200}; 
