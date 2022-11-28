@@ -207,7 +207,7 @@ export default function RegisterProducts() {
                 label: `${item.name} - ${item.address?.street}`,
               }))}
               label="Mercado"
-              placeholder="Selecione a mercado"
+              placeholder="Selecione o mercado"
               onChange={(option: { value: string }) =>
                 setValue("marketId", option.value)
               }
