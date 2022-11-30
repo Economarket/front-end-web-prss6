@@ -1,5 +1,5 @@
-// export const BASE_URL = "https://api-economarket.herokuapp.com/";
-export const BASE_URL = "http://152.67.62.157:8080/";
+export const BASE_URL = "https://api-economarket.herokuapp.com/";
+// export const BASE_URL = "http://152.67.62.157:8080/";
 
 export const CONTEXT_AUTH = "/auth";
 
